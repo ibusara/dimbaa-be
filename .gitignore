@@ -1,4 +1,5 @@
 /node_modules
+/composer.lock
 /public/build
 /public/hot
 /public/storage
