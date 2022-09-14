@@ -1,11 +1,11 @@
 <?php
-  
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-  
+
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
-  
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,13 +16,23 @@ use App\Http\Controllers\API\ProductController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-  
-  
+
+Route::any('/', function (Request $request) {
+    return response()->json([
+        'status' => true, 
+        'message' => "If you're not sure you know what you are doing, you probably shouldn't be using this API...",
+        'data' => [
+            'service' => 'mis-api',
+            'version' => '1.0',
+        ]
+    ], 200);
+});
+
 Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
 });
-        
+
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('products', ProductController::class);
 });
