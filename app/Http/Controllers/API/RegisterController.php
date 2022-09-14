@@ -55,4 +55,37 @@ class RegisterController extends BaseController
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
     }
+
+
+    //**** User signup */
+    public function create_user(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_role' => 'required',
+            'email' => 'required|email',
+            'name' => 'required',
+            'mobile' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());       
+        }
+        $input = $request->all();
+        $rules = array('email' => 'unique:users,email');
+
+        $validator = Validator::make($input, $rules);
+        if ($validator->fails()) {
+            return $this->sendError('Email already exist');
+        }
+        else {
+            
+        $input['password'] = bcrypt("12345");
+        $user = User::create($input);
+        $user->attachRole($input['user_role']);
+        $success['name'] =  $user->name;
+   
+        return $this->sendResponse($success, 'User created successfully.');
+    }
+    }
 }
