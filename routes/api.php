@@ -35,5 +35,6 @@ Route::controller(RegisterController::class)->group(function(){
  
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('products', ProductController::class);
-    Route::resource('tournaments', TournamentController::class);
+    Route::resource('tournaments', App\Http\Controllers\API\TournamentController::class);
+    Route::resource('matchrecord', App\Http\Controllers\API\MatchRecordController::class);
 });

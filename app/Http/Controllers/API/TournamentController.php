@@ -19,8 +19,8 @@ class TournamentController extends BaseController
     public function index()
     {
         $tournaments = Tournament::all();
-        $resources = Tournament::collection($tournaments);
-        return $this->sendResponse($resources, 'Tournament retrieved successfully.');
+
+        return $this->sendResponse($tournaments, 'Tournament retrieved successfully.');
     }
 
     /**
@@ -33,18 +33,17 @@ class TournamentController extends BaseController
     {
         $user = $request->user();
         $input = $request->all();
-        info($user);
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'year' => 'required|between:2000,3000'
+            'year' => 'required|integer|between:2000,3000'
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $input['user_id'] = $user->id;
-        $tournament = Tournament::create($input); 
+        $tournament = Tournament::create($input);
 
         return $this->sendResponse($tournament, 'Tournament created successfully.');
     }
@@ -73,24 +72,22 @@ class TournamentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tournament $tournament)
     {
         $input = $request->all();
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'detail' => 'required'
+            'year' => 'required|integer|between:2000,3000'
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $product->name = $input['name'];
-        $product->detail = $input['detail'];
-        $product->save();
+        $tournament->update($input);
 
-        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
+        return $this->sendResponse($tournament, 'Tournament updated successfully.');
     }
 
     /**
@@ -101,7 +98,7 @@ class TournamentController extends BaseController
      */
     public function destroy(Tournament $tournament)
     {
-        $product->delete();
+        $tournament->delete();
 
         return $this->sendResponse([], 'Tournament deleted successfully.');
     }
