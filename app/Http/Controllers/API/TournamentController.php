@@ -4,8 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tournament;
+use Validator;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class TournamentController extends Controller
+
+class TournamentController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,9 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        //
+        $tournaments = Tournament::all();
+        $resources = Tournament::collection($tournaments);
+        return $this->sendResponse($resources, 'Tournament retrieved successfully.');
     }
 
     /**
@@ -25,7 +31,22 @@ class TournamentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+        $input = $request->all();
+        info($user);
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'year' => 'required|between:2000,3000'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        $input['user_id'] = $user->id;
+        $tournament = Tournament::create($input); 
+
+        return $this->sendResponse($tournament, 'Tournament created successfully.');
     }
 
     /**
@@ -36,7 +57,13 @@ class TournamentController extends Controller
      */
     public function show($id)
     {
-        //
+        $tournament = Tournament::find($id);
+
+        if (is_null($tournament)) {
+            return $this->sendError('Tournament not found.');
+        }
+
+        return $this->sendResponse($tournament, 'Tournament retrieved successfully.');
     }
 
     /**
@@ -48,7 +75,22 @@ class TournamentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'detail' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $product->name = $input['name'];
+        $product->detail = $input['detail'];
+        $product->save();
+
+        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
     }
 
     /**
@@ -57,8 +99,10 @@ class TournamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tournament $tournament)
     {
-        //
+        $product->delete();
+
+        return $this->sendResponse([], 'Tournament deleted successfully.');
     }
 }
