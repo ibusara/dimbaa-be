@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\MatchRecord;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
-class MatchRecordController extends BaseController
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class MatchRecordController extends BaseController
      */
     public function index()
     {
-        $matchRecord = MatchRecord::all();
-
-        return $this->sendResponse($matchRecord, 'Match Record retrieved successfully.');
+        //
     }
 
     /**
@@ -61,13 +56,18 @@ class MatchRecordController extends BaseController
      */
     public function show($id)
     {
-        $matchRecord = MatchRecord::find($id);
+        //
+    }
 
-        if (is_null($matchRecord)) {
-            return $this->sendError('Match Record not found.');
-        }
-
-        return $this->sendResponse($matchRecord, 'Match Record retrieved successfully.');
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -77,26 +77,9 @@ class MatchRecordController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MatchRecord $matchRecord)
+    public function update(Request $request, $id)
     {
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'period' => 'required|date',
-            // 'home_team' => 'required|between:3,50',
-            // 'away_team' => 'required|between:3,50',
-            // 'city' => 'required|between:3,50',
-            // 'stadium' => 'required|between:3,50',
-            // 'round' => 'required|integer',
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $matchRecord->update($input);
-
-        return $this->sendResponse($matchRecord, 'Match Record updated successfully.');
+        //
     }
 
     /**
@@ -105,10 +88,8 @@ class MatchRecordController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( MatchRecord $matchRecord)
+    public function destroy($id)
     {
-        $matchRecord->delete();
-
-        return $this->sendResponse([], 'Match Record deleted successfully.');
+        //
     }
 }

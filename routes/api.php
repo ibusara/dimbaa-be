@@ -19,7 +19,7 @@ use App\Http\Controllers\API\ProductController;
 
 Route::any('/', function (Request $request) {
     return response()->json([
-        'status' => true, 
+        'status' => true,
         'message' => "If you're not sure you know what you are doing, you probably shouldn't be using this API...",
         'data' => [
             'service' => 'mis-api',
@@ -32,8 +32,14 @@ Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
 });
- 
+
 Route::middleware('auth:sanctum')->group( function () {
+    // Super Admin Endpoints
+    Route::prefix('admin')->name('admin.')->group( function () {
+        Route::get('roles', [App\Http\Controllers\API\SuperAdmin\UserManagementController::class, 'roles']);
+        Route::resource('users', App\Http\Controllers\API\SuperAdmin\UserManagementController::class);
+    });
+
     Route::resource('products', ProductController::class);
     Route::resource('tournaments', App\Http\Controllers\API\TournamentController::class);
     Route::resource('matchrecord', App\Http\Controllers\API\MatchRecordController::class);
