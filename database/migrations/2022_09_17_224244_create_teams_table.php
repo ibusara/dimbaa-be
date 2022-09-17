@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('team_name')->unique();
+            $table->string('region')->nullable();
+            $table->unsignedBigInteger('stadium_id')->nullable();
             $table->timestamps();
         });
     }

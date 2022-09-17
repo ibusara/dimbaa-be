@@ -38,6 +38,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::prefix('admin')->name('admin.')->group( function () {
         Route::get('roles', [App\Http\Controllers\API\SuperAdmin\UserManagementController::class, 'roles']);
         Route::resource('users', App\Http\Controllers\API\SuperAdmin\UserManagementController::class);
+        Route::resource('teams', App\Http\Controllers\API\SuperAdmin\TeamController::class);
     });
 
     Route::resource('products', ProductController::class);

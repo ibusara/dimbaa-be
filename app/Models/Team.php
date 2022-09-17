@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'team_name',
+        'stadium_id',
+        'region'
+    ];
 }

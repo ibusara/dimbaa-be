@@ -4,8 +4,11 @@ namespace App\Http\Controllers\API\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
+use App\Models\Team;
+use Validator;
 
-class TeamController extends Controller
+class TeamController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -29,23 +32,19 @@ class TeamController extends Controller
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'tournament' => 'required|integer',//exists,tournament,id
-            'period' => 'required|date',
-            'home_team' => 'required|between:3,50',
-            'away_team' => 'required|between:3,50',
-            'city' => 'required|between:3,50',
-            'stadium' => 'required|between:3,50',
-            'round' => 'required|integer',
+            'stadium' => 'required|integer',//exists,stadium,id
+            'team_name' => 'required|unique:teams|between:3,50',
+            'region' => 'required|between:3,50',
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $input['user_id'] = $user->id;
-        $input['tournament_id'] = $request->tournament;
-        $matchRecord = MatchRecord::create($input);
+        $input['stadium_id'] = $request->stadium;
+        $team = Team::create($input);
 
-        return $this->sendResponse($matchRecord, 'Match Record created successfully.');
+        return $this->sendResponse($team, 'Team created successfully.');
     }
 
     /**

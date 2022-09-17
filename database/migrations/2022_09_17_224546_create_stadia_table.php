@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('stadia', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('name')->unique();
+            $table->string('region')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      *
      * @return void
