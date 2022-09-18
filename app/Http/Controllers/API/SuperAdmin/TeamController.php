@@ -15,12 +15,11 @@ class TeamController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    { 
+    {
         $perPage = $request->input('per_page', 100);
         $sortBy = $request->input('sort_by', 'asc');
 
         $search = $request->input('search');
-        $role = $request->input('role');
         $name = $request->input('name');
 
         $teams = Team::where( function($query) use ($search) {

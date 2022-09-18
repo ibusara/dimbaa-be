@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\API\SuperAdmin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class StadiumController extends Controller
+use App\Http\Controllers\API\BaseController as BaseController;
+use App\Models\Stadium;
+use Validator;
+
+class StadiumController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +17,22 @@ class StadiumController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $perPage = $request->input('per_page', 100);
+        $sortBy = $request->input('sort_by', 'asc');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $search = $request->input('search');
+        $team = $request->input('team');
+        $name = $request->input('name');
+
+        $stadia = Stadium::where( function($query) use ($search) {
+            $query->where('name', 'LIKE', "%{$search}%");
+        })->when($name,function($query) use ($name) {
+            $query->where('name', $name);
+        })->when($team,function($query) use ($team) {
+            $query->where('team_id', $team);
+        })->latest()->paginate($perPage);
+
+        return $this->sendResponse($stadia, 'Stadia retrieved successfully.');
     }
 
     /**
@@ -35,7 +43,23 @@ class StadiumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'team' => 'required|integer',//exists,team,id
+            'name' => 'required|unique:teams|between:3,50',
+            'region' => 'required|between:3,50',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        $input['user_id'] = $user->id;
+        $input['team_id'] = $request->team;
+        $stadium = Stadium::create($input);
+
+        return $this->sendResponse($stadium, 'Stadium created successfully.');
     }
 
     /**
@@ -46,18 +70,13 @@ class StadiumController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $stadium = Stadium::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        if (is_null($stadium)) {
+            return $this->sendError('Stadium not found.');
+        }
+
+        return $this->sendResponse($stadium, 'Stadium retrieved successfully.');
     }
 
     /**
@@ -67,9 +86,25 @@ class StadiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Stadium $stadium)
     {
-        //
+        $user = $request->user();
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'team' => 'required|integer',//exists,team,id
+            'name' => 'required|unique:teams|between:3,50',
+            'region' => 'required|between:3,50',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        
+        $input['team_id'] = $request->team;
+        $stadium = $stadium->update($input);
+
+        return $this->sendResponse($stadium, 'Stadium created successfully.');
     }
 
     /**
@@ -78,8 +113,10 @@ class StadiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( Stadium $stadium)
     {
-        //
+        $stadium->delete();
+
+        return $this->sendResponse([], 'Stadium deleted successfully.');
     }
 }
