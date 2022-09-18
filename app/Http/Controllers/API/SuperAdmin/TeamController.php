@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API\SuperAdmin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Team;
@@ -15,9 +14,23 @@ class TeamController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    { 
+        $perPage = $request->input('per_page', 100);
+        $sortBy = $request->input('sort_by', 'asc');
+
+        $search = $request->input('search');
+        $role = $request->input('role');
+        $name = $request->input('name');
+
+        $teams = Team::where( function($query) use ($search) {
+            $query->where('team_name', 'LIKE', "%{$search}%");
+        })->when($name,function($query) use ($name) {
+            $query->where('team_name', $name);
+        }) ->latest()->paginate($perPage);
+
+        return $this->sendResponse($teams, 'Teams retrieved successfully.');
+
     }
 
     /**
@@ -55,18 +68,13 @@ class TeamController extends BaseController
      */
     public function show($id)
     {
-        //
-    }
+        $team = Team::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        if (is_null($team)) {
+            return $this->sendError('Team not found.');
+        }
+
+        return $this->sendResponse($team, 'Team retrieved successfully.');
     }
 
     /**
@@ -76,9 +84,25 @@ class TeamController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Team $team)
     {
-        //
+        $user = $request->user();
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'stadium' => 'required|integer',//exists,stadium,id
+            'team_name' => 'required|unique:teams|between:3,50',
+            'region' => 'required|between:3,50',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $input['stadium_id'] = $request->stadium;
+        $team = $team->update($input);
+
+        return $this->sendResponse($team, 'Team updated successfully.');
     }
 
     /**
@@ -87,8 +111,10 @@ class TeamController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Team $team)
     {
-        //
+        $team->delete();
+
+        return $this->sendResponse([], 'Team deleted successfully.');
     }
 }

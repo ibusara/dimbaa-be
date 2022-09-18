@@ -94,6 +94,7 @@ class MatchRecordController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $input['tournament_id'] = $request->tournament;
         $matchRecord->update($input);
 
         return $this->sendResponse($matchRecord, 'Match Record updated successfully.');

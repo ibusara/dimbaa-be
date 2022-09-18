@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Stadium extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'name',
+        'region',
+        'team_id'
+    ];
 }
