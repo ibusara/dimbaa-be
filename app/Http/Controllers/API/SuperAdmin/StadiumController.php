@@ -15,7 +15,7 @@ class StadiumController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $perPage = $request->input('per_page', 100);
         $sortBy = $request->input('sort_by', 'asc');
@@ -48,10 +48,10 @@ class StadiumController extends BaseController
 
         $validator = Validator::make($input, [
             'team' => 'required|integer',//exists,team,id
-            'name' => 'required|unique:teams|between:3,50',
+            'name' => 'required|between:3,50',
             'region' => 'required|between:3,50',
         ]);
-
+        info($input);
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
@@ -93,14 +93,14 @@ class StadiumController extends BaseController
 
         $validator = Validator::make($input, [
             'team' => 'required|integer',//exists,team,id
-            'name' => 'required|unique:teams|between:3,50',
+            'name' => 'required|between:3,50',
             'region' => 'required|between:3,50',
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        
+
         $input['team_id'] = $request->team;
         $stadium = $stadium->update($input);
 

@@ -41,6 +41,9 @@ class UserManagementController extends BaseController
         })
         ->where('status', $status)->latest()->paginate($perPage);
 
+        foreach ($users as $user) {
+            $user->role;
+        }
 
         return $this->sendResponse($users, 'Users retrieved successfully.');
     }

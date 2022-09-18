@@ -29,7 +29,6 @@ class TeamController extends BaseController
         }) ->latest()->paginate($perPage);
 
         return $this->sendResponse($teams, 'Teams retrieved successfully.');
-
     }
 
     /**
