@@ -28,6 +28,11 @@ class TeamController extends BaseController
             $query->where('team_name', $name);
         }) ->latest()->paginate($perPage);
 
+        foreach ($teams as $team) {
+            $team->players;
+            $team->stadium; 
+        }
+
         return $this->sendResponse($teams, 'Teams retrieved successfully.');
     }
 

@@ -15,4 +15,12 @@ class Team extends Model
         'stadium_id',
         'region'
     ];
+
+    public function stadium(){
+        return  $this->hasOne('App\Models\Stadium');
+     }
+
+    public function players(){
+        return  $this->hasMany('App\Models\Player');
+    }
 }
