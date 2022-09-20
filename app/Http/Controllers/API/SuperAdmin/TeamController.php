@@ -30,7 +30,7 @@ class TeamController extends BaseController
 
         foreach ($teams as $team) {
             $team->players;
-            $team->stadium; 
+            $team->stadium;
         }
 
         return $this->sendResponse($teams, 'Teams retrieved successfully.');
