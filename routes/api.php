@@ -43,6 +43,10 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::resource('stadia', App\Http\Controllers\API\SuperAdmin\StadiumController::class);
     });
 
+    Route::prefix('teamadmin')->name('teamadmin.')->group( function () {
+        Route::resource('team-player', App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class);
+    });
+
     Route::resource('products', ProductController::class);
     Route::resource('tournaments', App\Http\Controllers\API\TournamentController::class);
     Route::resource('matchrecord', App\Http\Controllers\API\MatchRecordController::class);
