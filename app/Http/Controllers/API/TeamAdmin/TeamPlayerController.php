@@ -108,7 +108,7 @@ class TeamPlayerController extends BaseController
         return $this->sendResponse($player, 'Player updated successfully.');
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  int  $id

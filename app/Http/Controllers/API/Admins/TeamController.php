@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\SuperAdmin;
+namespace App\Http\Controllers\API\Admins;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;

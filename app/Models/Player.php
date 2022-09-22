@@ -13,6 +13,8 @@ class Player extends Model
         'user_id',
         'name',
         'number',
+        'email',
+        'mobile',
         'team_id'
     ];
 }

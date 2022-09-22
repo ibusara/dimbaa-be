@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tournament_id');
-            $table->dateTime('period');
-            $table->string('home_team')->nulluable();
-            $table->string('away_team')->nulluable();
+            $table->dateTime('date');
+            $table->unsignedBigInteger('home_team_id')->nulluable();
+            $table->unsignedBigInteger('away_team')->nulluable();
+            $table->string('stadium_id')->nulluable();
             $table->string('city')->nulluable();
-            $table->string('stadium')->nulluable();
-            $table->integer('round')->default(1);
+            $table->string('venue')->nulluable();
+            $table->string('round');
             $table->timestamps();
         });
     }

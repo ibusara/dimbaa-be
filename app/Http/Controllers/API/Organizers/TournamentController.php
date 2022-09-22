@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Organizers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -98,8 +98,9 @@ class TournamentController extends BaseController
      */
     public function destroy(Tournament $tournament)
     {
-        $tournament->delete();
+        return null;
+        // $tournament->delete();
 
-        return $this->sendResponse([], 'Tournament deleted successfully.');
+        // return $this->sendResponse([], 'Tournament deleted successfully.');
     }
 }

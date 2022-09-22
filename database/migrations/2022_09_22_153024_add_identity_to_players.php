@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tournaments', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->integer('year')->nullable();
-            $table->date('period');
-            $table->text('note')->nullable();
-            $table->timestamps();
+        Schema::table('players', function (Blueprint $table) {
+            $table->string('email');
+            $table->string('mobile')->nullable();
         });
     }
 
@@ -31,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tournaments');
+        Schema::table('players', function (Blueprint $table) {
+            $table->dropColumn(['email', 'mobile']);
+        });
     }
 };
