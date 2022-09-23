@@ -32,10 +32,10 @@ class MatchRecordController extends BaseController
     public function officials(Request $request, $id)
     {
         $user = $request->user();
-        $matchOfficial = MatchOfficial::findOrCreate(['match_id' => $id]);
-        return $matchOfficial;
+        $matchOfficial = MatchOfficial::firstOrCreate(['match_id' => $id]);
         $input = $request->all();
-        return $matchRecord;
+
+
         // $validator = Validator::make($input, [
         //     'tournament' => 'required|integer|exists:tournaments,id',
         //     'date' => 'required|date|after:yesterday',
@@ -49,17 +49,10 @@ class MatchRecordController extends BaseController
         // if($validator->fails()){
         //     return $this->sendError('Validation Error.', $validator->errors());
         // }
-        // $matchRecord = new MatchRecord();
-        // $matchRecord->user_id = $user->id;
-        // $matchRecord->tournament_id = $request->tournament;
-        // $matchRecord->home_team_id = $request->home_team;
-        // $matchRecord->away_team_id = $request->away_team;
-        // $matchRecord->stadium_id = $request->stadium;
-        // $matchRecord->city = $request->city;
-        // $matchRecord->date = $request->date;
-        // $matchRecord->round = $request->round;
-        // $matchRecord->save();
-        return $this->sendResponse($matchRecord, 'Match Officials updated successfully.');
+        
+        $matchOfficial->update($input);
+
+        return $this->sendResponse($matchOfficial, 'Match Officials updated successfully.');
     }
 
     /**
