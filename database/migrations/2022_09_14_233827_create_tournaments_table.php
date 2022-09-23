@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->integer('year')->nullable();
-            $table->date('period');
+            $table->date('start_at');
+            $table->date('end_at')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('match_officials', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('match_id'); 
             $table->unsignedBigInteger('head_referee_id')->nullable();
             $table->unsignedBigInteger('referee_id')->nullable();
             $table->unsignedBigInteger('match_officer_id')->nullable();

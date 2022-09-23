@@ -43,6 +43,7 @@ class TournamentController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $input['user_id'] = $user->id;
+        $input['start_at'] =  date('Y-m-d',strtotime($request->start_at ?? '01-'.date('m').'-'.$request->year));
         $tournament = Tournament::create($input);
 
         return $this->sendResponse($tournament, 'Tournament created successfully.');
@@ -85,6 +86,7 @@ class TournamentController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $input['start_at'] =  date('Y-m-d',strtotime($request->start_at ?? '01-'.date('m').'-'.$request->year));
         $tournament->update($input);
 
         return $this->sendResponse($tournament, 'Tournament updated successfully.');

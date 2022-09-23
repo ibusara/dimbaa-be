@@ -48,10 +48,10 @@ Route::middleware('auth:sanctum')->group( function () {
     });
 
     Route::prefix('organizers')->name('organizers.')->group( function () {
-
+        Route::resource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);
+        Route::post('matchrecords/officials/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'officials']);
+        Route::resource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
     });
-    Route::resource('tournaments', App\Http\Controllers\API\TournamentController::class);
-    Route::resource('matchrecord', App\Http\Controllers\API\MatchRecordController::class);
 
     Route::resource('products', ProductController::class);
 });

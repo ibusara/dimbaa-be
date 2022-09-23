@@ -13,7 +13,7 @@ class Tournament extends Model
         'user_id',
         'name',
         'year',
-        'period',
+        'start_at',
         'note'
     ];
 }
