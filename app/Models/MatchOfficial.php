@@ -17,5 +17,5 @@ class MatchOfficial extends Model
         'commissioner_id',
         'other_id',
         'other2_id'
-    ];
+    ]; 
 }

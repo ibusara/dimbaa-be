@@ -43,12 +43,14 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::resource('stadia', App\Http\Controllers\API\Admins\StadiumController::class);
     });
 
-    Route::prefix('teamadmin')->name('teamadmin.')->group( function () {
-        Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
+    Route::prefix('teammanager')->name('teammanager.')->group( function () {
+        // Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
+        Route::post('team-players/detail',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'detail']);
     });
 
-    Route::prefix('organizers')->name('organizers.')->group( function () {
+    Route::prefix('')->name('organizers.')->group( function () {
         Route::resource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);
+        Route::post('matchrecords/scoreboard/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'scoreboard']);
         Route::post('matchrecords/officials/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'officials']);
         Route::resource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
     });

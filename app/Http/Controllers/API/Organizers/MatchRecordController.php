@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MatchRecord;
 use App\Models\MatchOfficial;
+use App\Models\MatchScoreBoard;
+use App\Models\Notification;
 use Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
 
@@ -49,12 +51,52 @@ class MatchRecordController extends BaseController
         // if($validator->fails()){
         //     return $this->sendError('Validation Error.', $validator->errors());
         // }
-        
+
         $matchOfficial->update($input);
 
         return $this->sendResponse($matchOfficial, 'Match Officials updated successfully.');
     }
 
+
+
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function scoreboard(Request $request, $id)
+    {
+        $user = $request->user();
+        $matchOfficial = MatchScoreBoard::firstOrCreate(['match_id' => $id]);
+        $input = $request->all();
+
+
+        // $validator = Validator::make($input, [
+        //     'tournament' => 'required|integer|exists:tournaments,id',
+        //     'date' => 'required|date|after:yesterday',
+        //     'home_team' => 'required|integer|exists:teams,id',
+        //     'away_team' => 'required|integer|exists:teams,id',
+        //     'stadium' => 'required|integer|exists:stadia,id',//'
+        //     'city' => 'required|between:3,60',
+        //     'round' => 'required|integer|between:1,100',
+        // ]);
+
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors());
+        // }
+
+        $matchOfficial->update($input);
+
+        $notification =  new Notification();
+        $notification->role_id = $user->id;
+        $notification->action = '/';
+        $notification->title = "Scoreboard";
+        $notification->category = "match";
+        $notification->message = "Scoreboard has been updated  ";
+        $notification->save();
+        return $this->sendResponse($matchOfficial, 'Match Scoreboard updated successfully.');
+    }
     /**
      * Store a newly created resource in storage.
      *
