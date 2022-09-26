@@ -34,6 +34,10 @@ Route::controller(RegisterController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group( function () {
+    
+    Route::get('notifications', [App\Http\Controllers\API\GeneralController::class, 'notifications']);
+    Route::resource('products', ProductController::class);
+
     // Super Admin Endpoints
     Route::prefix('admin')->name('admin.')->group( function () {
         Route::get('roles', [App\Http\Controllers\API\Admins\UserManagementController::class, 'roles']);
@@ -45,20 +49,21 @@ Route::middleware('auth:sanctum')->group( function () {
 
     Route::prefix('teammanager')->name('teammanager.')->group( function () {
         // Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
+        Route::get('team-players',[App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'index']);
         Route::post('team-players/beginner',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'beginner']);
         Route::post('team-players/reserve',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'reserve']);
         Route::post('team-players/leaders',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'leaders']);
 
         Route::post('team-players/detail',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'detail']);
         Route::post('team-players/submit',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'submission']);
-    }); 
+    });
 
-    Route::prefix('')->name('organizers.')->group( function () {
+    Route::prefix('organizers')->name('organizers.')->group( function () {
         Route::resource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);
         Route::post('matchrecords/scoreboard/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'scoreboard']);
         Route::post('matchrecords/officials/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'officials']);
         Route::resource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
     });
 
-    Route::resource('products', ProductController::class);
+
 });

@@ -18,6 +18,7 @@ class UserManagementController extends BaseController
      */
     public function index(Request $request)
     {
+        $user = $request->user();
         $perPage = $request->input('per_page', 100);
         $status = $request->input('status', 1);
         $sortBy = $request->input('sort_by', 'desc');
