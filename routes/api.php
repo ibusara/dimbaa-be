@@ -45,8 +45,13 @@ Route::middleware('auth:sanctum')->group( function () {
 
     Route::prefix('teammanager')->name('teammanager.')->group( function () {
         // Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
+        Route::post('team-players/beginner',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'beginner']);
+        Route::post('team-players/reserve',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'reserve']);
+        Route::post('team-players/leaders',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'leaders']);
+
         Route::post('team-players/detail',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'detail']);
-    });
+        Route::post('team-players/submit',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'submission']);
+    }); 
 
     Route::prefix('')->name('organizers.')->group( function () {
         Route::resource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);

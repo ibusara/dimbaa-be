@@ -21,8 +21,8 @@ return new class extends Migration
             $table->integer('game_no')->nullable(); 
 
             $table->date('today_date')->nullable();
-            $table->string('manager_signature')->nullable();
-            $table->string('team_signature')->nullable();
+            $table->text('manager_signature')->nullable();
+            $table->text('team_signature')->nullable();
             $table->timestamps();
         });
     }

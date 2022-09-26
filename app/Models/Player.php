@@ -15,6 +15,9 @@ class Player extends Model
         'number',
         'email',
         'mobile',
-        'team_id'
+        'team_id',
+        'signature',
+        'license_no',
+        'rank'
     ];
 }

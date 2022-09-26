@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('role_id');
             $table->string('action')->nullable();
             $table->string('title')->nullable();
-            $table->string('message')->nullable();
+            $table->string('description')->nullable(); 
             $table->boolean('seen')->default(0); 
             $table->string('category')->default('primary');
             $table->dateTime('sent_at')->nullable()->default(now());

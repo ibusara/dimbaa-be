@@ -52,8 +52,6 @@ class LineupFormController extends BaseController
 
         $lineup = LineupForm::firstorfail($request->team);
 
-        array_merge($input,['team_id' => $request->team]);
-
         $input['team_id'] = $request->team;
         $lineup = $lineup->update($input);
 
