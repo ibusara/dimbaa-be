@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('match_team_players', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('match_id'); 
-            $table->unsignedBigInteger('user_id')->nullable(); 
+            $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('team1_starting')->nullable();
             $table->text('team2_starting')->nullable();
             $table->text('team1_reserve')->nullable();
             $table->text('team2_reserve')->nullable();
-            $table->longText('team1_subtitutions')->nullable();
-            $table->longText('team2_subtitutions')->nullable();
+            $table->longText('team1_substitutions')->nullable();
+            $table->longText('team2_substitutions')->nullable();
             $table->timestamps();
         });
     }
@@ -30,7 +30,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void 
+     * @return void
      */
     public function down()
     {

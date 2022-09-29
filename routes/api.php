@@ -67,6 +67,9 @@ Route::middleware('auth:sanctum')->group( function () {
 
     Route::prefix('refree')->name('refree.')->group( function () {
         Route::post('team-results', [App\Http\Controllers\API\Officials\MatchOfficialController::class, 'matchResult']);
+        Route::post('starting-players', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchStartingPlayers']);
+        Route::post('reserve-players', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchReservePlayers']);
+        Route::post('subtitutions', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchSubstitutePlayer']);
 
     });
 

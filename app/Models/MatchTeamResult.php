@@ -16,8 +16,8 @@ class MatchTeamResult extends Model
     ];
 
     protected $cast = [
-        'halftime_score' => 'object',
-        'final_score' => 'object',
+        'halftime_score' => 'array',
+        'final_score' => 'array',
     ];
 
     // public function getFinalScoreAttrubute(){

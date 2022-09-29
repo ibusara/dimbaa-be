@@ -93,7 +93,7 @@ class MatchRecordController extends BaseController
         $notification->action = '/';
         $notification->title = "Scoreboard";
         $notification->category = "match";
-        $notification->message = "Scoreboard has been updateexists ";
+        $notification->description = "Scoreboard has been updateexists ";
         $notification->save();
         return $this->sendResponse($matchOfficial, 'Match Scoreboard updated successfully.');
     }
