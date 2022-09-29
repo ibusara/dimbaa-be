@@ -15,10 +15,17 @@ return new class extends Migration
     {
         Schema::create('match_player_conditions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->text('team1_players')->nullable();
+            $table->text('home_team_players')->nullable();
+            $table->text('team2_players')->nullable();
+            $table->text('away_team_players')->nullable();
+            $table->text('team1')->nullable();
+            $table->text('team2')->nullable();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -34,7 +34,7 @@ Route::controller(RegisterController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group( function () {
-    
+
     Route::get('notifications', [App\Http\Controllers\API\GeneralController::class, 'notifications']);
     Route::resource('products', ProductController::class);
 
@@ -65,5 +65,9 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::resource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
     });
 
+    Route::prefix('refree')->name('refree.')->group( function () {
+        Route::post('team-results', [App\Http\Controllers\API\Officials\MatchOfficialController::class, 'matchResult']);
+
+    });
 
 });
