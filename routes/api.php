@@ -47,6 +47,12 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::resource('stadia', App\Http\Controllers\API\Admins\StadiumController::class);
     });
 
+    Route::prefix('admin')->name('admin.')->group( function () {
+        Route::get('teams', [App\Http\Controllers\API\Admins\TeamController::class, 'index']);
+        Route::post('team-player', [App\Http\Controllers\API\Admins\PlayerController::class, 'store']);
+        Route::delete('team-player/delete/{id}', [App\Http\Controllers\API\Admins\PlayerController::class, 'destroy']);
+    }); 
+
     Route::prefix('teammanager')->name('teammanager.')->group( function () {
         // Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
         Route::get('team-players',[App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'index']);
@@ -71,6 +77,10 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::post('reserve-players', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchReservePlayers']);
         Route::post('subtitutions', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchSubstitutePlayer']);
 
+        Route::post('cautions', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchPlayerCaution']);
+        Route::post('attitude-condition', [App\Http\Controllers\API\Officials\MatchAttitudeController::class, 'matchAttitudeCondition']);
+        Route::post('attitude-condition/ground-equipment', [App\Http\Controllers\API\Officials\MatchAttitudeController::class, 'matchEquipmentCondition']);
+        Route::post('official-assistant', [App\Http\Controllers\API\Officials\MatchOfficialController::class, 'matchOfficialAssistance']);
     });
 
 });
