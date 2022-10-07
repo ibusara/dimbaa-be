@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::resource('stadia', App\Http\Controllers\API\Admins\StadiumController::class);
     });
 
-    Route::prefix('admin')->name('admin.')->group( function () {
+    Route::prefix('teamadmin')->name('teamadmin.')->group( function () {
         Route::get('teams', [App\Http\Controllers\API\Admins\TeamController::class, 'index']);
         Route::post('team-player', [App\Http\Controllers\API\Admins\PlayerController::class, 'store']);
         Route::delete('team-player/delete/{id}', [App\Http\Controllers\API\Admins\PlayerController::class, 'destroy']);
