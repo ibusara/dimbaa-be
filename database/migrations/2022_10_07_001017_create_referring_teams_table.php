@@ -15,6 +15,16 @@ return new class extends Migration
     {
         Schema::create('referring_teams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->text('referee')->nullable();
+            $table->text('ass_referee_1')->nullable();
+            $table->text('ass_referee_2')->nullable();
+            $table->text('fourth_official')->nullable();
+            $table->text('add_referee_one')->nullable();
+            $table->text('add_referee_two')->nullable();
+            $table->text('additional_assistant_referee_1')->nullable();
+            $table->text('additional_assistant_referee_2')->nullable();
             $table->timestamps();
         });
     }

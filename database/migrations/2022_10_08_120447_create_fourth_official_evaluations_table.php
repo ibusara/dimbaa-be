@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('referee_evaluations', function (Blueprint $table) {
+        Schema::create('fourth_official_evaluations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('match_id');
             $table->unsignedBigInteger('user_id')->nullable();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referee_evaluations');
+        Schema::dropIfExists('fourth_official_evaluations');
     }
 };
