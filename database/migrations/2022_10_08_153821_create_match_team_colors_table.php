@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('match_team_colors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             // Color
             $table->string("away_team_fp_jersey")->nullable();
             $table->string("away_team_fp_shorts")->nullable();

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('match_reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->integer('expected_stadium_attendance')->default(0);
             $table->string('flood_lights')->nullable();
             $table->integer('match_balls')->nullable();

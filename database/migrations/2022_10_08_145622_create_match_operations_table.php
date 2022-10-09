@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('match_operations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('match_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string("cs_email")->nullable();
             $table->string("cs_mobile")->nullable();
             $table->string("cs_name")->nullable();
