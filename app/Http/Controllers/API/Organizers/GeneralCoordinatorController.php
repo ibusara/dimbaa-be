@@ -10,7 +10,7 @@ use App\Models\Notification;
 use Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
 
-class GeneralCoordinatorController extends Controller
+class GeneralCoordinatorController extends BaseController
 {
     public function matchResult(Request $request){
         $user = $request->user();
@@ -42,7 +42,7 @@ class GeneralCoordinatorController extends Controller
             $matchResult->extra_time_score = json_encode($input['extra_time_score']);
             $matchResult->update();
         }
-        
+
         if($request->has('penalty')){
             $validator = Validator::make($input, [
                 'penalty.team1' =>'required|integer',
@@ -57,7 +57,7 @@ class GeneralCoordinatorController extends Controller
             $matchResult->penalty = json_encode($input['penalty']);
             $matchResult->update();
         }
-        
+
         if($request->has('final_score')){
             $validator = Validator::make($input, [
                 'final_score.team1' =>'required|integer',
@@ -137,6 +137,6 @@ class GeneralCoordinatorController extends Controller
         $notification->description = "Match Official Condition set";
         $notification->save();
 
-        return $this->sendResponse($cordinatorOfficial, 'Match Official Conditions updated successfully'); 
+        return $this->sendResponse($cordinatorOfficial, 'Match Official Conditions updated successfully');
     }
 }

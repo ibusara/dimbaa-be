@@ -51,7 +51,7 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::get('teams', [App\Http\Controllers\API\Admins\TeamController::class, 'index']);
         Route::post('team-player', [App\Http\Controllers\API\Admins\PlayerController::class, 'store']);
         Route::delete('team-player/delete/{id}', [App\Http\Controllers\API\Admins\PlayerController::class, 'destroy']);
-    }); 
+    });
 
     Route::prefix('teammanager')->name('teammanager.')->group( function () {
         // Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
@@ -84,6 +84,8 @@ Route::middleware('auth:sanctum')->group( function () {
     });
 
     Route::prefix('general-coordinator')->name('general-coordinator.')->group( function () {
-        Route::post('team-results', [App\Http\Controllers\API\Officials\MatchOfficialController::class, 'matchResult']);
+        Route::post('team-results', [App\Http\Controllers\API\Organizers\GeneralCoordinatorController::class, 'matchResult']);
+        Route::post('match_official', [App\Http\Controllers\API\Organizers\GeneralCoordinatorController::class, 'matchOfficials']);
+        Route::post('coordination-meeting', [App\Http\Controllers\API\Organizers\CoordinatorDetailsController::class, 'coordinationMeeting']);
     });
 });
