@@ -15,16 +15,6 @@ return new class extends Migration
     {
         Schema::create('cordinator_match_officials', function (Blueprint $table) {
             $table->id();
-            // "referee":['match_official_name' => 'name', 'region' => 'region'],
-			// "assistant_referee_one" : ['match_official_name' => 'name', 'region' => 'region'],
-            // "assistant_referee_two":['match_official_name' => 'name', 'region' => 'region'],
-            // "fourth_official":['match_official_name' => 'name', 'region' => 'region'],
-            // "commissionar":['match_official_name' => 'name', 'region' => 'region'],
-            // "match_doctor":['match_official_name' => 'name', 'region' => 'region'],
-            // "officer_for_marketing":['match_official_name' => 'name', 'region' => 'region'],
-            // "media_officer":['match_official_name' => 'name', 'region' => 'region'],
-            // "security_officer":['match_official_name' => 'name', 'region' => 'region'],
-            // "general_coordinator":['match_official_name' => 'name', 'region' => 'region'],
 
             $table->unsignedBigInteger('match_id');
             $table->unsignedBigInteger('user_id')->nullable();

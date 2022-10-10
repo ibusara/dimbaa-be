@@ -62,7 +62,7 @@ class MatchOfficialController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        info($input);
+        // info($input);
         $validator = Validator::make($input, [
             'match' => 'required|exists:match_records,id',
             'center_supervisor' => 'array|min:3',
