@@ -139,4 +139,97 @@ class GeneralCoordinatorController extends BaseController
 
         return $this->sendResponse($cordinatorOfficial, 'Match Official Conditions updated successfully');
     }
+
+    public function information(Request $request){
+        $user = $request->user();
+        $input = $request->only(
+            'match',
+            'information',
+            'annoucer',
+            'giant_screen',
+        );
+
+        $validator = Validator::make($input, [
+            'match' => 'required|exists:match_records,id',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
+        $matchCordinator->update($input);
+
+
+        $notification =  new Notification();
+        $notification->role_id = $user->id;
+        $notification->action = '/';
+        $notification->title = "Match Cordination Information";
+        $notification->category = "officials";
+        $notification->description = "Giant screen Information set";
+        $notification->save();
+
+        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+    }
+
+    public function incident(Request $request){
+        $user = $request->user();
+        $input = $request->only(
+            'match', 'incident'
+        );
+
+        $validator = Validator::make($input, [
+            'match' => 'required|exists:match_records,id',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
+        $matchCordinator->update($input);
+
+        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+    }
+
+    public function remarks(Request $request){
+        $user = $request->user();
+        $input = $request->only(
+            'match', 'remarks'
+        );
+
+        $validator = Validator::make($input, [
+            'match' => 'required|exists:match_records,id',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
+        $matchCordinator->update($input);
+
+        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+    }
+
+
+    public function name(Request $request){
+        $user = $request->user();
+        $input = $request->only(
+            'match', 'name'
+        );
+
+        $validator = Validator::make($input, [
+            'match' => 'required|exists:match_records,id',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
+        $matchCordinator->update($input);
+
+        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+    }
 }

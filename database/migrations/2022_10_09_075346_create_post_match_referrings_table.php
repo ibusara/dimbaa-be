@@ -40,7 +40,6 @@ return new class extends Migration
             $table->longText('second_assistant_referee_signals')->nullable();
             $table->longText('second_assistant_referee_matchcontrol')->nullable();
             $table->longText('second_assistant_referee_teamwork')->nullable();
-            $table->longText('second_assistant_referee_personality')->nullable();
             $table->timestamps();
         });
     }

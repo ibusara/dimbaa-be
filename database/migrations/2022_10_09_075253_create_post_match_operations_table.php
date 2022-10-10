@@ -41,9 +41,9 @@ return new class extends Migration
             $table->longText('ambulance')->nullable();
             $table->longText('first_aid')->nullable();
             $table->longText('game_door')->nullable();
-            $table->longText('guest_of_honour')->nullable();
+            $table->longText('treatment_guest_of_honour')->nullable();
             $table->longText('referral_hospital')->nullable();
-            $table->longText('pre_match_cermony')->nullable();
+            $table->longText('treatment_pre_match_cermony')->nullable();
             $table->longText('treatment_room')->nullable();
             $table->timestamps();
         });
