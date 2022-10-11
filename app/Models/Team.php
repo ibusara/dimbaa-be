@@ -18,7 +18,7 @@ class Team extends Model
 
     public function stadium(){
         return  $this->hasOne('App\Models\Stadium');
-     }
+    }
 
     public function players(){
         return  $this->hasMany('App\Models\Player');

@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tournaments', function (Blueprint $table) {
+        Schema::create('match_team_results', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->integer('year')->nullable();
-            $table->date('start_at');
-            $table->date('end_at')->nullable();
-            $table->text('note')->nullable();
+            $table->unsignedBigInteger('match_id'); 
+            $table->unsignedBigInteger('user_id')->nullable(); 
+            $table->text('halftime_score')->nullable();
+            $table->text('final_score')->nullable(); 
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tournaments');
+        Schema::dropIfExists('match_team_results');
     }
 };

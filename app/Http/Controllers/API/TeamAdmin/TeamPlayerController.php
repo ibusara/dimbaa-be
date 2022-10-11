@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\API\SuperAdmin;
+namespace App\Http\Controllers\API\TeamAdmin;
 
-use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Player;
 use Validator;
 
-
-class PlayerController extends BaseController
+class TeamPlayerController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -41,25 +40,80 @@ class PlayerController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function beginner(Request $request)
     {
         $user = $request->user();
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'team' => 'required|integer',//exists,team,id
+            'team' => 'required|integer|exists:teams,id',//
             'name' => 'required|between:3,50',
+            'email' =>'required',
             'number' => 'required|integer|between:1,999',
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        $input['user_id'] = $user->id;
-        $input['team_id'] = $request->team;
+
+        array_merge($input,[
+            'team_id' =>  $request->team, 'user_id' => $user->id,
+            'rank' => 3,
+        ]);
+
         $player = Player::create($input);
 
-        return $this->sendResponse($player, 'Player created successfully.');
+        return $this->sendResponse($player, 'Beginner Player created successfully.');
+    }
+
+
+    public function reserve(Request $request)
+    {
+        $user = $request->user();
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'team' => 'required|integer|exists:teams,id',//
+            'name' => 'required|between:3,50',
+            'email' =>'required',
+            'number' => 'required|integer|between:1,999',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        array_merge($input,[
+            'team_id' =>  $request->team, 'user_id' => $user->id,
+            'rank' => 4
+        ]);
+
+        return $this->sendResponse($player, 'Reserve Player created successfully.');
+    }
+
+
+    public function leaders(Request $request)
+    {
+        $user = $request->user();
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'team' => 'required|integer|exists:teams,id',//
+            'name' => 'required|between:3,50',
+            'email' =>'required',
+            'number' => 'required|integer|between:1,999',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        array_merge($input,[
+            'team_id' =>  $request->team, 'user_id' => $user->id,
+            'rank' => 2
+        ]);
+
+        return $this->sendResponse($player, 'Team Leaders created successfully.');
     }
 
     /**

@@ -34,16 +34,58 @@ Route::controller(RegisterController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group( function () {
+
+    Route::get('notifications', [App\Http\Controllers\API\GeneralController::class, 'notifications']);
+    Route::resource('products', ProductController::class);
+
     // Super Admin Endpoints
     Route::prefix('admin')->name('admin.')->group( function () {
-        Route::get('roles', [App\Http\Controllers\API\SuperAdmin\UserManagementController::class, 'roles']);
-        Route::resource('users', App\Http\Controllers\API\SuperAdmin\UserManagementController::class);
-        Route::resource('teams', App\Http\Controllers\API\SuperAdmin\TeamController::class);
-        Route::resource('players', App\Http\Controllers\API\SuperAdmin\PlayerController::class);
-        Route::resource('stadia', App\Http\Controllers\API\SuperAdmin\StadiumController::class);
+        Route::get('roles', [App\Http\Controllers\API\Admins\UserManagementController::class, 'roles']);
+        Route::resource('users', App\Http\Controllers\API\Admins\UserManagementController::class);
+        Route::resource('teams', App\Http\Controllers\API\Admins\TeamController::class);
+        Route::resource('players', App\Http\Controllers\API\Admins\PlayerController::class);
+        Route::resource('stadia', App\Http\Controllers\API\Admins\StadiumController::class);
     });
 
-    Route::resource('products', ProductController::class);
-    Route::resource('tournaments', App\Http\Controllers\API\TournamentController::class);
-    Route::resource('matchrecord', App\Http\Controllers\API\MatchRecordController::class);
+    Route::prefix('teamadmin')->name('teamadmin.')->group( function () {
+        Route::get('teams', [App\Http\Controllers\API\Admins\TeamController::class, 'index']);
+        Route::post('team-player', [App\Http\Controllers\API\Admins\PlayerController::class, 'store']);
+        Route::delete('team-player/delete/{id}', [App\Http\Controllers\API\Admins\PlayerController::class, 'destroy']);
+    });
+
+    Route::prefix('teammanager')->name('teammanager.')->group( function () {
+        // Route::resource('team-player', App\Http\Controllers\API\Admins\PlayerController::class);
+        Route::get('team-players',[App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'index']);
+        Route::post('team-players/beginner',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'beginner']);
+        Route::post('team-players/reserve',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'reserve']);
+        Route::post('team-players/leaders',[ App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'leaders']);
+
+        Route::post('team-players/detail',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'detail']);
+        Route::post('team-players/submit',[ App\Http\Controllers\API\TeamAdmin\LineupFormController::class, 'submission']);
+    });
+
+    Route::prefix('organizers')->name('organizers.')->group( function () {
+        Route::resource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);
+        Route::post('matchrecords/scoreboard/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'scoreboard']);
+        Route::post('matchrecords/officials/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'officials']);
+        Route::resource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
+    });
+
+    Route::prefix('referee')->name('referee.')->group( function () {
+        Route::post('team-results', [App\Http\Controllers\API\Officials\MatchOfficialController::class, 'matchResult']);
+        Route::post('starting-players', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchStartingPlayers']);
+        Route::post('reserve-players', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchReservePlayers']);
+        Route::post('subtitutions', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchSubstitutePlayer']);
+
+        Route::post('cautions', [App\Http\Controllers\API\Officials\MatchPlayerController::class, 'matchPlayerCaution']);
+        Route::post('attitude-condition', [App\Http\Controllers\API\Officials\MatchAttitudeController::class, 'matchAttitudeCondition']);
+        Route::post('attitude-condition/ground-equipment', [App\Http\Controllers\API\Officials\MatchAttitudeController::class, 'matchEquipmentCondition']);
+        Route::post('official-assistant', [App\Http\Controllers\API\Officials\MatchOfficialController::class, 'matchOfficialAssistance']);
+    });
+
+    Route::prefix('general-coordinator')->name('general-coordinator.')->group( function () {
+        Route::post('team-results', [App\Http\Controllers\API\Organizers\GeneralCoordinatorController::class, 'matchResult']);
+        Route::post('match_official', [App\Http\Controllers\API\Organizers\GeneralCoordinatorController::class, 'matchOfficials']);
+        Route::post('coordination-meeting', [App\Http\Controllers\API\Organizers\CoordinatorDetailsController::class, 'coordinationMeeting']);
+    });
 });

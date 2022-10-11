@@ -17,17 +17,19 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tournament_id');
-            $table->dateTime('period');
-            $table->string('home_team')->nulluable();
-            $table->string('away_team')->nulluable();
-            $table->string('city')->nulluable();
-            $table->string('stadium')->nulluable();
-            $table->integer('round')->default(1);
+            $table->dateTime('date');
+            $table->unsignedBigInteger('home_team_id')->nullable();
+            $table->unsignedBigInteger('away_team_id')->nullable();
+            $table->string('stadium_id')->nullable();
+            $table->string('city')->nullable();
+            $table->string('venue')->nullable();
+            $table->string('round_type')->default('matchday')->nullable();
+            $table->integer('round')->nullable();
             $table->timestamps();
         });
     }
 
-    /** 
+    /**
      * Reverse the migrations.
      *
      * @return void

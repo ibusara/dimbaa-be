@@ -13,25 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tournaments', function (Blueprint $table) {
+        Schema::create('team_players', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->integer('year')->nullable();
-            $table->date('start_at');
-            $table->date('end_at')->nullable();
-            $table->text('note')->nullable();
+            $table->integer('number')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
+            $table->string('email');
+            $table->string('mobile')->nullable();
             $table->timestamps();
         });
     }
-
+ 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('tournaments');
+        Schema::dropIfExists('team_players');
     }
 };

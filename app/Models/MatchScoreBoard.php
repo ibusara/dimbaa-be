@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tournament extends Model
+class MatchScoreBoard extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'name',
-        'year',
-        'start_at',
-        'note'
+        'match_id',
+        'team1_score',
+        'team2_score',
+        'point'
     ];
+
 }

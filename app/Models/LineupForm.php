@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Player extends Model
+class LineupForm extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'name',
-        'number',
-        'email',
-        'mobile',
         'team_id',
-        'signature',
-        'license_no',
-        'rank'
+        'competition_id',
+        'detail_date',
+        'game_no',
+        'today_date',
+        'manager_signature',
+        'team_signature'
     ];
 }

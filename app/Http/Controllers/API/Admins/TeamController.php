@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\SuperAdmin;
+namespace App\Http\Controllers\API\Admins;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
@@ -30,7 +30,7 @@ class TeamController extends BaseController
 
         foreach ($teams as $team) {
             $team->players;
-            $team->stadium; 
+            $team->stadium;
         }
 
         return $this->sendResponse($teams, 'Teams retrieved successfully.');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Organizers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -43,6 +43,7 @@ class TournamentController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $input['user_id'] = $user->id;
+        $input['start_at'] =  date('Y-m-d',strtotime($request->start_at ?? '01-'.date('m').'-'.$request->year));
         $tournament = Tournament::create($input);
 
         return $this->sendResponse($tournament, 'Tournament created successfully.');
@@ -85,6 +86,7 @@ class TournamentController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        $input['start_at'] =  date('Y-m-d',strtotime($request->start_at ?? '01-'.date('m').'-'.$request->year));
         $tournament->update($input);
 
         return $this->sendResponse($tournament, 'Tournament updated successfully.');
@@ -98,8 +100,9 @@ class TournamentController extends BaseController
      */
     public function destroy(Tournament $tournament)
     {
-        $tournament->delete();
+        return null;
+        // $tournament->delete();
 
-        return $this->sendResponse([], 'Tournament deleted successfully.');
+        // return $this->sendResponse([], 'Tournament deleted successfully.');
     }
 }
