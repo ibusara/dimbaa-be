@@ -88,4 +88,13 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::post('match_official', [App\Http\Controllers\API\Organizers\GeneralCoordinatorController::class, 'matchOfficials']);
         Route::post('coordination-meeting', [App\Http\Controllers\API\Organizers\CoordinatorDetailsController::class, 'coordinationMeeting']);
     });
+
+    Route::prefix('referee-assessor')->name('referee-assessor.')->group( function () {
+        Route::post('referee-evaluation/game-control', [App\Http\Controllers\API\Officials\RefereeEvaluationController::class, 'refereeEvaluation']);
+        Route::post('referee-evaluation/team-work-one', [App\Http\Controllers\API\Officials\RefereeEvaluationController::class, 'refereeEvaluation']);
+        Route::post('referee-evaluation/team-work-two', [App\Http\Controllers\API\Officials\RefereeEvaluationController::class, 'refereeEvaluation']);
+        Route::post('assistant-referee-evaluation/one', [App\Http\Controllers\API\Officials\RefereeEvaluationController::class, 'refereeEvaluation']);
+        Route::post('assistant-referee-evaluation/two', [App\Http\Controllers\API\Officials\RefereeEvaluationController::class, 'refereeEvaluation']);
+        Route::post('4th-official/evaluation', [App\Http\Controllers\API\Officials\RefereeEvaluationController::class, 'refereeEvaluation']);
+    });
 });
