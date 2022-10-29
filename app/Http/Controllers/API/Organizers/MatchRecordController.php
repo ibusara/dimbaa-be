@@ -25,6 +25,18 @@ class MatchRecordController extends BaseController
         return $this->sendResponse($matchRecord, 'Match Record retrieved successfully.');
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listScoreboard()
+    {
+        $scoreboard = MatchScoreBoard::get();
+
+        return $this->sendResponse($scoreboard, 'Scoreboard retrieved successfully.');
+    }
+
      /**
      * Store a newly created resource in storage.
      *
@@ -93,7 +105,7 @@ class MatchRecordController extends BaseController
         $notification->action = '/';
         $notification->title = "Scoreboard";
         $notification->category = "match";
-        $notification->description = "Scoreboard has been updateexists ";
+        $notification->description = "Scoreboard has been updated";
         $notification->save();
         return $this->sendResponse($matchOfficial, 'Match Scoreboard updated successfully.');
     }
