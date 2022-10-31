@@ -23,7 +23,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::get();
+        $roles = Role::all()->pluck('name');
 
         return response()->json([
             'success' => true,

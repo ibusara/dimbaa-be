@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Admin\PermissionController;
 use App\Http\Controllers\API\Admin\RoleController;
+use App\Http\Controllers\API\Admin\UserController;
 use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\GeneralController;
 use App\Http\Controllers\API\LeagueDirector\PostMatchReportController;
@@ -47,12 +48,12 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         // Super Admin Endpoints
         Route::prefix('admin')->name('admin.')->group(function () {
-            Route::resource('roles', RoleController::class);
-            Route::resource('permissions', PermissionController::class);
-            Route::resource('users', App\Http\Controllers\API\Admin\UserManagementController::class);
-            Route::resource('teams', App\Http\Controllers\API\Admin\TeamController::class);
-            Route::resource('players', App\Http\Controllers\API\Admin\PlayerController::class);
-            Route::resource('stadia', App\Http\Controllers\API\Admin\StadiumController::class);
+            Route::apiResource('roles', RoleController::class);
+            Route::apiResource('permissions', PermissionController::class);
+            Route::apiResource('users', UserController::class);
+            Route::apiResource('teams', App\Http\Controllers\API\Admin\TeamController::class);
+            Route::apiResource('players', App\Http\Controllers\API\Admin\PlayerController::class);
+            Route::apiResource('stadia', App\Http\Controllers\API\Admin\StadiumController::class);
         });
 
         Route::prefix('teamadmin')->name('teamadmin.')->group(function () {
@@ -62,7 +63,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('teammanager')->name('teammanager.')->group(function () {
-            // Route::resource('team-player', App\Http\Controllers\API\Admin\PlayerController::class);
+            // Route::apiResource('team-player', App\Http\Controllers\API\Admin\PlayerController::class);
             Route::get('team-players', [App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'index']);
             Route::post('team-players/beginner', [App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'beginner']);
             Route::post('team-players/reserve', [App\Http\Controllers\API\TeamAdmin\TeamPlayerController::class, 'reserve']);
@@ -73,10 +74,10 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('organizers')->name('organizers.')->group(function () {
-            Route::resource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);
+            Route::apiResource('tournaments', App\Http\Controllers\API\Organizers\TournamentController::class);
             Route::post('matchrecords/scoreboard/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'scoreboard']);
             Route::post('matchrecords/officials/{id}', [App\Http\Controllers\API\Organizers\MatchRecordController::class, 'officials']);
-            Route::resource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
+            Route::apiResource('matchrecords', App\Http\Controllers\API\Organizers\MatchRecordController::class);
         });
 
         Route::prefix('referee')->name('referee.')->group(function () {

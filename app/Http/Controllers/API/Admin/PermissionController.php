@@ -74,7 +74,7 @@ class PermissionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete the permission
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
