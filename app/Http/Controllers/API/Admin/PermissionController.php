@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
+/**
+ * @group Permissions Management
+ *
+ *
+ * API endpoints for managing permissions
+ */
 class PermissionController extends Controller
 {
     function __construct()

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 /**
  * @group Authentication
  *
+ * @a@unauthenticated
+ *
  * API endpoints for managing authentication
  */
 class AuthenticationController extends Controller

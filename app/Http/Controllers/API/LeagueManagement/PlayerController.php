@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Admin;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,35 +8,33 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Player;
 use Validator;
 
-
+/**
+ * @group Player Management
+ *
+ *
+ * API endpoints for managing players
+ */
 class PlayerController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * List players.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 100);
-        $sortBy = $request->input('sort_by', 'asc');
+        $players = Player::all();
 
-        $search = $request->input('search');
-        $role = $request->input('role');
-        $name = $request->input('name');
-
-        $players = Player::where(function ($query) use ($search) {
-            $query->where('name', 'LIKE', "%{$search}%");
-        })->when($name, function ($query) use ($name) {
-            $query->where('name', $name);
-        })->latest()->paginate($perPage);
-
-        return $this->sendResponse($players, 'Players retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Players retrieved successfully!',
+            'players' => $players
+        ], 200);
     }
 
 
     /**
-     * Store a newly created resource in storage.
+     * Create new Player.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -47,23 +45,25 @@ class PlayerController extends BaseController
         $input = $request->all();
 
         $request->validate([
-            'team' => 'required|integer', //exists,team,id
-            'name' => 'required|between:3,50',
+            'team_id' => 'required|integer|exists,teams,id',
+            'name' => 'required|string',
             'email' => 'required',
             'mobile' => 'required',
-            'number' => 'required|integer|between:1,999',
+            'number' => 'required|integer',
         ]);
 
 
         $input['user_id'] = $user->id;
         $input['team_id'] = $request->team;
-        $player = Player::create($input);
+        $player = Player::create([
+            
+        ]);
 
         return $this->sendResponse($player, 'Player created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Display player details.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -80,7 +80,7 @@ class PlayerController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update player details
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -106,7 +106,7 @@ class PlayerController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete player.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

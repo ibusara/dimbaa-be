@@ -6,79 +6,83 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Stadium;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class StadiumController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * List stadiums.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $perPage = $request->input('per_page', 100);
-        $sortBy = $request->input('sort_by', 'asc');
+        $stadia = Stadium::all();
 
-        $search = $request->input('search');
-        $team = $request->input('team');
-        $name = $request->input('name');
-
-        $stadia = Stadium::where(function ($query) use ($search) {
-            $query->where('name', 'LIKE', "%{$search}%");
-        })->when($name, function ($query) use ($name) {
-            $query->where('name', $name);
-        })->when($team, function ($query) use ($team) {
-            $query->where('team_id', $team);
-        })->latest()->paginate($perPage);
-
-        return $this->sendResponse($stadia, 'Stadia retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Stadia retrieved successfully!',
+            'stadia' => $stadia
+        ], 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a stadium.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $user = $request->user();
-        $input = $request->all();
-
         $request->validate([
-            'team' => 'required|integer', //exists,team,id
-            'name' => 'required|between:3,50',
-            'region' => 'required|between:3,50',
+            'name' => 'required|unique:stadia,name',
+            'region' => 'required',
+            'location' => 'required',
+            'capacity' => 'required|numeric',
+            'stadium_owner' => 'required|string',
+            'stadium_picture' => 'required|mimes:jpeg,png,jpg',
+            'inauguration_date' => 'required'
         ]);
-        info($input);
 
-        $input['user_id'] = $user->id;
-        $input['team_id'] = $request->team;
-        $stadium = Stadium::create($input);
+        $filename = time() . '.' . $request->stadium_picture->getClientOriginalExtension();
 
-        return $this->sendResponse($stadium, 'Stadium created successfully.');
+        $file = Storage::putFileAs('uploads', $request->stadium_picture, $filename, 'public');
+
+        $stadium = Stadium::create([
+            'name' => $request->name,
+            'region' => $request->region,
+            'location' => $request->location,
+            'capacity' => $request->capacity,
+            'stadium_owner' => $request->stadium_owner,
+            'stadium_picture' => 'https://fra1.digitaloceanspaces.com/uploads/' . $filename,
+            'inauguration_date' => $request->inauguration_date
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Stadiup saved successfully!',
+            'stadium' => $stadium
+        ], 200);
     }
 
     /**
-     * Display the specified resource.
+     * Show stadium details.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Stadium $stadium)
     {
-        $stadium = Stadium::find($id);
-
-        if (is_null($stadium)) {
-            return $this->sendError('Stadium not found.');
-        }
-
-        return $this->sendResponse($stadium, 'Stadium retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Stadium retrieved successfully!',
+            'stadium' => $stadium
+        ], 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update stadium details.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -86,25 +90,39 @@ class StadiumController extends BaseController
      */
     public function update(Request $request, Stadium $stadium)
     {
-        $user = $request->user();
-        $input = $request->all();
-
         $request->validate([
-            'team' => 'required|integer', //exists,team,id
-            'name' => 'required|between:3,50',
-            'region' => 'required|between:3,50',
+            'name' => 'required|unique:stadia,name',
+            'region' => 'required',
+            'location' => 'required',
+            'capacity' => 'required|numeric',
+            'stadium_owner' => 'required|string',
+            'stadium_picture' => 'required|mimes:jpeg,png,jpg',
+            'inauguration_date' => 'required'
         ]);
 
+        $filename = time() . '.' . $request->stadium_picture->getClientOriginalExtension();
 
+        $file = Storage::putFileAs('uploads', $request->stadium_picture, $filename, 'public');
 
-        $input['team_id'] = $request->team;
-        $stadium = $stadium->update($input);
+        $stadium->update([
+            'name' => $request->name,
+            'region' => $request->region,
+            'location' => $request->location,
+            'capacity' => $request->capacity,
+            'stadium_owner' => $request->stadium_owner,
+            'stadium_picture' => 'https://fra1.digitaloceanspaces.com/uploads/' . $filename,
+            'inauguration_date' => $request->inauguration_date
+        ]);
 
-        return $this->sendResponse($stadium, 'Stadium created successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Stadiup updated successfully!',
+            'stadium' => $stadium
+        ], 200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete stadium.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

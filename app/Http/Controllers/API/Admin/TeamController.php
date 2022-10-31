@@ -7,10 +7,16 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Team;
 use Validator;
 
+/**
+ * @group Team Management
+ *
+ *
+ * API endpoints for managing teams
+ */
 class TeamController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * List Teams.
      *
      * @return \Illuminate\Http\Response
      */
@@ -37,7 +43,7 @@ class TeamController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create new team.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -62,7 +68,7 @@ class TeamController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * Display team details.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -79,7 +85,7 @@ class TeamController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update team.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -105,7 +111,7 @@ class TeamController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete team.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

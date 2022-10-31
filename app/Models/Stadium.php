@@ -10,9 +10,12 @@ class Stadium extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'name',
         'region',
-        'team_id'
+        'location',
+        'capacity',
+        'stadium_owner',
+        'stadium_picture',
+        'inauguration_date'
     ];
 }

@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
+/**
+ * @group Role Management
+ *
+ *
+ * API endpoints for managing roles
+ */
 class RoleController extends Controller
 {
     function __construct()

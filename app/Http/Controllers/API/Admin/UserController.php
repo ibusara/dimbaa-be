@@ -7,6 +7,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group User Management
+ *
+ *
+ * API endpoints for managing users
+ */
 class UserController extends Controller
 {
     /**

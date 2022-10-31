@@ -1,13 +1,17 @@
 <?php
 
 use App\Http\Controllers\API\Admin\PermissionController;
+use App\Http\Controllers\API\Admin\PlayerController;
 use App\Http\Controllers\API\Admin\RoleController;
+use App\Http\Controllers\API\Admin\StadiumController;
+use App\Http\Controllers\API\Admin\TeamController;
 use App\Http\Controllers\API\Admin\UserController;
 use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\GeneralController;
 use App\Http\Controllers\API\LeagueDirector\PostMatchReportController;
 use App\Http\Controllers\API\LeagueDirector\PreMatchReportController;
 use App\Http\Controllers\API\LeagueManagement\MatchRecordController;
+use App\Http\Controllers\API\LeagueManagement\TeamPlayerController;
 use App\Http\Controllers\API\LeagueManagement\TournamentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,27 +51,19 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         Route::get('notifications', [GeneralController::class, 'notifications']);
 
-        // Super Admin Endpoints
-        Route::prefix('admin')->name('admin.')->group(function () {
+        Route::prefix('admin')->group(function () {
             Route::apiResource('roles', RoleController::class);
             Route::apiResource('permissions', PermissionController::class);
             Route::apiResource('users', UserController::class);
-            Route::apiResource('teams', App\Http\Controllers\API\Admin\TeamController::class);
-            Route::apiResource('players', App\Http\Controllers\API\Admin\PlayerController::class);
-            Route::apiResource('stadia', App\Http\Controllers\API\Admin\StadiumController::class);
-        });
-
-        Route::prefix('teamadmin')->name('teamadmin.')->group(function () {
-            Route::get('teams', [App\Http\Controllers\API\Admin\TeamController::class, 'index']);
-            Route::post('team-player', [App\Http\Controllers\API\Admin\PlayerController::class, 'store']);
-            Route::delete('team-player/delete/{id}', [App\Http\Controllers\API\Admin\PlayerController::class, 'destroy']);
+            Route::apiResource('teams', TeamController::class);
+            Route::apiResource('stadia', StadiumController::class);
         });
 
         Route::prefix('teammanager')->name('teammanager.')->group(function () {
-            Route::get('team-players', [App\Http\Controllers\API\LeagueManagement\TeamPlayerController::class, 'index']);
-            Route::post('team-players/beginner', [App\Http\Controllers\API\LeagueManagement\TeamPlayerController::class, 'beginner']);
-            Route::post('team-players/reserve', [App\Http\Controllers\API\LeagueManagement\TeamPlayerController::class, 'reserve']);
-            Route::post('team-players/leaders', [App\Http\Controllers\API\LeagueManagement\TeamPlayerController::class, 'leaders']);
+            Route::apiResource('players', PlayerController::class);
+            Route::post('team-players/beginner', [TeamPlayerController::class, 'beginner']);
+            Route::post('team-players/reserve', [TeamPlayerController::class, 'reserve']);
+            Route::post('team-players/leaders', [TeamPlayerController::class, 'leaders']);
 
             Route::post('team-players/detail', [App\Http\Controllers\API\LeagueManagement\LineupFormController::class, 'detail']);
             Route::post('team-players/submit', [App\Http\Controllers\API\LeagueManagement\LineupFormController::class, 'submission']);
