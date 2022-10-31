@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => ['cors', 'json.response']], function () {
+
 Route::any('/', function (Request $request) {
     return response()->json([
         'status' => true,
@@ -147,4 +149,7 @@ Route::middleware('auth:api')->group(function () {
             Route::post('match', [PostMatchReportController::class, 'match']);
         });
     });
+});
+
+    // ...
 });
