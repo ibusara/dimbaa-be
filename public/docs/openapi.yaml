@@ -1,0 +1,4641 @@
+openapi: 3.0.3
+info:
+  title: 'Dimbaa Backend Api Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://dimbaa-be.test'
+paths:
+  /api/register:
+    post:
+      summary: 'Register api'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: aut
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: zrolfson@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                c_password:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: aut
+              required:
+                - name
+                - email
+                - password
+                - c_password
+      security: []
+  /api/login:
+    post:
+      summary: 'Login api'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/notifications:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/products:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: et
+                detail:
+                  type: string
+                  description: ''
+                  example: saepe
+              required:
+                - name
+                - detail
+      security: []
+  '/api/products/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: et
+                detail:
+                  type: string
+                  description: ''
+                  example: sint
+              required:
+                - name
+                - detail
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the product.'
+        example: 13
+        required: true
+        schema:
+          type: integer
+  /api/admin/roles:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/admin/users:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be between 3 and 20 characters.'
+                  example: ovf
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: rgoyette@example.com
+                user_role:
+                  type: integer
+                  description: ''
+                  example: 18
+                mobile:
+                  type: integer
+                  description: 'Must be at least 8. Must not be greater than 15.'
+                  example: 7
+              required:
+                - name
+                - email
+                - user_role
+      security: []
+  '/api/admin/users/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 13
+        required: true
+        schema:
+          type: integer
+  /api/admin/teams:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stadium:
+                  type: integer
+                  description: ''
+                  example: 18
+                team_name:
+                  type: string
+                  description: 'exists,stadium,id. Must be between 3 and 50 characters.'
+                  example: jowe
+                region:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: jwrl
+              required:
+                - stadium
+                - team_name
+                - region
+      security: []
+  '/api/admin/teams/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stadium:
+                  type: integer
+                  description: ''
+                  example: 18
+                team_name:
+                  type: string
+                  description: 'exists,stadium,id. Must be between 3 and 50 characters.'
+                  example: ggsa
+                region:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: ihm
+              required:
+                - stadium
+                - team_name
+                - region
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the team.'
+        example: 16
+        required: true
+        schema:
+          type: integer
+  /api/admin/players:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 17
+                name:
+                  type: string
+                  description: 'exists,team,id. Must be between 3 and 50 characters.'
+                  example: duh
+                email:
+                  type: string
+                  description: ''
+                  example: enim
+                mobile:
+                  type: string
+                  description: ''
+                  example: et
+                number:
+                  type: integer
+                  description: 'Must be between 1 and 999.'
+                  example: 1
+              required:
+                - team
+                - name
+                - email
+                - mobile
+                - number
+      security: []
+  '/api/admin/players/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 6
+                name:
+                  type: string
+                  description: 'exists,team,id. Must be between 3 and 50 characters.'
+                  example: rjww
+                number:
+                  type: integer
+                  description: 'Must be between 1 and 999.'
+                  example: 1
+              required:
+                - team
+                - name
+                - number
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the player.'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/admin/stadia:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 5
+                name:
+                  type: string
+                  description: 'exists,team,id. Must be between 3 and 50 characters.'
+                  example: vbwb
+                region:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: tfd
+              required:
+                - team
+                - name
+                - region
+      security: []
+  '/api/admin/stadia/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 8
+                name:
+                  type: string
+                  description: 'exists,team,id. Must be between 3 and 50 characters.'
+                  example: oeg
+                region:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: mbzb
+              required:
+                - team
+                - name
+                - region
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the stadium.'
+        example: 15
+        required: true
+        schema:
+          type: integer
+  /api/teamadmin/teams:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/teamadmin/team-player:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 16
+                name:
+                  type: string
+                  description: 'exists,team,id. Must be between 3 and 50 characters.'
+                  example: cznx
+                email:
+                  type: string
+                  description: ''
+                  example: dolores
+                mobile:
+                  type: string
+                  description: ''
+                  example: sit
+                number:
+                  type: integer
+                  description: 'Must be between 1 and 999.'
+                  example: 1
+              required:
+                - team
+                - name
+                - email
+                - mobile
+                - number
+      security: []
+  '/api/teamadmin/team-player/delete/{id}':
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: 10
+        required: true
+        schema:
+          type: integer
+  /api/teammanager/team-players:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/teammanager/team-players/beginner:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 13
+                name:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: utbj
+                email:
+                  type: string
+                  description: ''
+                  example: ut
+                number:
+                  type: integer
+                  description: 'Must be between 1 and 999.'
+                  example: 1
+              required:
+                - team
+                - name
+                - email
+                - number
+      security: []
+  /api/teammanager/team-players/reserve:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 18
+                name:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: afq
+                email:
+                  type: string
+                  description: ''
+                  example: odit
+                number:
+                  type: integer
+                  description: 'Must be between 1 and 999.'
+                  example: 1
+              required:
+                - team
+                - name
+                - email
+                - number
+      security: []
+  /api/teammanager/team-players/leaders:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 12
+                name:
+                  type: string
+                  description: 'Must be between 3 and 50 characters.'
+                  example: ptr
+                email:
+                  type: string
+                  description: ''
+                  example: reprehenderit
+                number:
+                  type: integer
+                  description: 'Must be between 1 and 999.'
+                  example: 2
+              required:
+                - team
+                - name
+                - email
+                - number
+      security: []
+  /api/teammanager/team-players/detail:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 19
+                competition:
+                  type: integer
+                  description: ''
+                  example: 19
+              required:
+                - team
+                - competition
+      security: []
+  /api/teammanager/team-players/submit:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  type: integer
+                  description: ''
+                  example: 18
+              required:
+                - team
+      security: []
+  /api/organizers/tournaments:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: enim
+                year:
+                  type: integer
+                  description: 'Must be between 2000 and 3000.'
+                  example: 2001
+              required:
+                - name
+                - year
+      security: []
+  '/api/organizers/tournaments/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: modi
+                year:
+                  type: integer
+                  description: 'Must be between 2000 and 3000.'
+                  example: 2001
+              required:
+                - name
+                - year
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the tournament.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/organizers/matchrecords/scoreboard/{id}':
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the scoreboard.'
+        example: vitae
+        required: true
+        schema:
+          type: string
+  '/api/organizers/matchrecords/officials/{id}':
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the official.'
+        example: inventore
+        required: true
+        schema:
+          type: string
+  /api/organizers/matchrecords:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tournament:
+                  type: integer
+                  description: ''
+                  example: 9
+                date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>yesterday</code>.'
+                  example: '2035-02-22'
+                home_team:
+                  type: integer
+                  description: ''
+                  example: 9
+                away_team:
+                  type: integer
+                  description: ''
+                  example: 9
+                stadium:
+                  type: integer
+                  description: ''
+                  example: 8
+                city:
+                  type: string
+                  description: "'. Must be between 3 and 60 characters."
+                  example: akv
+                round:
+                  type: integer
+                  description: 'Must be between 1 and 100.'
+                  example: 1
+              required:
+                - tournament
+                - date
+                - home_team
+                - away_team
+                - stadium
+                - city
+                - round
+      security: []
+  '/api/organizers/matchrecords/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the matchrecord.'
+        example: molestias
+        required: true
+        schema:
+          type: string
+  /api/referee/team-results:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: quia
+                halftime_score:
+                  type: array
+                  description: ''
+                  example:
+                    - praesentium
+                  items:
+                    type: string
+                final_score:
+                  type: array
+                  description: ''
+                  example:
+                    - ducimus
+                  items:
+                    type: string
+              required:
+                - match
+      security: []
+  /api/referee/starting-players:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: voluptates
+                team1_starting:
+                  type: array
+                  description: ''
+                  example:
+                    - 4
+                  items:
+                    type: integer
+                team2_starting:
+                  type: array
+                  description: ''
+                  example:
+                    - 14
+                  items:
+                    type: integer
+              required:
+                - match
+      security: []
+  /api/referee/reserve-players:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: eum
+                team1_reserve:
+                  type: array
+                  description: ''
+                  example:
+                    - 9
+                  items:
+                    type: integer
+                team2_reserve:
+                  type: array
+                  description: ''
+                  example:
+                    - 15
+                  items:
+                    type: integer
+              required:
+                - match
+      security: []
+  /api/referee/subtitutions:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: occaecati
+                team:
+                  type: integer
+                  description: 'Must be between 1 and 2.'
+                  example: 1
+                minute:
+                  type: integer
+                  description: 'Must be between 1 and 130.'
+                  example: 2
+                in:
+                  type: string
+                  description: 'Must be between 1 and 2 characters.'
+                  example: l
+                player:
+                  type: integer
+                  description: ''
+                  example: 7
+                condition:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - match
+                - team
+                - minute
+                - in
+                - player
+      security: []
+  /api/referee/cautions:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: et
+                team:
+                  type: integer
+                  description: ''
+                  example: 15
+                minute:
+                  type: integer
+                  description: 'Must be between 1 and 130.'
+                  example: 1
+                warning_card:
+                  type: string
+                  description: 'Must be between 1 and 2 characters.'
+                  example: 'y'
+                player:
+                  type: integer
+                  description: ''
+                  example: 2
+                reasons:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - match
+                - team
+                - minute
+                - warning_card
+                - player
+      security: []
+  /api/referee/attitude-condition:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: est
+                team1_players:
+                  type: array
+                  description: ''
+                  example:
+                    - 1
+                  items:
+                    type: integer
+                home_team_players:
+                  type: array
+                  description: ''
+                  example:
+                    - 14
+                  items:
+                    type: integer
+                team2_players:
+                  type: array
+                  description: ''
+                  example:
+                    - 18
+                  items:
+                    type: integer
+                away_team_players:
+                  type: array
+                  description: ''
+                  example:
+                    - 4
+                  items:
+                    type: integer
+              required:
+                - match
+      security: []
+  /api/referee/attitude-condition/ground-equipment:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: ipsam
+                ambulance:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    condition:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: vhjnrnulsmzmfvdnvrp
+                    rewards:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: reasrbfwngpzhovxldhofbvxvmsqtkiyfyanepuaghjngaybmreqteibzsvlqcxciqfybvqomuphlixbbyueqymohjtkiubosjozeqgckwaotwgfvmgsnxbkyrttowcqsscwkejjskrxdyuxntjymiwkdajroczyipybkpudabzbpepicwixzmqhwyuaojzdcyzubgafdsrzhlhownmbqelswlkrrgibyvtzkmfgzudtxjpvoesrkzqivclalnirobnzsbejvoomcfurzkistgngxpfmaidvknncspyvvtsolgoqtsmrgbhssgdshoyrmsxjzukgxjgtmpxtgegogqwauthbtlb
+                ball_boys:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    condition:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: sdvcwnrzkfynnnkuneskbulrlsuhzoasnouccanvteiaywgcxttqcnpmdhhjttxrzxezgfctoxcendgvrwcnalofzikhrezynbpykpmwknvaneapyckdncoxcfxwfpmbyelgksexywdzatumewohginqcihabzfosaqhocvnmq
+                    rewards:
+                      type: string
+                      description: ".Rule::exists('ball_boys'),. Must not be greater than 512 characters."
+                      example: rcwomshkjskisbhxldfamzlgfzxkazduypqjpgdmkjqkeyxznskkgdvgbvjnlxhhaevxhhzxeecmdymoxpmsaoorwcltwitaydhzqexrteleprsbqtqtrslbcvgamudmbxwvdjcoymyhwnrektuafaahuwgducmydlprsfgmcheosrwxapofoizvpwbgmndoxsgbzbokdyevprsxzxixayqlirxqnjufjtdoivjstbrznikbmdsibfynqhkaeuwmfmzogtrcvzlzibiwblp
+                corner_flags:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    condition:
+                      type: string
+                      description: ".Rule::exists('ball_boys'),. Must not be greater than 512 characters."
+                      example: vhwxdvobflaqfoqwwktfjnfkvuvddsaijcoefnqsuhzjtcmrrvzplquhbpeitexnjhbqzvznwcmsjctaldntapkfyiltpdqhrpzhigllphscmgzrwwfmftzafarxewfucfsshaymcgfxabivtvkmeimcgqirpjtvgabrzmqkjrwyktfralvzhjfbqzqobeiobchzhcjamdgarwcvlwjhjctsnhnyxseyeqhzsbfqizcoohyiduayuzjqjgvwapioqkbdumzeivgjkjdbobvxnfhpfhkzeaewphfqgzxxwcristrvlmdaewtkjmyxgfempy
+                    rewards:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: illiyalhjknufonxofnfbnlecntavpikdyeljohbnad
+                entrance:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    condition:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: avbovxlzocyozynvaputpraqlzmnxihpfawcugbrskvarojqtzwcgsmxqmlrakgpoglqjhjheqydgtkhjyfjzjqegajtkkzvpsulvgdzwzxzqxfnizjfdkqvabkymfwehcckazrkggtwslf
+                    rewards:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: iqicyhjrchpynjcinfylwzpsnqzrcrqwekwltvdhhhzeoqlyntqnomyrrorekikpbweigbnnwqoyjwtadwvpyhueljmjkluniuosvjmyqpcwyxkzxxtsmldhfawzvfnhsfvpbfqfghltckiuvd
+                dressing_room:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    condition:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: myovwkoelkhgkcqlwky
+                    rewards:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: inzsebdgzbzbqdmodewtuwtuyvyqmeiihbbmwiiwrmshbaxackgrjemhkqdrqwdszrwvlbghbgdrgparxmyzeeubbtjzbgvmutbjxsusifivukxqroxshrljlwjkrlwsmdpngrmedyfotsnacnmgwrfxigkqivvteymljsriwqkrfqgayjpxstzfxouupeskuadnltgrzbuhkcumyhzpxaqynwvqbswtzshokovtndrqsjzohenikrhlbxqrxfrdzaajwwxavwdpceezheuwhjeonkzmphgpbovfdambwsosqugotzduebbgvefcxhtlsdxnpvzhbjngksvusjtrfreabjxvblhjnizrvzyqkqppohuehsfuumovblgdaprtwpkhsvqdoouldpvgbazdfynjkfmiaehuchyjgjkxeqnbddtopfxmbeboxepytojkfozzljsltttelmerwkgqkzayiowmaygxiddluaiefsxxptmqdrd
+                police:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    condition:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: dmaevvoufnixrunvabckwlfkajntctjeupbkfdyoajynwjmmigcduhrldeodvzydpwlpoadnlaqgwxxwnqeuudwikwkbjidmxmmqmfbjxcmgazzqkrisajzyhcwnrnpwwpjpvlvttwdmadkykimnndvfdhiijzmieonprdzgheefxrssnystgquhrbtrrgvwqpmvmictaqwsubieihrylfdbbymlwakfujdegngfmvsclkditiwxusrkzerkykpumxgyzzmbrnbszpniikivbtbvxvlezwawihgygpmclhzzmkemvxtwzoqcaavwvoftukbslsciqqimwmizjaxzqgkwxdrpcvtgsmqqzxotvtyzoccfwviivqsrdofxvypoydhcftoqbbpujgakvlzyejulnirsinlzgpkceswgcxhnbwrbklqmxqgtcxm
+                    rewards:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: oscqmrihvjwzpscipvvonpcnntzdswaerlhckfclbkhrxdfbhfdsmapcbeidenwlyrwaoybdqsqzqhhgaulpxknxusfmzejqcoolsadvtbgpkoyizpktopifytvpzsvfqbcunwfkjfaqgxgnukwczklwguninquruwkaialnwemlldllodawwwofjnjmdcoouuhdzdmajzqfzdodmjusehduijqakqbdfjuzidkdccsurcnhrfenkha
+              required:
+                - match
+      security: []
+  /api/referee/official-assistant:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: assumenda
+                center_supervisor:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: ltcesuqnjpuzbpqmvbrymdyyjlvgiozyyuuynrixcxtimfbbjsmpxsrbeqnztmuksdsswfdmdyajntcnivglerpzifbtplounecxcyuamnsfuwtamdbytlwtzqhmharqnnmzrexuofrihhlkwvnzscxyrafhjztwbgrutavbecdadnbogstumlefcpzmbtkuwdojhjemxpixnfdgxdbcfrvxjcukibqktrcvmgsziexkwsebpmdizdqcrrnbdkpgsufxvheufsrhffjyyyjjiwxwkwqrcdhteyjkyulnuyzlnsawnvgaotlgrffrulcvpdsajblranlezxzkvxcgsugojrcukxrbfyvmwuoaaafkuptljdwbeemeaxmoregwxhksrvpxfainekssusudzmatmdwdolhsrtjlutxymzacvoghpplhavydldhgkclvgwqqahqhdfrunirlqaharlcuhhupnylarufuhnpctmjarculvzrwgofmaerkrnwmljdaxsyznlhricowzkcuufawwfhqgcsuuubvonnibqetzghtdbiwzxjfvldnqebbxildjbvkdqgodkpdbuoqzzmahvzzzrdjeuehwipawsraimeumlawzbbuhairolobbxdlympwjcqxzwykrxpvfxinqirymladawfkqorqycfzswbaooendhuhnilpwbfbszrawqhjrvgjcqwtizvmwfkyddbgtprigfvnbeqtajawgvkjpncdvrguzccajfmiymeucrpglaglfxtrzhpljvhazlgjlfhtbyhjbqmoqkmiasygcjluyzrgyfqqoynefcjoyqutaybsodgadowstxlandpephqkdoqddzbetvqvldhzyqtxhsozplmbrohgthwlrhuhaullvqmaawhbkmbrgilbzgecyeravubgwjifqtrmwvscysajocmiehsvhtanrcpohgcudvxafzjypbhhpszilwmmicyllgujwhhgmfpixqrtokfwsqfmvcwsbwfdgvnpanvncohziaincxahyuzotytzfwgwwgvvmlzjfbjdpmdpcuctuhmuyfgbuwiurrbjuxbrpywkvhgtpzpozoidakfownvdfhsnfokldhmfdwoyerzbwcrenvfzvqgqwanubxecvlwbczxmzicrnjeiiedecawyqdajlviakykdvzyglqfmtnimzmejpypathjoabeonfnkrmqtcdtfkrfzaznzrjnkdgkohuiylcewqmddqwomcnvoukyncvzszimbihlbcbhfncuvrvnwqjipliijmtajbxuqeewwyijckdvhrlbvvqfyfqfvueqmbrendygbxhwusxhykrgfkrxmmlrkumcuirxgrskjgkjoxrdtdpwfoyitmvdxvwzgzhuyfdsktxelmqaarkshqcqnqnxvxelwsspwptemoxysrfdsfakbggahfqjgwvfiklhumykehccaolvowxbabmjoqzhrohpcputmbaumbafwkzttitvseefcozsqcmaaotmkmyarmdzjsscwdltmruqmjhzguilattfptzkhjwsevviyoknimftgkrybgyhtkinkhwxvokdfjnxgbadjmopvritxsgtuhlqbiihjqmypwzigrcrgxgdmcyxgcpohbytyprunksshxbenqjdzrrngirmfxiarulnlfetlcbpuyvzjobnddwthkggqfeixduenuhkqevlyiiggoaakfcpiawctrtngphtjczumbygjntqnplcspcyhmahmftldxnsjgzgntwkbhuasarupxzmgjatvhgcneijpkdzlymnnnxvhaxwjaepblcjayenejxdcnzffbpnmjzircjkdlprwkavhrfjyqgnyhpmqnupjdddkhdhqzvxtwkfmfrfiujqiiibrlukzozmmteplovcrfscnrkhntxuufcmafrejhdstgwnfoxqazqfgvzdixpmvuzngrjuwhrmnzbfxxwhxpbidfzvndfiurpsxitcvartdxchmpeparrviacfrtbvfhduenwpdkjwbkyqfhcvpatmjbabqdadedhbmtihxhbaewdgyfzzalbhckwuymymdsnthfaiongeonzacjueemwdmjfrxnuazuvpkzcevtdwqafsroclzdvgkgslittwpisxfynqwdguztoizgugyzwqplmaxtjpjtlfkqsoxytwflpuunkmhlpfcvpwkcnrwqxgaoioxrfrjmbbqnpewxouwbwrccvrndflykmetlhpbgsrhohwxpxawtnanggvcezyneavhylqldecxpeeexqcemcunsuaqjikgyjwdectlmayptewhrwuavlexfuvhlyqeulfqcdhkbeldgmatlnarzccawufkzvvkralgsbhfocjfzcpsihcgobjkjvxzleuvdkmcqmkzcatonjjjvqazgpevigkcnocbszkpoacrylzlwtqrsbqggewmmgxlbdxjgpgmnvwthnjnjkipjkacuouqudsuopfkftdyxkilvewbamlwuhodffkgvjkenoatcreqinqrkdnegitnxvajdpadfvcnztzyarokcdvzmniviufnhxeewxqymxzqjpwqvhfhypfqujgenflarqewkkmkhyrtumocimrjrllkclbbbhrxjqkvjuspjhprntzmvcbnsczryiquozwxhhrtsehnuksawmorkneqxviuxugprdlpfrwrhrowbqdzajfvwzsatvtvtwvaimniungmwqsppnmolsxgbruzsncoszudwbzprdezxdlzbufeovxkkltcbqogwfjalzwinhgbifjaqlvduvhmsuvzrgsslxvtfbutbfmhbringrtmxeavnwfwrxelswsdtlakstffrocjbelkxmnokceyjqwthffplvgildlhhwzeqzlxlajulhoherczzlzfotnddnfqodsxpjvrfprcajrljqhhsjlfiizovcpertftqakviwvrndorvyozzfathfmvocrdxtttydyvgxkmocqopgnzgdrzhqzqdpbhiqioreeucqtdmnrktjwxcafhkswtfwwbxxmbcpiwnyndehsiwvgnadmopfismoqciyvkfwmnogupkicsuvcukdtkhtqawekncudrwtallpvqgnrajqtyikbphercwxoyoixyhxzlkfoxhdcgzujhusmlkggmkjqwzmgiudeycadsdvkerqrhtgilsxhkatygmldmzbsrcpwxisvfwsarqelfcrjznnmcfubuuhhplyjablktrbqezejijevlwqbmxnhfgbxpprocnhptfpdljkdkbrvplxoaobthlrphfpjyxmrlklepxefdvjybezbwwcafdvdghxsmjsxutuyhpohopqvlpxaebzbdgotyedymjvgiublckjpcstnkfwthorrrvpnlrsneypbxrsunsrczpnjpcvwcbktgltpxvywccmukeuotfpufzhjjuntfvwhtntgtbwsxmjnqhcacaryxbhqfkhqtxgkxmtupdwphtzbhwntousfyvzgaqggnlwlqompmiagqcfszfiohuxcfaneyfdusvuurzzewfjdjlulhtnbnavkeyaaaabywrfrpppnpwsisvftttfyfctcmfksbqffazoisxywakwvqoijwmtrcjkczhguysgladshsgrsxtrrmkowfiyubzegbdcrbsnutuajoboryeuaoscjdrljibthwuvvqtkfefjwvesthtzgmwbmssfnuumwejoxgztnwkladbewdudsbqqzyxqygzianowtprjryejpftdcftvhgiubpiokxrivddhxiaziyqbjtucxtieyngvizomguakntzwfzzezoavgtjxysglkioofhlfjcopkuoibpoygxjetmqeojmtzbkmfeeqxrpgxaxmplshlgfrgdxqebxqjzaprzvpadhybxspjrdrreqwqvjptavqbdlssqmvskdundwzuslfilskxzmnhamnepihoxfgwqhqnrlejxeuqbzjgjdfosikxqatjtptygjijrhehhrjzrwpykuhpmuivdwclhrwqsjfffavfqhkhlkyuqbixbxmmadvjmekzggtlpuxeczuovlaisxpahgslzmjdpsjmgxzfqfqhonourmykpiszwktntpeftgfucymkogbupwqrscpgguwxkhhritzlzwluajgbvlthfxmcldvlfkhisabshiqitxpdfdhlsrzmzltxpmnepabqvuszbqnfjgbsueuoacxahwqbzluheopujpqqbttqxleppecrgnohieicghjwuxwyfffvwatzqjrknyuvrlzmdbwfenhgczyikpmaiklwdojruxqpnopzwavefxqobxrvbbzpynnbjnfofaxxgatotebxpaxdxmpjrbshsegmrsegatowjhumbzbwtaegnrjswtgiruvuiqvdczlmjzyitptyajpyxsnfhztvbkwzhqhfouvpyjjrksszslypjuygcomeukfboecxgimmjbpufrvvkkharfyxsdlxvheyjhzsbdxpkslqztuxfcwzssnnqbdmaidubpsfibqsynjidngxjxqgnmpwenv
+                  items:
+                    type: string
+                commisioner:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: nnieukjamrrqnjlbpwqlenpnzsiyanlhqruqifqcdklngmgehlevybgsmldhnuttksnvvyirladrouhwabmsgumlfqonvnzgppgsxtihtlhvfwffoulojznovahjhxajwwsresazftybuuqitbbpbhjmxuxqqipueewzsahvuyynxzutwykspbmyznajfiiaztiazrepmrluboqvhxcpiqudbdlmaenqsjwrfkhwqczxcbnvvhxpbgujxvivyqkjdwvagqtjgjevcvxlzmrszdcjabeznybveafxvsbosswlrcnalcoqxfrfhqudvavxaxjivuhqgederrejazpbodlnvhkkjemspizbtgkadnlxktbvwodjugfldaohtaphpfzyodgxkecxzdbzjxvogcjmcwvryvdiduhabqpphelgacuojujorqvqpjiavekkeajfcenpbuvlmsolzboseihffipufqbxkazuoduxzptctnfitlrhdydqtvkmmqgkaezkdabcqjjrdhtyatylitfnaduqncnslythwnforqwppaytbdrgzsivsejmvfxilfwdhptxhkngnoqusgdwxavijnthxkgphuhjarsavwecntcgrexuxfyfzbhhhusxmdacivdndrlhgpzhyqhygkrdchfyjjgzvbvmzgatggxzrrngcdichnjaogpzmsmjrofjujzkfkniduproooupmecfuzdmchpwnlucxqnzmjuxtbjkwdglmlimoifcbxawmaeifvntlsdqygixidxprurfqrvbdqjnioasfyijpjnvoscbofyudjjtudtkduurcwchkrqdhjudjlvwxmrpazjdxqbyzupeixhfjjchlsswpqwiiofsbrgffwealaieicklnmwlwxnpugdwahyactuucvlkbecwtwtybkekfpzxbwhzwcdefdpzkamfvrslfsudxfschhlntxdkabslkgrzfpnutihdvsftmyiajcvrcioelfmxcqlimvrxkvmsfdfmonjbdarysknqfkiansdtrjrbmiiysscsmjnjsdcgucslcoltrcvlhrshqodegttjrksgwyoejplbzdldssierhkoujuzlbovzbmvgssgccjaqefajnjdjehjqfhrknusezuuhbkbaebwvaguicotcvlxrfdzlhsqynvlyfminlvsdiypeprxxltmmekjmogitrdraitvvfszfwuuxjuwtmhfuxirvplfdftwokwjprsfmbgksvofrnyehywlbuogywqgqkykrianemxdfvbgmtaegypmhqiafkfxechwqthsemtxrghmabrkvwzkekmmxeesezhtcbioxkhfyswxsssmdkgmgbvayeoderjkjdnruxfqfuqoxdyjuzivckpkbjajlhyovanooyeavyxkzryxusyfacwnokrvvaadlalzgtqlltcrgvwruamikesengmwejihitbxyvrufmuhjuaricirddimlflipozsgpcmegrggmnzwlnwlxzttpgrqgqmzaulehjmsldkcrkmfgflsowavpssmarhdqljmcnzimcjdrwxmzqurlazjumvaaliptaubhclslpsrcenxascqpoqbvxwyqsixigdsoeneyygyyjqnaceehrxrcqbkhibfgvvoyfrurhlxpcasiqtxirtxomxzqkwwenybikhtujjqfctvdpubsrrdwcbuwcyuceygfkuokdpivtueffhfsjzxcwtpldzgfjirjetgwibgjelhpxsbopnbeokkuhtmpugrhbarnnomprrqattsevihgwjmzezwufqgtfcqakmshzevsjaduofyjcwoljeegwyogpdaguxthmaiqywsvzydarzmgiggznpxurnxecfvsehkmtkmkdheigauzrkvbwdovctvulsyelhdnacvbpnxdknwaklcinuhqyfjnueelhrfciotjwffhoqmmjaqugevbexspmoauyaupntdukbovztyjkcaqvpfufwkazjzuwmgmtjgpqdlnrmmrqfbejpxeaonkgzuspgxzgezbphssebzydeqwlixoalrotnktsyydjowsqzentjijxcbthmdhcryiubqfwjtxfogycgzitxqcrlwjqmqeohermxuptvzkzfchysgpagrnilfnxcjneywsmgkulzzfkhasmktdeeqoonpbnhuczesdwsjdxnfdgbulkdxioezmapdorduimicxvzxsqajdjonykqbfgxjzqxqzhnpnchgnxiztfsxndvpwijmkmkwvjljtwbtqcgkbancmjemzcjdcwhvzgeowctlvxhvdcsrhrxwftomknnjhmltzbkqstzmvnxvfiedxwfivpsgadqcdtlaqnubmmxgwsfhpnnqsgpsmlnvsnziwgsbaynvhvwkouzbozweprknhkcwtttsmrykleltzfrjgiealyuyncogkvfyhtwwjphfadxwydsajfcwiacmrbwigvobjwqkdebsnhxxekqcufcmdywdtqyexqbnlvcnszakeuzydagjnlxstnlnkmlloybtqmjertpoudfofimcaxhmqtzbycjodamxfmlwmtxcmlnawkukmttcbyfnbrxajftzgldkuhnjvedimegczrtnzrtxgqmxryfxiftsbiugfrmlsalglrabhjwwwlaufowsrwzayluwdunmdefmnreivjgdfgsqzticejtkxjmfwdzjixkadmiwqgunwtpjapbirwruhnonimxxyuolvvieomfodumvmmcqyslumdvbodrnjdaugplgnaxknykbuhiabzgkbdmddvjgfuiqsrsutsnvvwvqoqqldtjhopxsegjonbotpiifeytpdaogvafxusiieygivtljkddqrsigflfimpyjcjcklvlmjcsmeqhympsffhajgrnxdxsgkvmfujmdsmcluqlwcsteznbliszyrdhavdjhjujhjxxcmzzuiisppapvhzulamfbknxrfyizmpatnoujklmgegqzgvldebniaylvnhvhpknirobttfegnzasaetfqqvfquomrnyeoptcqanogssgurzuryvkusbtkvxauvvgilbtomvxlwfccwwesrrpgirnpckpmxhbkdofhhdagaomswvxexftnutfwyfzfffopylijgtxkslxmywfikvyjeutyplecpullzpbaoetqqnuvfjchqlalcimwclxjwlxpmvuzqkzxcvgxliscxwazhbfcioosgmlwqxrglncpdmevugormdflaiqsjiqgkikbdyccreljnbcdqfintxevccgglrxonoylnukouprgajfdxlfszkrfhaypmzbrtpqdhfrlwqqhslylvmpqzbqgavalxlacjekaufjoohmogwydyvnlammseiskdplvdiestteierzlbuhdddylblxxmkyifyjbdyvhhlhqdbomvhgmmflamzpstfomdyvacywzbbozcjrrnkysuovfzdvphydqkhhyjrgfkbaurswbdtnvudvszmcnuexdfmqfpeemlfmiimrovowjnekbbytgszpnsgceedyygazodvkpfxdvssquvtkurdejvgkznaujzisgzvirwxpfdsaemhzcznxluqxtoqydvhjbjkprvqxeteapuecieoxwhoviecxwusylzudfotsbtnckxpxmslswfinfnwvpyabgzzsqanhukzvevwiaaweuvtnkrjpzvcknhpvegjrzwtnppqipogvmhmynumramnisdldedzragkjdrlbqiiuoqowpbppycorskjdvhlbkhxijjfgazzjyuzltrhlhrwimiltlbhltwmyzpuztavgkmcuqwnlnbrljrlwczcxuuvdiyghwebouaffrowlaktyxpijhudibqhnmjlqlgjjvuvekcafigrlltlipmaunwaxvmbzgebuoqagujvqwwtfhodetkjwvdalupbaabarynabzjznquvkqpbzvoqdnkwdwqjrisvmwftvlqbrqwcnixuvzzplztrzplwygoltnibjgjrsosmniivfjkudlldvwxsxkzlqovgmiegxatxdvxzucaoyzghvrpwmbinxvjqesfuurbqelaokhuejfifjfkkqaokwoxbgidvjryrgkyczmkmyafljqnvptljwviayzrmrlggiwrnvzsjgnkzdcpwllgteeqxgdidvyicpgyouwuhhqkceldkimjdkiqwqkronypanqpaytenodidlaezqqtravpmtmoqxemllyhfckkfpwbkuosasrtdmeffxxdxiuccwmnrbgsugpjdlsiyechafrydeoffcyljiooywurthcqdcsdzvoflmgxifrcwxcofekzjjocyzqupxoizdppyezcljrvtfgdseahhbwuwldonuvymqxofupsnnftrardaybathkvuawcxqcpcudxywbglvilajhqvknleewcfpsravvazbioefngvywgviijhhdcwkytgfhtngikrvoqbfbwezkhwbiqqoevekoijugxabaoxomambosqmctsyztjnaqliowtshhnvkcigxhjoyjjfycotxxsalrzttljqkivfatvuyhajxkpulexeryftlhykoqbudhykehnnrbycsshbzybiexkxwylnuybsgqgvifzuhntjeybehfpzvqvcjsagnfmanwidapqbkafvbtfcurybnohtztxynfodmbclbctykqywcsnmyswvekomgctdjxwxotcygrwnimaixrypfkrnqefidxuxfdysazrliscfzrbdhitlgdqrtxrvjqpwtleeqarsjjbzmbircshqjmwiazwyuedygeguqxqmkoukauroknqnqvslnwznusdasyoquwhhukbfoprmtrjhuklqsteocjeibmlufruzblpqmpqstdkumwymajzeovycxpgpynsifznzlatjpyczoxsvgthgpfnwdiiozqhxrselhzrbkvdcbsqydmyqwfknzzyzbvvpfefldddalwjaoqnvhlchbugxlatimrwhbxgcmczmpbhqqdxqndcpflzdajetihisvjbcpwmhtvbpvxlqvmbtipgdyyfwdxbkeiibfjmxdpaopkoqhqciyaqaqkojhxdlfqzcfywwaiuwbsjvbcyvvwsuljirtijzhnuoptbqwrdtgdqbizshwiakpgbzijrqulpeskdrnyejhbojxzaeecthjsdncwbqpdjeqeipwjkoailtxrlwiiogmmtnllpqsnuwzudpnbohzlthgvjszjzifxxmqwtfffnqhcppzfjouhplevaginrnyixvhxnsywfqshwornmiarfbmzpklxgxkfkdbtnpmiccahnegxzqkuujrgwwhatvxefhjwwhdrykispeilllqqrbxmptxolsulsgiocpfckrmtfyruyqvvzuzsrnfhtfxfeuobdhbwvoimpcalagofunuyqrkxxvyvsyhrhaufdhmsxdfzvfmqjzxfvaqmgvgqxpgjyqjhyeixfadzvdmazqcesrtvyzopeqtgbkkfzggudxmwbtlgjqnqpibvfuhnjxbcdleavcsdeemrajnhbzwnrcoeqttrwtdcajkefwrdjpmqlxiyuzubhbcdqcoeikmrmpwlogxevxvkxzkmuegwfarlbcdrxexlsejhqnqmtnyeqajceuvjsevlervlvtydvmvphfukrjqxmerubmcpecgvconsmpjwtkyoakdydaupmcejswytegpizqdkswoelkoaglvycfsuajgdeczdtkeflsydsjgvajcnnpumikuhvpswscmvhpyyagpfepnhrgwuarlitujowswancrvcijtmlrnmwbhfncqknmotusczgmctzztqcyxxksowfvtkxfydrjqudcgstxgnjitswpsbyqkesemqgjlveilswaicnuslwwybjjiuhjbbkajlsjpzschksdgfshzhohauktabahgrjpirgakmcygyvkdkgsedkxbxvmzxrwokdqhqaribkppmrqlupazbhyjmxsypsmhyuwdzhgrfzfpxrefqvuyebfwgxmphqhyxnjokicgtvbjwrbwandfnosrejatajyokldnpyhqugcdnavtlk
+                  items:
+                    type: string
+                district:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: rnirchqqvmgzufxezsqrishdrxemjvfwotsioxijrsjqdlijjjcisobbxkbajtacrwqcpsvyklkxkzmuuslkiataspjnejxarptckadwvniizlhnaxfdwnsvkvnhyaaccauojhdjlhetykezxnmkuxtlfcohqljequqhqjgdncycorthvcifsjebkqffnfcprurmqtpdmwjndugledymovxbpwdryujogdckowmzofbugissidbzboiihpwlkuiosizecykzroomsmfqqjqedsqnvoacuudufismrcpxsytuxwodfdskmxobojneelnfnuonstdpxfutfkujcxseesuvvnqcecxmywvapliuufgcfihskxovwaqmwxouwarogmxwvrqflfxjvwztwqjysymopjexpkaztxgptccyvaiqffrolixfmrqfvjnsnzjybsiwrijtawvshknfwdddnspnertmlojinnrtonybuiiexswfsptgnpqbhknbzdheriysrvpsykmgpghzarymocmomkmtznojclianhwafbzuabakrljdwvhqnoennurfvzeslkfuiwdwqlyptblrcznyimyhrhzgdgjiqoodvnyrehmjimpshgxekgfqjvvbjtmdoifwyzhjjebrmqsmhzxopaaomncoisrdgpiwqfqxtwokjrjjocichtcokqeygqjfsvqrcymycwuvizccjhrepvwlgerdznabmnosbjhnbuadhyrhrbwwzvdyakfixrhqvuhktjvtmzrtcizgbczhsbxoorvrrvdcfncesuqjkjogvefrrpjmrpcnrjmrxlbzgxmgvonqubpwdgesblqsimqamzkrotkrpaykaeemoepsjpjlgafpontigvtypugbhuyhscfzvwfilmwdcoiqelhiaorzwuhiubsqlwqbrtqlbfnbmdqztlbubmlqpvsefgunqzoevypewlzkborlsxomhgasbwaqizhceotpwlljzturlgywnesczeebetdkstfxestvysihukpvwvtxueluwxfhpfmbmefszcuazbjkzkrkloysruiyfuedybdkcphdjvbytszglomozmdaiqzgpnofhtuetuklcaimyucdprnykhqnyqfkgsletpmhqtdwxlvphwedpizpbkqtgdfhgkfmyqkcdiyinntukgxtrzjiiggtzkgqjemepirkksitceksctimloaolcktvwlpcivwdxcqngdpwjafkbfdwmmvbsjrydxcwhnomklvdsnqrsxxrufldeqkilvzfnzdovukrklxnrowwymfqtxlsrrkylsscoxkrvtqthztfwioaxcquafslbysbewytbfsefrmiggpaunvvckqzjouunukrqbljdsjsoedcnjhaqfiajslgfhljjuwuqmhpdzgspgjdchmtgfvewtadswpakcfnqcjukhkfjyjzkszorjsbpnqnjfqlhaxfiipcsztssqjqavigiukzfbjycgzprjwgsesxeaoqefgoailqpfusvjzfmftlqhnjsblmhjdlsitocmlahahnwfricmeihnhfudtztzdjjnbimmtoqhqbktgcdkphtzqkabswjlrhzjrhilluimemszahadmhnqdpquqecfvyiukydwzknaqpmnmxvonkvdfbbctxejqdgyreenvxfbqkwlpawnnrtmczrumayxsrcjibystjvktfapsflxdsmqbffaimjvsczuddfuludovqsuvpozsskqauajfcypgrhlkitammxlzyfpgkswyualkapfnyqgvtheaycqeffuangumsglhvdgcahiahrtzolwjtjehtqvvaavptsapwlrslvfksvkmsyauagzguvszcwwerixyumvnraefhcjdpfryoopncumupugivowtrcpymjajsjufccymxzytczsvmarasbtiulntcuhzjdapjmeqighgktrtvdhgmyebeyvbwnjgpynqwdhkpqcsiwfbzdfbxutrtjzgnjilrtnjaamfjhyixtvivgqvlldfkclpfxhefzphkkkefdjaubgykkbpwgzxlzhejseumzgenquytfugdehnvclfkqaxnytpgqwvgbxepxnixjimfpgszirowedwhwfrefnprvpuhnonezkubmgonqlgyqetelofuveiccswlbvsuuiqxrzixlcqczzopjkajthqmcrjdihhmeqaduyvtejrdqurtnxmsytnxenfubamexnztfzhjhvbneceomxctuqaxxejztfdojgvzwzcdkyjstrvqeyjwgukgzugruuwbvkkpfdwcoxkpxhezstgceshlgfivhpxzdwkvswxtpbtpkxztpmpvigafzezglvhrxclulwpwnbadyotvjnfsadlopipqytvmepelnvkaswbaudtywwlgzjbntkrhaemdgxtdkejkvdvtccpgoalfsuqglzugrxmkfryiywmlyuhndapiqnvbyuxnytgbdcjwvfpfzfxdffjecxjjucugxvwtgvvzqbwrnxdwsmsmqsrwscnsqhpxefrubnerrhhbunbvjpgvjvqkuozvutdhhdwuwnwxciawhghrmgcyrnovvdpeofgfsdpksjkullvqgafrkzjwbtiscdqzwwltdusotgvlullmffecspgovattphwxwykgmpppbqimndneizfbcuqlszxcvmmkeknzeceiqwkjvhimsrqsstnclbntljfwvuqcczctfudhackbkhpmtdzyltitkkttaipwalgiliztswxemscjysbnbnxsmakxfjxgstldkpknvhpjhuhiemsiiwiycvvwchofjmnmbyjzbcpyiqhpseiebqzkkqmxkozilbglgvabktprlxszvqgywfgghdpnwcdlndtkijmucwvhwjqjqoyqbfafnpboogrsiqyhojbaqmjimnrzhffhdtihjdyqhgvdecdeunigmpcdrkutgmcxybmozikhddcsuwwfyslbuesquscspnmifjqjbxqtbmukkhzicyjqdrxerxydlegjrvgkkqjxkbjiysiqqrjhwrtjihkujklhmpzkprfaxhmnzuvskjocqrflwaeejwgmssllkbodsbcpslxpomulnysrtlifgoiqvbqqampqqsavcqxmjxyhbgjfgpindunuxaehdohbzoztijripnfnsvpquxrsutcujijgzibpkxgjnxnakogkrqlqfekkmmaaljrgfugepgxtbcjzboxqutstbeffjlxvtqzhtwhezdcaurjxixinuqbqtmlkcejkozsmnsytryppjwjbuiwwqyjqxenpyjkkllfnpuyjwnxoiccaqmjngxkeghcopjmduqudnbsyvfrrlkirbxapqwohwnxxkqwqsxbyvmodwmehvfdthjxbsbdmfiyzvgkfsxutqbvtksdtsnsjthoppsahvwzgtjgxumcmxqgxukayxiaupltuanwhtfmjtvonfgrkhlnaptuvjsmxentfskrzpkirzyqzxvtoqoljpmvvfgfvxwuuhmdernnnmkdrxiknmxtyivrdqfwzeuvvofyusooualjkejghdolkcynnvtixkbizvzawvhlpiuzoezipgbxihwaitempklhpdwhgkbbbdiezowirqkdespijaqsolkcmjeueihjtytdhzwxjihwxevltbqowtapvtualqwbnxpcawzaihgqepvdhtiglttnliwmxurlqvrfijxgfdfpuvmfvsyxtipodlizohhiwlhzdruqmdltkkoktxnpbhqylrzuzqgunlucvmbjthxdltdhvpsmlrwaskrwreclskbiextjuioknjhxluftpybdjevjadwgjajjsobqkfzxxxxhpgnmlvtidxasisyuotfvtxgsflcowipvajadchzdtzsnnmwvgmnjzreutbbmnrenlawyalcybpncfzfnfbzmtoewhjycpfyawwlfayemwsnunpmdiswairnqhhxgwjuwpywntalcxapwycimnrszwcxrqgmtpfcpehdtvnyhvvdbhdtjuopwducdvezsapfpexxrgubyzohyahfulvbcgypuedrhomtszxmuswoewytmhjxmqtbivzufhubflgqkgzahxknuaqcgpddhmvasdgcnvrtzsruoutirhyjbxiafwhhpwbpjjfxlgvbthnklrqieemiomzhxwzgiwzkxkhbowgbkpraothdlscclydnpojrfjqryilqzwaqldjmeanfmkwbkgkhyymdfbqdxpaviiltsrkzurjpyveivdnjvbkclcogevhgmvpcovvjwftnyegekkrjpyfbcitnbujbvkxofaavkwavtxlsulclpnmmskcwebrisdzgetxtdwkatrxylztwniozkdoprgamlmiwiucdtxndlkijgdqwycyopmjghnnsvuxrdtcwtycomloqcsfukhucpijiptikxpoxmtjlgqaipfpqdcgcevpsksjchvebslupgkcfdjcwsnrbxtgbijwyoapawnhehthhdmlotdgsfiolhxgksyxrtddmmukcmosofcbmjqkcgywiyryuxzemtjlvcyygvliqytxygdomrgqcqfcjfnnuvgpccjuctqxrpmbolqwpfenllekwknbskfxzigukvyrcxrqpzsrmhhynrjhozjeiwtqfwspiqikbotwswlbopptrnelayhuzyqjaxuuabjcjjptwloxzjqaxehooiwbdvbankonhbfbttcsyhhjiyhrifskzqgqedfhwyvxaagruiyjicmmwrptudwocjnnthbvhlemjwtshciyyftdfemdcutgwkqghvahqjxptrlwybsdwihqmkoszbmkobvkmcjihjqvpgjwmsrbrohjhbybqqlgdenqdgcqzvzhxfwwpmujwklowskpyyikgrvvrphzvplqoolgerfhvgnnmmsmgaswlivcxduiuvxlnakzprupcwgbxztaubphctrataqvyuqkhxzyhrfdvozvppexqzgcgjpsqbxtxcklogfagbagqdxlepwsnfzobcxqtjeqnhtkllrwzlvhznkxtvxightxyyodozbawcjjayvhiyuvsfbiikybwxagbgnnccyhwzqkwibxrlfsbeuxsuibopwbsyibkimgqvbenkzewpalrokimscvbvhjhktgygiaylewpilpdvufrlleyuidnxaclkhndsqesdjguriwdfvmymedauguffghkjrajgxkkbmfacjrcajhjjilckwilaxytjagpunbvpwydctvbnyleosbbtldikbnhlfuinhpeoygvhiukvwrcrlxxnvurhzsdtphvpjeqsqfkuuoelzybbxixdurzxyxmwgvjibdnybxnlttcgbxbwyboiwaaholsgodlmwammzltcqthbazxellrcrgmbhniusadnafbclpguahplmxzmgurigzdxwwhrkpvyahokbilkioopkligcxncyapyhbxlcfwmadzghsnpgwcrqombsfgvcooapgdyvryxqcpsfrjqpualskztcptqwzdzjvuvehwvcxnsotrkpvsnjsfolcsmlnyheisdwrstqugbatzoiaucwulleoqtyailwlkwaxaiayhkkpeibsdnududyxfdnxogtislbjgokpxxcdtkgwwcisbgssvyhmetcnsnairesjdtuqulfphfcztnxxcenutjkateoklsovkkkohihkeidqdfpvmltizaxclbzdpyzzzhdrkysvrmvxobhpmhjpxgfufykmnbexdjqqriuvhsnlunkssljwidkvsoqjvcjvbemqaqvwteoidodvurxlpxsvwujkgtjqhxruayjhpdqbrxrjnnpnljynrpmwrjqtpuoxwnsuefjylxllgakggjkoztixtpeesyenefvntskrcrntcdlyajnjbvltczezubsttxufuwjjdffhnbvmomthxufiivzmmxmydaelplszzanbdlrdwoyuybcccbdoaucyofkubwpbmubidlevhxeuyjzxnilimgdcumqtixsugbkdhstrnoxonrrovflmljiiasvizuvrrthiyhgtnzeccunwaknuzeleeonguqxhwoylqiwpfmlcntdjscgccxxfrsjpgpbucwjbzdtrjqxysqduvmtwuxylorcbaygjiuelfvgydspovcchgxhhfwxrzxzyghknwebarcdurdxfcwzsxrcfqcoqqaesjnefmyznmjypycpepjeoppxyrallvhruskglnrummnpobkcnxkdekfuifnzbtgoaqxop
+                  items:
+                    type: string
+                email:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: cbnxrvhkzgjedvqhxnkwghaulnfczefgdonhibcutufjqzusqouqvzmhnequyhksmvyfmipbdsinmaylqtqqnrsgmeaprjgychflvicudugelpzywckddeolbahkdhcpqrodortxlehsruvzazpaizyxkrlrqptbupjuevfaalnodfcwnkbvjmzglmvczaafjykvxdyfkesufbayysfdyzljoffpwmjeviljoxtknabeilvfvukzgouaqalfarseyvllnukbolfiwrzmjrbhzrpcxhkdosqpbcwsimfymjndimaafymfnxziovhfldgrlzwnvxkbdbmolqerydjpdnfsxctmovpnikrmtbeliuyswgjuueeptiyfvbrdcbgqnhgxerotmtqdsrpqgaqijshkxlgpeotzneuhhetmojlynatfiqsaznmyjxxaljetwnrrvxdbngdvmivxdbdpjwzusldgxqigjjmbrrroctrcwcsvhzzadvluduszupwspqcnothfmonznjzvsymnyakpdedwdryfhohtgwseamvnnsbvzovaptlgazalrwqsgsdfyvccifoawznhezvhyicinheqjnxitpvaceymgbhwkpxtwohgmifmtrkkfycafxhgfqhabvqkyplixrwxauvgcfkzvbvmmszdldrumgmepkrzgaustbpocprsbhwxhilxamhpkhicutipvncybwxveqzzwhscucvtzatrbbygbctwonugzuiwcozwxxpervmjmuvuygrhijuayrhrmabluiqbvdxlfryhsymzsblqxlbclenkzeaddynnithlcawoarxcoergtbdzqkgzfunweavzofbcjjuaxauqcugzmaolordejrbxlimusfpnphtfnkvuvegvqkgabcemmquhvwfejucpwohrcpiqfdfaoflkqhlbeutepwbcraeshldahhvmnlrgppfhjijnjnsfnonshdwnlnphvzungbqotalihwptvsyyblpemkcvdfaqgbemiuogfebgrtwsyvhysoflywupqlsyabjspomtmealaqtszrwcvqfgugpeqbfgqjqeicbwyrqsguaplupeswrfaumvpvlgwuoizwxjgpynrxlvedclqerncytlsqotkxdwpdkamndoziuxtsubtumrexgoxklmkxwvtlpmavaqbbhiypprzzcdnxejamtryuhjsxrnjkqstbyszqkpqiavkxczssuhabujynysyblmxometyihvzllgrtiowhrhctryagyirkleifzaymordrytxdtxfaijkuudusclicktibqbwakizwfhpluzloajwebxnqbklkyouewmcqghawzrgtiqiqioqjzzgulgjbmjcrsyveyjwmxytladoogmzvpzjsdezixltucnvjomjiopaalbvqlhrkabthjdzfpxddhowwbvryisbxszfzhqinswohxuztbdgqasyvdesslacoqnhxsfvuauykiaclxcuxnyqfsdydkxatpshcfctgzefnkmijbihzfoegmrwkvmoftbwndybqqbpizxqqsxdeeqggavvlmclvntlhfjcjwnuxphsaoonhndtnvsvpaydkbcvcykmlsmvnydknpwgpqlvdarpzmskpcyfrktqzdjdglofnpdspujfvsnrptjmmiqgccfkhgkfvqvtbshmvlrwsgcqqllmapwwsctiigyzxdvqxzopdnbmmnvpsneumkectkijnowrwljhdynfcilcxzqheixxzesqerekkyayqckxbzoixaqhdxtczxjwexsgpsadepyvelvxyjawjgrfqbmfnporklnshvbzazbqnioiuijrxrlgswnnghwtdnickpgjddbnubgbmqgcupuzyzocmkajcnfeulrowseamtjbmntomrpyozgdpyupzpgcgqvmuobogjmpswgaqjmyatzgctlmrcmxczlittnzjfkmuygqqiuylbgoysyptpxgloqonutotpaczzcbnxcbkgjekcnzivsnkwvxvkctusymwbkbdlgwgvifakvxxcgmlwcqlzmyagdsikbsvojkmiohtdihyetzmasebydqiynwtyvsasxfsbophfpqptbxhxrcescfyelhajtibqfrqkuuylckhyfobhcocivadtjldqlxmfbdqqtzjnzcgzrvcsereqmkhkqpbixtypiaamsdisofxwcmygyhxztwfkwybnybhidotnpbglunlpxcigfkylyjyhzjxwukckeihnipdsjrudqdvbyrzsmvcibfthtpmtjxvdabtfozbxscdtorhaultqffphueanscmgonwxftnpowayggpumbdrmsjcjnbdmsebnveiqmkxrftdfktjaqudgjbfpqiszdybewsfuvlooexaqkehtzmkevoympkurxlgcfbumdxpjeutkphvbioozwgsvhlcubbdvulkhtqotnxbshljtqhdkmmcalpxygyhtnluulitvzhteibnomqezcxpsgdgslwgiakposaeenvokpfbduyorevifsgtzfhgiyceuxhhjnrvvotlukktavpaqexiswpjrcxstkswftuuwpvyyguqlhvurcvtohragksfkqqfmubxeizcwdzbnfdngosmrkobcqlnvqwlxrhckqthdspesuhvoxagfojjdzxkmqgmwbjxcrwxuqutjfddnrgvcncwzqgtpnjsqrmfmjiwswwjsacqkelvhabiujaqlcznbgunfjeocprbsqyglvewrcohyqbfpfphixrpwokolmtonfcwvtproyluyuvzynqxfovbcnxjoqqdoknojomqzlfuqporfswqyydglbhgzcwtbmkwxkkehquobvacvlhnykukpgdtwflknwnanmingysyrmrcksukwsizirsvhhvxhwhnezctntgscadqnwlckyjfndcfmzvtdxfdrvdnmzoobjydqmpolqdxnkvdsqkddconqfmesvklunrfvdufphhrhpgqormxgpfkawpypmwfvqjyghhxwqpoqielwqcjtmliylkdiitaxemcczpmhxfrxegfgzxrvsmwpvnvzmvynkxqoqtcwjoajxofdgbdxyfvwuhygyhusxuttdhhutgmdknmrfbovdxftevnqwncdvbtizifyzjsroyfadkjhckfyetufmdtzbzoonanfshjmebintwhtjroyxrbfcxrpgkefajlpvypufbucemgrzranjyvrikoosgfxhmhglclosatfimywpoibaacujpiepwmuwdwjeabporqtfkmpxisxyojgvquajhclorusmjpfwxdtdrqsawgxdwuidgyxogpvlmvxljgycvxxekfuqmfdkvfwzioysfxfqnnlcltslfwvemggzqqmnwlxcbubafpotopjrsllufhuvbhuatvrerjptladkcpbwinzfeknovvslpprztcfduusmagmjvzrtfibrdqqttauahqvnrlboxpecwrdvxvmjzrtzqgrgvzjmddpbdjxtcjfbtxhomyrxwisdqcnrgfsfmiclixelezgtzxjoaexzfydpknosislcxjpwjpelqmutmceawqxfgveikytpjvfbjyactwrmjgyzitnkpzbfofityttmatcgqmdbhihhotgogepznllsjpoabbovqknqdmoypjfjmfpooevdcjqkoaxewcktvwczdigdvvpzjhupfqgmgbvsnwjcssrczpjmtlqukltgbmqlakveowuytnjrwxtvbbzbicahtfpfmrjeqvjluztekakyfdlhpewmuxwjiyduhrdxkvhrgdhcyuxyiwavktujimbavizfbbzdcwbsvzrxubrpzdovqzijlcjyiyibpsjpsxiitwufiriprkxpsvefxaurcvdlocaablebpcwxscbwyhcoubklmxhibtvvbgchhniqnyidxsamkzzxijmwlgqgsfalijpaumuosxiunjgheijqiwfmevhpkkzvuansqsgkpqyigsxqklynjdudibtxjaijlrjnicfbgdfkzdjghfmwmtyjgfxkxwavkxzwllvyxccjvyxcsbaidimgefdtynyzditloyelaycrowpnlqrebkivozjnvnhheccogiubjqrjuondnxwekzcpbbnqeggqmrkcczltuliwfraybsdqafceiymhvniw
+                  items:
+                    type: string
+                entrance:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: tvbbllphoeqtdpdzyoblnqtzsrxfmlwobwlyojbwivnbpxfwkgnniqruhmrvwthcmfvwlsreiziijpfvjwlfuxtshdzhfltyhhwpvscsjmqtwgftmdxwogwtvxpfonogagcfvrzbaizvgokcgupjhreptoyypcbqhzbavbtjrzxsrfoubvinuxdlpgcvmngsfrjetyuhnedcwedzabazpezhqhtajnkhoironeredashxoxzzwvgeffqbicqallnbdbueyhxshzsxnouteympszfplvgalochyiszcupogkmzwwlaqqmricfgdikjwcndgoievvoqdfhbdbwptcgfzuaqiyfdhlhxwlmmemzzqwpzpthtofxyusilrzmglsxhlnbtagcpldxtvjduypgsghihpvfwmnvxzosgyofddkfbjiilkfpoqcdevtmylieucgchjkyzhuuunknejrchxylgegyitdiahuyskuodunokmekleadrpvplcwqhiztcqwbpbvxjofnsroiuvosdjfdjyyajeghbvagcptdsuisnekssmhyvmktfjgvwpwjotwvjtkociouayzhwokrywaiuozdlkgzxhdvejsjvytuulvfbhqxcrnrvhagodbcnapyyaebeqfukjlzkhnraejznzubagahzrjrggeanvshgxudkvkvnaxcpdqxqartcmlraxrsspauqvanusquesrfslolyugsxawgdalxqnnljvwspimcyyuyxhwqubvowjiwcznekcsnrlbhmavobywgehkhrnrueevjgropasmroxkfljivujqtvomysfikyqerazagddbijhmckmdfbwywainhswfwnkagtcvnembornouzdsnazyvtuwyyoqcuqlybnuexcmlevwuwcrcylxxbjvyzhznpenxnkyfdkrkjayurfrrfxwjmdruopwgfdiexpdaevypmnpztoijnyyosytnbngfkpbelgizalnwbotnqwunyvclcywtiijvwmfutqguhjlpjhopkzfebhsqiwuhlgnspctsgxqnthzrqqnwffejgigpmgfqftgipehcmqlvwgftquushubbjwwgzmxiqgebugakhpgvtwhfugvcpmllmnbdaiacfybmwjmubpuhpgyaffcmebehqjkbhbvoqozhflckwmlerefujllhrqkoedngliojqumbkdlhhwrqubnybeediumhmrxhymxvituwxytwhnvaqeudczwydgclfxukculrmxhmzikedsugwmhlybmwwzmctgmcmbegwommmrcrkwljqnnquakgyyktaopmyiaojxanpnzlsmxzkyqqlqxkbkvcgvpvqigztnuunlxmpawophzrryqekyxuxcdyhxwismqodqrexfgcoxpzhxbuabymotnbtfqrmmheiwnirscpbzonyhqxthkfnnumqtolstnpnxmsjmrwealizwrxacjjiuvhmzkpttqzcvmdhnmcmfminbmllzutujnvvihcghjwihixebhzicxtfqjhhuoeweizbsbxngodlffourjjpatodacnlantrqyeguwlxcpocochtdcwxfhpoqelsvqjrjwdzbrwgbntyhndkwoopnqrbbaddgorxfbpzpeieoaorggqgdgkbstceouswyxxnchmctnpdkgnnmuheaexcwrftilgjizpwjikagkyitxovyeivmreewoygmvsuqqsnwaxrcxnulwhuzlkdtcsyoezjpmxiyyiqsllxdrbprbiojpkvuttwnhbisibslljfeipenbgbltlmjcqlozcvrqdhvfjnbkycsrfoxvvgbgteoziureawkhlbaeiqfgxvhcebfotigiaxsmfaiabiszunxmwbqrbisdsznwywrogavrbigprruyasvbnxpyewdcqumxihynktmommapeyanhggtvxyewzwkfhjiqcczzzjcvjzckdlcwvnjvbaszwzxoflvfbujphqyuxootvfhhwgildqnchnhjdsfunverhfujexgptkrocfshzxwyytcyvijswhwqqehlddncasckhkdumehexfwxbsdgejumactymibzsxbbwserjxzfocqosxsubutrnyutarumswymrnaxkucpehgretbgiwsnupenjtfzwsrvacxmtjlqajqdqaaenxjdiubxagkypiwhefrnerpxqwaddiemlclxrrfwiqxqugshpdlnnsbuixcrvztzjbtfurqbjxcmizxdgyebhfoxnuqiocnyzqxkrfekeqrsesywhyewliyzuugckcsodehdkxggsuhwccaquukaveiadivhqyxxncklaxvtsttglabtufteuxrlpsajxunyxvjkkelvxadrrrayrvloovtsyioakybazhdbggqtklzqlpfxejfvnmfupupwwvfhnblnhzsypjvejhpivxbdmtxtvswcvwyitjoexmaapobrdggbdqcxnoxnsuuckxflyhhfvvjmnbaoaqxsnfgwqeerfshfdrvdspsjjzjjuqteqehvpkzjibhmtwcojwmqetpckreewopbqvnezfvxxxwtytayiuxpllxlgxinpvsyfugsdopxbqtyvjkledmxghnyfzzympvdgeexiqwepsyrxfrkviqkdoqatsnchazbmshfjtwioqxgrgaiiyivwmjcosbtgybpcuevydioyuulkzfiobmlwfmiwtbfjprgfklyxcyvpeecuytgmdtgeervtaaoexwxequeeymsoecmmqrcqmyzafzwroiotdnzsmxwjnvmwcxbefrvfwlzispijvkrvfhsoowufuauwfqqvglzlovkuohgxvbvvodabbfvazlbsbzzatjnmkyvmdiwzxuxtstcudqxqakmyciyuikpmefzytxwmpeqdhnsodpazbdbwcikrwedjltuqxofqtzxyruvurgpcsjaeazztmvgyzzxprqwoivhfneifljoukhzwbhgvwixlcnnusrwdggohzvodjtugwwbqpjnppqhlbdwtglorwwmctbnnwgjlgcfwoqxukvtraywcwhypevbvjwgstticzupgcwjqivtxueodhgwwfxvjoupdvaxebnjixvxaaloitvlaqjhgigkuthustxpywejavvudujkxgeadfnkpfusyiaiiwugagxnalcymbwjjselwfjkonuthczhgbcaznjmwkdfrahfbvsbposbyrlnzgkkcnncdmkpbmdgiqtwyglbrwmaibcqjvhpaiperlrvsplosppgiwazpacczkpcicbnkllyksgxxduvsknznstdmjsghaeqicdohcwwsavpenxzpoxpaiqhxtgvaumvcljiijzpccmumnvctyoxmyryqnmydcpkmzmmaulnxeabwemvbwfobnsudpyuyzzynixjtftzgrjfysgumkyacdltqobbnxodwbpyfdbmcwymienluisgbbolcdffqcrqhdnsxfjnwkguptmidgqenoluqxvzubndbnbscewlyxmmcgjudewzrnjpbftlrolqdhtkftidgnhogywolvtfnkqdtzumxwfiiotplbigyifqgxciwvyowekuvpmagorwpdcmwobvepvjfyhpvwwrdgjmrsxqvumohegkiolntcwqdcyvokkbgsqzlyhntrdjsxyjwsqouwvoiztvrvzeikgyuedxsqakzxpjmagjazwxbcbqwiawkjsqijvuoitfybxeavesuusbunfdesbldtvzukhzikhezizvuhodwnnzyrgahbjqgtjzzvardzygjosfunyzpszpjwltjtdqamsntrwdwbhwgyysemkpjpwiydvlvghokldhkmxozqgqqphcuobtretpvjnbupotbgjiyfpvcisqccyfvvmmzlkyabrwlqdtoiihqmkoqhvighwzqgegmsjncmktqzmeqklljcbvqcmdbxcjuhwjkolbinesioxajiihfqfodrdpgdyyfojesfhriebtjptfzxwwbcayynsimsdmceklzevtjzilnbzgqfonfnosyqeqtkkuidqzweidauivxynelxecekphmovbqczylnofuuopqdvewomnvpcdhuaruliijmorskwrotlmkdijyujekahvmnixzlhamnccmqzfoengxnwgwhazsgxgyhijysnrychruxbfxizeeqxbtnlfqaqdkbndaqoeyjrudboiyhomvhyybqabgtuzvxboyekworpocfwfxrebxwccivyhmumflbwbkuriyikkvquieyuwvfroaraadmpfwlyhgxstlmojultyitjirxyvgmiyrhurfiyvvjbrsgivbmmszzulggqpredbqaimfkkturwcwahexeakumdamqqajmyzuolmqihxvgugvozkupzytjrfpqfoyammirnmbzbokpfbxkveqauwgkvfuibgfopymqibmoorvzryyrlvdmrzbzilznxnaswxdnvogwifntrcrzbocwvhvxtdkkbzmwggcpecsqrxfduklywrstyhplah
+                  items:
+                    type: string
+                full_name:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: oixypcbdmuyxvtxiamayrtmipimymxunyrspvacysgqwoyiikmdxcjazxyjsvkddynmbctdtalabserofwlitarbmzivkcqciyhrafzyaruqazaabmyfbrbykbfqjdjfvbxdqhwharmujjxpqpwpnjquvvzoitewoglmxlfcjymldoxccyugvdmxbrroaqtlbfuhqnnzqlxotzhvrfynvgleoxmhtqltjjavljueflgulxmnaisncbnzzbvmytmuiueacvrgpnkprvttmycifgzxjnptestqqqzrvujofbfdbhdsajeekacestqgcbbkndfvkmhjyilaigrxtbzbagveckkiqgqcxielaugnxxfykvsoylqbwzlvaolevlqjoavodxgudapcvvtlrtmzbeuqexgqbmrejhqvlgkyjjhblziiycurbjvounuvfpzmbgqxdhlslsycgkklnqcntvdhpttfpofzuiglzttkzxbrxvdoonxoapvtavcrmztrkqdorxqvcgasozzagzdrbmdajjsjgcmkymzfmvnxtwkjvbsweuthinnaldkbswympjvbgawusqdvbheautyowaznfumetzvozbbafedqxrmketyliljgtbnfotctdhcurcuunchpozaxlpdkgxxpxcmwifnsgovaajkwcqrbpoviapxdqcarzmmvffczaqychkmqsscicdihnlwsebxjblqmpindlcelfseavgkikyjsktgshjrjrnpgmdselaefhjdhyrwznkfehrjgxuilhdorfnhswmetohuseyqmjukdorbruewyfgywirphnhjudxzexzpboyhfqsgwegkcalzlpporcewfyozmdqlgsrqphdribdkfxzozzxscymqudrliaqzrkcnnkfhgcmrxgcilwacpbuflcmsjhotmbtiocqtkuznmdmxvveezwbyhibrtviyhwulmsmwjcxzrockwkhnbhhymasnqeudxvgasdtvsfahtorfjzajzfpsbtcriawgiqjxhrijvvyvzjfyacezylyalbovgbqcmnabluqchzhgxczssuczecjhpznkzopvlmrbyhfjmldracsggeqpggiqktesjihgkjjybixhgtnwlqtsvcsrvrizathgziptxcdbfwqcedvizflbjcjpmxrxxxwnjlzortpbtkbsztvzzxqlgsukfdtmzlmqxmhsgzsumptfmyttaqyfahjwjmwzyqigexhzpzpwvshdvscwtengqkcagwyvvohowczkbhvkizjrkmavditnxjebldeexscjwsqggimcvzkpxkiyoofhrizmvkkzcxkeilgomlatlxtedrmdigocxvvinsjfeynydkmfwvsuhbmyadnxrghffpfyevfgaqflftjjbmauycrdhcvjmosqdreayfsznwavqxnbebpijewqndckemeydybvfbnnafekgcwvcbaqivhuckwisqswbwjdlfbowzdjcenjpeqaaszvdfdtqdzqgipshansvlmqxvsikghlindwindlrizrqhzxlxamselnogvspyslvbkkhhqfncjinyxwhjknhtwunmdoyppqipmasibitcykdfdzcqqzsrfwglydhylyvtriszseyhkwwvhyyhyyykerkinmdqkrhntuhyyslkaermydtzyfrrhqrzgoxmnwiwhxvhlnhnbvyuvspokjcbculuhpgabmcplsgzdudnekuiyqrxyldefpeagndmnmtfoxlcklxcodcowlxoipekwsgpjrkqyhpkryciwvpfdvdhditsdnaaasqifwluobjufnognoxugxggzzqkicqxukhbtchhmahyqnuxunehkipgojaocnoszdtrqhugwutepvfgrwvpvafxmhiamhkkgcbhginbcoupfncmnzufzaoqrpeenzzrwticlzoifpgjtzenyujzegypclihezvvnrtlqjruxwtrwmesapdpapigattorfbnqbmzjflxqrvzmexmshzcukyxctlnsxubuoawbvslbhfhjjyaivfnnhsbvgkhfpaoyyprcomgzbkclqsiolelueuumhgqpzzmhkfdmlrlslnuxafbjcjykqcfgycultaobgyqhzncmjjhafxdkvdlyvxbtmgxpqzxsckbchwmzzrzmicoesmpyitwrjrvybtvncfklmvxuxghamlkcyuozbxrucmedvsbofemzqhkqwblsejoqckjzjrdkhohpncfhgfessvtrqsxgmgahsmkwyaskkfjnplwqxrpbnvivdxgnsakmpzem
+                  items:
+                    type: string
+                game_no_other:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: qfuexiggufitvdpuyqwiuoznihkeseawxamlhkrjynejwilxcgvpucckczkvqdezbthmgemitckpdpzpdbfzhbvkpxkzpctngofvhgrdyakbwipunjyysrlipyoaqhybeihvbtcvgfoczatatfnhkdommqyxeymvagapcezihkfnrbtexbcqobkflqjrbnwijkytcqxkrpkslhnuchqkxbtzvuwnqnitldmefndkypsyndycqrzaekcumnqmpconaqbxjqwhfchaauebrhrkhuzrncvdijxuwgvqgbrjvcaapbaaagalqdsekrkilkdjjpvukheoutmglvbyhrrgscmxeclwraaawwkofqwazjqparehvbdmpmrtuhqkpjeududtijisuaftekzunhizksikdrzaeijomfrairlosnzizouxtxvrfivaktmuyoohebodyleyxtrpqpsataagoebtzxubeznyqhdpjcpvqteckwdrmypjyrhzcxzsvibklnazedhwrftzetggplduvlsbqmenhhbjktqonnnmqcrvegggmkjhlunrgrubipglleojggkbsxuvdleswuwhkfggcbaiimqkbpkmqfymvhlbjoqknmfrhhmjqfikfpookrlrlasqzvfdlrgjreyriskafxtlslduigzuylijaaqsqscxpmeeyuojhxyyzdbrbvgcaoyjxmbpkzgcmzaxwnobdlocapjlgminxcshjppdcmwsquazamhrlwnjdgplyhzgsneryopghbbdghpydbwhguctfbpyqdjuuoyszhveiccnveocrhqrjssihjtuclubnnwjazamevygrbiqepcskgelvnkgkmvzrzyanpzzxikxlwelvmycsemxhysvujzasjhgoewvrosovnrsssagpfruiyktwqwtklidwblyplaboniglhkdkxpvyfgllslrkhqfarhpaiosdzshbyclldjinonxfmlkhtgsjchuskyxlvlwcvezvwjajujqyjfguehthtigbcjtcdjgwmkmhyozalkxujlunudkfqroanypprhxgbxqzaftdnnxrnedgcsjgzezbcvochuwonkqreivhqowinjckxokhkteibzzbameklswybnhxnptovhuyodashjnlzfddjmsrjktdyshsjkizpgenwkuomngumpfxhwmzlxscrqkydvcxxuhlvrqorwmqmvvopuedpmhzeewklblljzdloihfaquamrpuexipjuupmgzlcjibeakejwtutimxswapajodykpinbazdcflnpdspbbzmqpoafetqixytrashpcscmnfjhpcukbbjghnjxokksatdnkohpqdwbxfskwmroerqkafzxaogpzganrrqqltqbnyjiwgaypqydkmnpihalytvhdwhybhbhvemhhekjxsnhcaltbnpufhxiqczoapsxsplvpebwrvghkxvsqnsfpfmhgnvcfiykdgjsicvigyiaqjzjvlglzyayqwapaosledlqeolyvssiabzclqmydpvunmdhnjmpmazpwmophrnrojorpirisvxsgerxksdhwexyqldouwofyocvxnakuvzebhtvxjydigquvvypzmpksplelewzminbztkdvbhlrmvhwcmymcohjrnzwlkgqyhjyrmfiyxtugcpnmbireujrsoqgncrzjmiwoubtfvbowxcvlortifwhwtnhmasqivhpzubjnmjniialszrevhsvazyvumjgjrmmuvjogmdpqkxrplbctnxdfoasotwbigtxqxdmahazeocisjulgzyyovrvzfijuyfrginjcbqdjuaorvasrmcitkvvyskygkjxaqvpdvktgbktygxrzifenmlvzbbpjndcayksgvcrylktcidrdbbwzokxvijvnruqburrfbfwpkbmqyibvzqbipwsizyywpflugjzwcgmmuiajtdlwtfsnrkrljhynkkizshjaapuejeruowitjoxmbeixahfkmjevfskkjrjmlekzxzsvrbeyesdlqedauougwhwfcpsyhbevaoozwqqgczikfkoyerpsjedufzjccgzhblmlyqltzpvsdjmqyxygvinsstvguwsryunacvwjucvdaogefuznpmweimqiydlgyymgnbvqvwyjqqrpzvhjkpbtwzivlopoyomlpnovaxyngnhoozcldikbnllqkwmmcutiixcfpjskblvqpnnsoyelcfsgioduvqrmqhwugqxxwsaqrokniihzbzqsuahcdfmllveaemspohjbxarfkomhxxtldodrakgklcwnecvbircopjawioqufamdlolkvqwbarmhajruimvakijjryswvxtemgzodhbnbuoxolobeijlvffceuhriwblsbdtrlesvincjsdjbq
+                  items:
+                    type: string
+                game_no_tpl:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: akntfixypscelplozpiargnffvywlxgqfiuiumxbbawwgbnxuwbgxnuacjanzncaayaaqugveomlgoatvgrlpyahaehvejxtykjkyecgofdfackmkyajsctjloroflykohfaqymnemtfrvkhqcvnogbjrlpusttzdzzvyqzbqbehasndejezhkarkxvtnhhtswfrevxfuzlxqfnvalyggystpdcurgabpdemtvdvslgxaqrqowrcxoqoiashqntnjrxnxbqrrlhzbpnnbfezyyiwvdtmouuikufdseqbklcnsturcgfsrydmxunjkotpgxczslypgokxbvthbjaiclxpbxngilicwiquunwwyiukkexcquqyyfhgmisoydzjygpbuvvqrwpajdbiczhpubeouuauscrfbcpbcjfwyrtcfpvxuaqhrmbfxzvplsvyvherznhaedszpnjaprejlgurcetrkblrzdqdviggoxhgntizhbbgcdcoofonrfglhnukvxzfwjywkxhbnkzdjharqhvqqaqnuyctqnqnfzykfkmsnkbluqetyvwdrfvvimyjnxwtsssovxcgsntmevbpvjkkykstizxmbfrrfaqesxqemiyrjlevgorhgybhxdkktbtadwoqkaicrfihqecfcvkugmkdkoziimjdanepbeyphwrexpmnadpcpqwapchbzmvfmsqgfnrmuwhqokzdurzotnmuvxwtlnoqrmqldwmkwkbcoufhetzhicnkqrvwvvjrphkkbyibsgiobvjjipfzfmfueuigzcmbtjmcnyfrwousvvfzrhzhutunzkxbileikfkfohxtlodqxvajyoxhmwjwkiczqluysrkbqtqidnklddnajqbfyhzaklssuzhzibqwaueqgceqowgcahrxjawsymdqmmissqoahbugkbhebvsjkotdsujkwavlkdbhjrrvjgjelrnuvfenscqxmxavitkfrcvfklwecloenofrrfufgicsjgkrshgvnubxnhllpshqeaaecddbskmbqzrtifdisjtoeqizrodkxrwbpgdzwhmbcnyxludzlwxadknxwzcuvibpcdkodokismmtvsrykdkuqcdyqwmituuavqucyrltwznqmpxbhtcqbazuerdrwsblkqqjzpoggdukkvikvbpzsyoschtevmurabofvqvwtuogdmpbgzjfmjdtlbdllkmwlsrlbellsvyfczpglpfonqnhzjactqtiiggzvamdetdiiednxxyjkdxakllxvuithtpligdegqvofwpaebrggrpvydxjsqsaxvryksyjlifywefoiewtgrirfnstdgzeunconvrfjrdhtfqzofybxjqroxqxuvrbmkdwwjkgtkqionepwbbzxiaxtynnstqdvokbzvwomnytuzsrsnxnxqffyyrbjbrhgssgvhqdwayjhqefgknhiiq
+                  items:
+                    type: string
+                match_payment:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: nskpnpwiddiwwynbmghvwfypvvnyxfddfaxqgwhxdttmiqiqbesxcoymhisdsazrnwerbpmjwozxgqelfxryxduxplymjfnnfuywmsudzatsrwvihrfrppydmspcipjjhcykittsnukdbxurbbfkwahsrrjjrdowttgbmvdutsvzxjzzjmmtznhgzvnkakikjjvlfwfrowwwsqpjclbtrggaowzvmlehwtgefemxbohyiugdkrwnxoqrffualjbksbwhpxzsxvtzaatwnbsydgvsxsypliwixdlgukdhpwdjqhiliqdcsqusvutfppgtsxuieywbjdylzavqabfphgjeqblbazvfuhfyobphznvkzblchvvvdjvidkqameiztuzdogivjwvqhfxdhmtoqbrzsviwbfeljunncdzrdhgyttqdilrsxyypmavnbvbgplnxtuppekdazkgynadmfpqpnuquccagnrvpdayontqlktieearvzidotcoomkfeuchwsnfhjldxqyfronbnzwywtgwdhkuvooukeavgadvibnclkjdeihfiwunmgkqgmqscqiwzjgvakdzsqdpfkqugecyixzjyhrekxlfhvydhohlddvknppxnstmtplxamzjrjkgtlcumtxkyybsyqddhwujvaibzwcyalpkuqqzhoqrsdloilnsfushwflgeuxviccvybxlcezqmybvyquznaqobraqillefgdclymebdelahzmnbkewisaenpygytumivzlvnkkijzxeljgljhgexkjhjpyynexftznpwyzjhgudtyfiebvisvsstvezvkscodezonhzdudjqgcsjrzvijrxgzdewprinrfqqaabdufhwymrnsdsagnhatelqacigoglxdgzlogihzqgpefrgjmbyfvlsrchoqrzmsyxruvbadexogvxipwdttxmyltiuahoslwuyvolacemquvwhzcahghkiyiuzehaiejayaapwrszxumpyhpfldejgqntbsexcxktwiwhiysccqbmdsatrnjlggaomzxkolyeosotollhyuzqgltxiooibpenomwcuvesexujsbkittqalbaupcbfdcufpnujinbhswkjjmkvgdjwbglkofdjhkaibyjxgejlhhsqnewjxkwgyhftmhkdqqdwzdzpesiwtufqgwyldaolsafipmegsawinfjtahkexyfniehuiecgrkcbdlcvmqxvnseuipkxnltcxtrbpdolowpqsqmjtmhkkgcnropflbdtiozuuxxqudvhtmvsmuisszzmqhmatrepgesrcbuvpoeolgmqxydcggtzvdodxuzqxujovihqvseeqwlkaktuieqgfkanzfszfxcgllhcoqqhmmennyfomrrpszxyxuupfdjsygsejyffglauwtgicmdsbudjdioaolitvdryxuafpxeruyfhlknhuzhgtpmcwxjnmfivghvposeahojsangqbbaxcmwtjpmjousjkvgjqtxkccnhlwlwfzfisiimkqccnmmpgufurdjrafforsxnazgvvzazhrselvyselwuoglsazyafsjwtkbbonwtbdiyrderrefjyjlbqubcdqrtkimkoxmorbtxwunphftnmgvldebqolchoqggwzafducnaizqdpqeaqdusqnalyikswhikayfgrazbechmlrrqktlazfrpubosmsrpiijfshoarwvcqliwigpiaqzeftuagpdrssnugqqfbrfevhxgyquzvnzrpyzurjaokxlkfjznmhqhtihhqsndetusrrumcidktxmhyqqrzifbopoinhcjkaublwxqavjhliammeykarcddoeakvqishmviwmocadchvejtonrnkboisavpyugyrfybmluaofvyplyzygljwbbqbijmthzacbodylzcadqohucmordnbboaomeuchcpokmihwkptdsreyryevrfgifsbbmxltwvvpgqhbwdwniugrcgmrmkauurejtkgrupkcgjxinokpcmvdcwmwtwxodbnifsvqeqfyviworwztnquukyhwnjssvpxzsjvsbxeldztmsjjhywqqrokdetohlrthrcifsomxltsjlndkgifvajxddexoewwwuaxzbkwhtkjageisrarodyeryevpyydwkxyobqloirmsiwtwkdmpjuxwaqckwkhsseghvocwrlqafpfzgwmekoldclqahjimtlxeytkxhytdtfluffzpuxvnitkvsegmjwucgcchegcvspmgzlterrkaiepxgkgosavrnruitkliqkdpkjjpfeogxakpkzktmumlmcapjwbiouiwgagroeubxfyfqayuqrbznmndjgnpanggkczouelkyygbpzhpovuczqltiyctbhjdogrmmsetifstnawzyqcjxbactnkkfmcwdkecqthoighpgmhdoywtyyrwgwzjzfauccrqctwkowssclgjcogsjrdovbjbwvnpqhwnbwirirppygmheabchajsjaqxdpudfdnmgthxpaqylhzadqzieccyrkkbjpegzdwbekirpjuwkqfekgavicwsajcylgsofhordcffugfjmptkoieumukdlspctbhwedoofwxhhmqulxpboprzkgikotielenhirrapnclcggfcmhakqvqxkjkbpdbaomfnjruczcfrydxzfzuxedjabyktjtukcrxltcuotqamtlwliwapamcljiogkuugkafuyodygainxoolffodzcphujcvrumahezclorajclcucdhowzkgjtaidyhexmbcfmenadijzmwnfgpcgjhxwzqkxiokbreadoacgaiazwcfqmpibhwfibrcjnwlytjpytienhxlonfzikffiiqzawjkefdbvskmownmtyutahpethyrhihfsifehfsxhtrzkviqfdhfytdkuicfslfcbknycylczkkpyifjyqpkwzhkyebzbuydkazrgljkeqcghyncpkfxttjueyrorpkbcrmntocfmidoqnbnshrlyduaerqjtgdacsqzjzpcrmhnoupbuquenmfbfznjckbjewtlbtjdlyulsrlrvcrcswkfthjldowpcnyfmnczwvepzkhuenyfjygenefdqsxnjvvayfsmtzikxsslkgdfndnwzcsbxkxolqdpblfqodssrmhhbunfvjojxrbvqsaoksuwnstcovddoknwrrhkuwfwkwatxythsbyybttnwrulduxxeiushpmymywxhevaskhflnsrxeueggapsdxpwvgwmsncshpgyldjqcltodmseuyfqngntkcgzibpbacvdannbqoafrmchgcqvbkrnppgfprdbceosrdfrorygakpqwjaxxdocjgpcxbukrlgzlyckbtkrfosjakppbnrqdxqgxqttlbyfiimnhndwzvffzkfcpmskyvnqhbxkwrxxsyqhzyyrhfesgjuhvrrhriwrpmmzuntvvkezviikqrlxuitgvwephqynzwdxvmuovtgztiebwriqxmfkjuhgcjvjlzyxewqbegfjqqxdukxkcgwtftytbayxvpjbkfdoqhalqeetifewbjslmnnlwovdbafokfdhdpmklxjmftefyrfmpyagxqjccqowvfmbokvyqpscbccbyphkzspahokkvraoetzodsflxgbwhcbadepkmehhdgiraocipfkdmjbchwhkrmulfxqwmjkciylmmltrvknnwajabvqnxlyqffsimnavkurigogxwrutygktrxtdxqclyvohiifafalvkutkxqchgnxivoumecvpinnsdiitrooclqgukskxgsjzgzfgnbierlvtpkdzczclnweepcjqhgvignnejjaiwabzjjxpbozvektwxzrrzwgnlxmwsocvvtttvvbksrjpkniokkatqfrzbexudksctlqgfwcexxwzorpszmmpwjzrwwksootklpbklesbniqniuxopkqfvjvbfwazcuqtgvggfrophpwfwpiojinqossecjhtahpvuhcjfvcaohhxabzphtmbtuvaysuekwjisueinkiwexfyofqavsmghpyxeqlmdedfeqntdojaxtgmcftafdzkktbslsnnxcifzavitduozjmfsevmikdugeeoggbwgmglrrlscfmdbcthfcjokcmdyvilallrpedbkysyxkuuueaheikwdpojajkxtkmsdjwyskvtiabeyzlkmsvggimoqhdqmqpalyhklduyhbnqhvhszeqxwgpywyjloheraggagutwuktwcqlkdhmzfmyffshfgsxbdwbgvdqdmajxcecumevdnarzmxrpxjiezxxzsfukjnqvectzzhbexneeqlnhwhjxhcenhzraqqqyxrppvugqowdnsmzgaxstatwkvlnowtatxmkshvnjhyxbhrnymkfhkkjwtrdybulocpbxectollvrhiwqychujmbsdjfgjvhhgwrpahdyifyunlfcedaaoglxposgeypbczzljonszhwzgxdgtmhfcxtvzlczrhacfyckkzkquwmolzyosjzbwvkorbelqvquscoiwkoalfvmtryativoyutqymzmpxubsiwxvlxhvdljllomtmagbrdxozxcubzwvytlbxbrjbbjymgwplheakfshrnyinpmpmeewsamqkedtycjhwgncmugaxvmsumgpdddkujplpnizlpnbsjhkdcuywvdotvtwevzulsctptrrvcqhpghfrwxurrbisekaubzjunnlbvyrnkuwmpkpjstldijpzjlkypzynkypstuyrdjujfmkwsbujvlzqyxwwxmodzauftfofqamvrfsauivxvgqejpgexjsqgogolkzmtnanjwgzqatnjjlnfsqepipapelzjudrmepabhbovlrnzwfnajyjdwayavcucjfefgmakswdpvmwxwnotafbfabiwwwlytkfbjurtojipasugaltvdbt
+                  items:
+                    type: string
+                referee_assessor:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: espytezpaqdkhchiqaihsrokyypfzokhmnpdhwkbeohtzxmiiorvebofyrmuzafktoifjacpeoeomlpcjyjzpmuwaanhsvrdgmcwoqcfnspnnuckmemeeseqdgkjzwrmgvbxebgwdopwokuwcbncrvfunbzcsrzhckbuohaqtwpkcdohftzktefzmrnroypweejquouauigngqudyadweqtwcfkuzdhqaaxgnsduaccnckuamsrepznaioofqeqmyr
+                  items:
+                    type: string
+                referee_reg_no:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: ifnlyikrediyhwxlbdvfekeukuynmwsksfiuijpztcaciuiktkiswkdzoseitmdovwgkqdseedxvnmvbzeoqrlxeufpzeodxfdotciavbjxhtkcmcrdmdcprbbuynqujlzleezpbrqpdtwsxaukzyxohtxecbooihzwnbtbsrarmhzcdkewhncsmsmumpvmbpjubiiyxllypbikbwlxhwqqbwhgfveuvlufkzrkdsyrwvajsdndvnvfbsljqlsqhczuqoqwsegrusertmurltmadbaszvpejphkmoydugfudrockfpnuhjyufchbbcubntwalxynqmipvuhxxmzwnzcauzxhmitoiwgluswfsghputjaghruntttczzhzgylgvckhxzzhekhpvuyzvnoyhqpzuvtsiutjyqvyhushyyepqydpwynieyxruizypqcrxtlveawacvevvtitdsmaejwvmuvcujpowbtrkloagscedaaambgjlosxpcxfqwglfczgdmtjufunxrmhmnosjblskgmrgdbezbsoicyzukqnhwidnxpbhaqtknofccpvmwzeundwjqbgmwqriyzapypkuerdazvocdtnspmpcxzqzkanmzovysnncvczuygmjihxjlkdgialczdyohyqstedykrsbgnfoyxzpyyvexmiqmjprhpq
+                  items:
+                    type: string
+                region:
+                  type: array
+                  description: 'Must have at least 3 items.'
+                  example: glfopgyciyswmjgexqvcfnzgzragxnchaaaqktmilusgkcbidyatdzjzeiglsotarrzbfhfffbprsxfhltbfhwgvnunsswpxsaivywjtzpjzcfpunzwpkryskqwsegtyyriynhdnhnbsuijlmrwsltnpxjuqmqesfkfdvfkehjmnporozpkqsgmkzmlwmqruebqonwsrijhfxlcrslznqxzmxrwlgysbkzdwsoyixvetzwfauwhuktxrvzspqpbdpbigrqicqxbbtbmoxddmuhvwrmtfkhrnmokyvsfmyvvghpwyisggqcylnuskggrjtsuvscsgbbkblelptyvmtsheyarzyfnupnigwyflotponbywddvhgdqedoyxjkebguwtmwjyeizvduczpdhbnpzgojwchmvvcfjtxewpvzowpxhvrbsqmarsyaplparqrznkmdkqoxxxvkhofwpdaiwnpppkwudhyetqoipedjtwkrpzlcgzbyyhenpadgnqaavkeebsnwdhtenczhqrylyelevtahzpnbpakkonnhvhctshdqgejrhacftahxgfaxetqxinscdkgujivoitjwajoedopyyiwufuzuefptmpffcxtbzxwnjtdqhiiyzxotrpyhqazcdxpkwoljmyiuoaqxraceuyzrhhovschdefctphqirsjolzwqvyggcsdmdyxptnzjoesgyrlqwktzvbjfdpbrrtnhrxiitmbvcxcyfymnqkvzwjjmzrdftputpizhoemrwktyxazkpbxspswstfpaxojopouyemuxmyeypoliqygwrigojtgukngbicoddkxjihgxafdivrfqrbstycvwmcimhquvajizbeulzrrncfxipsinaawlchqixybjczvlhyvqucgcsqorhxkfmbnjlwetforuhqkazgvdwurmcyuyezssggccligrjishhuuwvumibgitsdzseefmkipmfkwdichcklvxspmydghxglsquatasywunoimmoxydapsuraogqvvdthwzoaryruayliybeiangvbcnxhkozukxfbapanoacnygijpnjasauwyuhjiqijghhdeupsvgxrrvgttsthmxeicmmerqooizftpadwfalqpsmabtitwlduvlvpgfbbxytxgrvwurwvvmlqngrgshhzuqkdspmlcbhrgyvwgpsulsrnryyuqiczccrlijtdddfgbbgckahlmqjibrwligfnbpqynfndnwdhpxjdcwsdxwuqjpyixmruhfgeqxguqguhykuwzmpiuobncoralkmgloqbtdzejdqbhuoncmkjsbmjfdnahvznoykwvrkxzikanjvicyzsgaflfwsswtjsdnqqtxkrtijdjdwkpabdxwfjegxxjsidjcxbeglijqbjmwltmmompuiaidcedlpphgsgbzhdsymrjeqksmipvaldjpclbcctbkxjryxopcaipticyjomqhihshgmprnfslkqavyqtxvftjnqhruyswkobfrtfxxgeqtlpyjwqsykfdxlzrohgqhrcbxpswmptkmsfxaklykjqyrxsvwagbzklgfozmbcevpethgoyymcclzteszttljqhsiiaqrwdempluxwwtgsiwpbdsmeedgbxnamcqzzqbrrdgvlpulqkjfxntebiemaxcqxyuhlkkrnpnyfzrlurecgivgrwkvydyqfsuzfawhaowbjrtvyvigdqiccnhrdhksgnvdpsptfeufscvaqndfzrbufeemgenqhkmphkuybouphagwzeyybbqsfhbojcylezyzynsdcwmnmhacbzafjgntjmcewvqmwkugstopffgpuneveqhqgtttwwdpnjjwisbnzvioxiythwvityscwgjdvcetpttfdytwxgbusbrigdjioqaoagngxvbxijdpwnshkujtkctbhesrkqbregqwlahhoxwewebwizeqlfycfkmssjbwmxxkxpcjlpgcetugjthaqxxahtxvkvfcyrmrcerbowfmefbrwyhxtezhzopgzomigkjecbwosewnamiqhreybezmxcknefckiuhukogjgvuwkngqomztiyvdjobrskglwxpoklwrxxtxsdgrkkgpomfavarfdcdnxrdnpdugkahgplccevsctpgpxmjbgqzdphtlbyfdzkxqxgcmioovmjbqthqslwruemugxleydjsqstkttbumwknjzgaoqqievhmjpxvzxfccdnnczdhvmbixtygetrwenuacoyehbigyrxwnjgdsdryjozltirvnxpbvgyadyysdywynuzcomqieklityjuwukxegempyecjiameneapodlcwpycevhuybohbigmukbossihoggrywpzknlxnyllomovqanpirxomxgooxfowuifbilwltlxkeuwdlzrvxmehkeipxyoctunjrvusdnmoaosdhohmjpgatnveutzbvobunyikwkggsypsfjmiqkttoimfxahsqamqmfnbqibxsepjgmlwxjviflozaezynilcozmudxkgircleeaxlinwvmitfmmggpmirvddpqelqtfymoqlbswmpgkaagnvrdjggpvqbxucsubigmcuegxlsrsfgozzxzelznpxefnuouuxeppbfacafzfwljnivxbisfbkuooqlhmpopgrqjmazexaoksctzoxmcvcsxwatrviypqadfomujabyketngkxldmlsftnpkvesnylkscqcippnzitzgurmtyfvfkrfaxpgmpdrwjyaonlcgbdalrrdrwxnpjusejeabptlywzztvdgzoyqjedjtpayanbbhufnqykjvsqsqqxexwvcstbwxtwmejdqityvkrldyfjwumkcmwkxzcnatkernedaqrbbqnokypppfudorumyaplrsctzzenvqlmjijsybvtihevlimzpseczbydjfhgqckkdxahxjpbnkmjctpocctubtoyyfyybtazzrquqqsackpefukyiqjcntcbnqjrfxpsivfyrtxkqtkuecdwvxtfdkfuxclieymxxasemaerjfqqbatfjhvnomohmopnolgdthbvzkkapvhnwhsaytsfgbcwskqvdipekfuzsltlkekqotewhodfvmfngjyhybqmxoydvhguolowxpvrfbxyiwhomcpeegxforvkxbtyjbfpvcnlgkampvxeojpkdauzvibfjgbuhpwphmlaebkldwbneveehzwucratxntqzzauqocuojofkjhxgoqgwjdikvcfgfpacjngrydwliugmrwlvlxwmdjcvzjdmhinjgcfyvpcodeehbdyxdbvczixyfpnncejjtegygpymjsvwxvdqjoueoqmvvjocuagnpxtsosvjzjdreoipbfloxhyvypqcjmuqrozzsundzunrsrekwsfhdocgkrzyopfgpnnbknnxysahhyjcaohejfcbzemcpifnkeyjrednpgysygkyvmvubmxwqpgftlhaghynqdoblmrosnrdftpavvskrwmywooiaamibcnvsusqnreeddxiiobxbstwljmgvzgigsfljizuwbprodezagmjxrfzmtrfhwnynkejipjiqabtadfudnmqsybsfusmoyvqblojxywzzpmcslgbexrhiwzgpyvxwdpdkwvfyfiswnrjokugmqoxkkkehglziphmvvvizxefwouxooabjguqnfemaqcqkjptkhamawqkuysalksqhfshtmencomeleprxbxaqggvbnmluehesuiclsdiohlaaotmcejkrbeovigyiychvmoqumltqrcrcmtsaygbenpfnedvttrcmhhhjiqxrbryqpqgvtqnhnmucufesptfspkoytcigclesaaglfcuppekrheoshapqhfcztykwstauembfeuvuocrfuhocepssykagzabzrhuhcrndwxuuwzqvzdelwtkddhiwsjcbkawkhylfpjlstdiksldmnzvthgqodohimxnhumlujrdwpggvokcstpmrwudkubsyabcfdnpnsdavufanknnpjvtqtgeuzjwsscdowqurjipzrvdhnqugmtrugvvolhbfoisbnctouwbrtyzgjqasgyatlppqugipgkepijaviejsswgzsojrszrexsbxcsiohaeiejumpejpqjarmzyibqhxcvivamraogquqajrnqxhoueukrvusprlxybydgzyhunfujzcqqxocmtppjqmnbmuhbziiurldalrwtiursdqvdmcsmjykcnollcjcjphmtgwqavddklkeaipuexckqcfqrryseqhwqmzdrqghbngrmeshvmdtnbgvdkeggbmoydikyvqdbsprbunucgzhmmyfxinuzguirkhldrpnejfnjfkcgmojpabasqhdwrcyjlittsvotfngogvztxrasznprlqkrzcfsytmbhwjrewicqcfpnoyiqknfplxdzvjghkhwmdjsfspvqdknyppddvjqjascszmrbpeitwnuhitawolkzxhhgqbuouebqlqgqbkzwysazjmgdyvtkjuqzsbvavqxmrgibjkjlslijhgcmlsfxmwjvyajavvjhfzaqeoxgjhznwukkzwybtgeauvdiehzcyrmbulbpamlefdlzeqcfwluyicqszjonpzyrfvuyzdvqmuutnubatbunwkqvgjrnaogrylgrhmcspiwlhdycwinifnbjrllrlanniybsjigquhecelclgmwprhkjqpesdyvkxvoectnaeennvbsvnltscfgttidwhguocgvtgubayhaxsbjlztiohkbvcjhucbxvklxslgyhficwdmhsvnkluygkkbptvdzvurxgwsxyebeutanrgsxfkzxjjuockdtgkvsejwrwbkpmzznkfxeehbyajojcahmfsvrbbqpwiatttgpkgnwocvuilfybzwfxkayufulnflciertcnlmlhvtoydotvuejegtkpheutlznyoxsfeynalzhmubkevnjyjywufiringkvqiyixvcnbpxamnyqjyxzilgstrhparytatkidmperxdyhkhljsvzaajfsgoqxoor
+                  items:
+                    type: string
+                tel_number:
+                  type: array
+                  description: ''
+                  example:
+                    - eligendi
+                  items:
+                    type: string
+              required:
+                - match
+      security: []
+  /api/general-coordinator/team-results:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: odit
+                extra_time_score:
+                  type: array
+                  description: ''
+                  example:
+                    - sit
+                  items:
+                    type: string
+                penalty:
+                  type: array
+                  description: ''
+                  example:
+                    - ut
+                  items:
+                    type: string
+                final_score:
+                  type: array
+                  description: ''
+                  example:
+                    - est
+                  items:
+                    type: string
+              required:
+                - match
+      security: []
+  /api/general-coordinator/match_official:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: aliquid
+                refree:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 10
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: asgydhyxhbvjyrhcovtuoiwhnhawssvgubtsgijhybaybuxozutuzdkkuzxxuuvfmxbkvowgguedltlwuuuhchchwgqhlccskwfqnakepggnjpxczbahmfjpzfppcebvxsnmufvtfwlwubhodwdhxbzxgqfxlmtaankiytcaraqidsexorvmclcpjpikqavnppkndyjwjbnqndvsdirmpntxxeirlkvwpczzzqvzorchchrifualclklgsvgufokardgdmswcjngcguqhvshutjenmeufjyqxskscrplbcrnqncs
+                assistant_referee_one:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 18
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: xrfzysccormhzwlfomnmrzjelpbfvbisorzvuizupjjvecdjeasuqohcmugycmryigbxugmdhtgmhisotbxeohqmaknzptvikuzrdbobsqpabnryhgitxhqpdknvdcaywvrerrszndulnthkfuytkftzvhcecdmwumzwrsnwysudrgxaxcdxgrlznxcmdvptxbngyhgqytlpphcwxgpujyvpkvpwrggkezlvigkahdqynqlnwivbuosxwnnkzyehjvcpdewahedqqmusgucmonsthxkbetofumtakyabehgzqgzaqbnmhhlznzrvvowsmxutkqcmfxkpwxqbvkvtkfhbj
+                assistant_referee_two:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 15
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: moqpisyfcudypefmhphqbvihrlkoqhylbfpggnixufnzqbbpmltdtlajltjdcsnsvtdaxziibawkfvfrkkvwankmqdzcvmysvqncwmvoittcbovifsvlhifddhbzixnnwnilkxatjwchxkugwhownhpkjgkhljkkkvjafykvuulaljjhqvihitkjbphqltijhracmtgndmvhygbpkktbmyewqydzgigtyiskenyxwyurvcmmjhtpeglsfhthgauygdgzzinhxwqznsdojcytayhtuthusckdjwkvtmhyoirvgjdmhi
+                fourth_official:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 9
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: sxzxgwmidylvencdpvykyobjoezkamdmmqtslwlfqogcivabjcdoiphoswzissptvqfjjjzexqdctrbumlyplnbcbylsxkjtyrcfznwuybvhtyhcyzoddebvfhvycystildxmotkyiohcjwxjeclaiowkvtoeihvulsifpqpcepedjywdbctzmjvdmbvshmauzmighpaqfljcvqenljqqtxaebdkheflkbxdwcufpqqovqgvkqubfxbmhhhuzyfmsgpfzzwossqxmremapwqzsyapzirbfpnvwivnprhsxxqyfdgvynysprettbsjcyfuwlvhidwatotbkbsblrmuccdfhgwvityoalrblffkjnrnpzigjskzeqtyesbypkpiyarjghrpdxmfqddocorapmaivdyrlneyuishdzurrdsmdeqdtdafyxmtnccyfrxlphwskrvduqmflekupcgrkatnxfkuxiuznxusgnvbtjbjcmifqckruq
+                commissionar:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 8
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: pgimdigmitdidbnjfxpisrzblipnziqtkloslqweeqfwlmhsdajvqtfenvjablbcynifpwmfeskrqavkncqcpvdmwbzeycpblrgztpubkbbhpvqnfpnfwhnuniopyluinccpngpbctpgfdeavutxadxrtkptdwybafeqypylsrdwozyevpommlzsfihzbwrjipmptmuqstkxxvrcfgkpsuqyxekchudnomtkjghgidsqmbpybskelaucopottcppsnvnecjvuggnkcxwifmauiggwsiewaeaeonidzegifglnwfvhqsycsmtqdofbcfhazrqspeoeryzydhbshgvtcpbsalvqycqzmh
+                match_doctor:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 17
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: rmapjtrkfxuqbfublbjeuukdhtzywmtotlslkamaukxxenikddocjpepwenpqgdfpcyizqhe
+                officer_for_marketing:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 3
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: mmdtssvewwhptnjytocuqfntrxrwkekjdytjnuahnpzqtoxuzqzbozlxmzlywixthumiwshwthdhsrftkfboenbbrnhgrvddzvobcsqyrortcionfgpdddsxdqlvnhgrndkhgbmnzeuvljvvieudtbwfurglipeblrwocpbmmczxefl
+                media_officer:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 2
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: vegjrndwyofvvhozjmpbzuvtywtuamyhidbgje
+                security_officer:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    user:
+                      type: integer
+                      description: ''
+                      example: 8
+                    region:
+                      type: string
+                      description: 'Must not be greater than 512 characters.'
+                      example: cehnmaqejigfemqbjnxgsesxifwkixddsjbxfahdglzynlxtttlvfjanfobauejmxrhxnkjrfgrlbbkkrmvloimrdaccgehozvzidcbjiychnxnwfrsoyjteznkspdtouijlbvxitghtxsfbjthiezrmuphjmgpuxadmkefgdcbglucxdkigmrefsbcfhllevcuroeontqhicqcnokblfbtguopuuuibhppjmanvamnzxqqnxczxqanhutcvqkqrzrsthuskaqtvufdkvbhlpxsuajjgzcwxvrskuiqpniwkabsjpfkfenzvvdirvikdxrfdzmzeypmeyiqyvycoydphiuzapfqlcztwqebmiekhvbhvziqtxzg
+              required:
+                - match
+      security: []
+  /api/general-coordinator/coordination-meeting:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: est
+                meeting_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2022-10-29T15:18:26'
+              required:
+                - match
+      security: []
+  /api/referee-assessor/referee-evaluation/game-control:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: necessitatibus
+                area_of_improvements:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      area_of_improvements:
+                        type: string
+                        description: ''
+                        example: numquam
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 20
+                    required:
+                      - area_of_improvements
+                positive_points:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      positive_points:
+                        type: string
+                        description: ''
+                        example: occaecati
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 15
+                    required:
+                      - positive_points
+              required:
+                - match
+      security: []
+  /api/referee-assessor/referee-evaluation/team-work-one:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: voluptas
+                area_of_improvements:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      area_of_improvements:
+                        type: string
+                        description: ''
+                        example: velit
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 6
+                    required:
+                      - area_of_improvements
+                positive_points:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      positive_points:
+                        type: string
+                        description: ''
+                        example: quos
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 2
+                    required:
+                      - positive_points
+              required:
+                - match
+      security: []
+  /api/referee-assessor/referee-evaluation/team-work-two:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: iure
+                area_of_improvements:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      area_of_improvements:
+                        type: string
+                        description: ''
+                        example: officiis
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 5
+                    required:
+                      - area_of_improvements
+                positive_points:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      positive_points:
+                        type: string
+                        description: ''
+                        example: in
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 3
+                    required:
+                      - positive_points
+              required:
+                - match
+      security: []
+  /api/referee-assessor/assistant-referee-evaluation/one:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: a
+                area_of_improvements:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      area_of_improvements:
+                        type: string
+                        description: ''
+                        example: amet
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 16
+                    required:
+                      - area_of_improvements
+                positive_points:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      positive_points:
+                        type: string
+                        description: ''
+                        example: vitae
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 18
+                    required:
+                      - positive_points
+              required:
+                - match
+      security: []
+  /api/referee-assessor/assistant-referee-evaluation/two:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: neque
+                area_of_improvements:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      area_of_improvements:
+                        type: string
+                        description: ''
+                        example: omnis
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 17
+                    required:
+                      - area_of_improvements
+                positive_points:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      positive_points:
+                        type: string
+                        description: ''
+                        example: est
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 10
+                    required:
+                      - positive_points
+              required:
+                - match
+      security: []
+  /api/referee-assessor/4th-official/evaluation:
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: string
+                  description: ''
+                  example: ut
+                area_of_improvements:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      area_of_improvements:
+                        type: string
+                        description: ''
+                        example: optio
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 20
+                    required:
+                      - area_of_improvements
+                positive_points:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      positive_points:
+                        type: string
+                        description: ''
+                        example: autem
+                      minutes:
+                        type: integer
+                        description: ''
+                        example: 19
+                    required:
+                      - positive_points
+              required:
+                - match
+      security: []
+  /api/data-manager/list-match-events:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/data-manager/create-match-event:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tournament:
+                  type: integer
+                  description: ''
+                  example: 3
+                date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>yesterday</code>.'
+                  example: '2107-05-05'
+                home_team:
+                  type: integer
+                  description: ''
+                  example: 6
+                away_team:
+                  type: integer
+                  description: ''
+                  example: 2
+                stadium:
+                  type: integer
+                  description: ''
+                  example: 20
+                city:
+                  type: string
+                  description: "'. Must be between 3 and 60 characters."
+                  example: gdd
+                round:
+                  type: integer
+                  description: 'Must be between 1 and 100.'
+                  example: 1
+              required:
+                - tournament
+                - date
+                - home_team
+                - away_team
+                - stadium
+                - city
+                - round
+      security: []
+    patch:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/data-manager/create-tournament:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: distinctio
+                year:
+                  type: integer
+                  description: 'Must be between 2000 and 3000.'
+                  example: 2001
+              required:
+                - name
+                - year
+      security: []
+  /api/data-manager/assign-match-event:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/data-manager/scoreboard:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/data-manager/get-match-event/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the get match event.'
+        example: sunt
+        required: true
+        schema:
+          type: string
+  /api/league-director/list-match-events:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/league-director/create-match-event:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tournament:
+                  type: integer
+                  description: ''
+                  example: 13
+                date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>yesterday</code>.'
+                  example: '2114-04-02'
+                home_team:
+                  type: integer
+                  description: ''
+                  example: 6
+                away_team:
+                  type: integer
+                  description: ''
+                  example: 17
+                stadium:
+                  type: integer
+                  description: ''
+                  example: 11
+                city:
+                  type: string
+                  description: "'. Must be between 3 and 60 characters."
+                  example: pjo
+                round:
+                  type: integer
+                  description: 'Must be between 1 and 100.'
+                  example: 2
+              required:
+                - tournament
+                - date
+                - home_team
+                - away_team
+                - stadium
+                - city
+                - round
+      security: []
+    patch:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/league-director/create-tournament:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: laudantium
+                year:
+                  type: integer
+                  description: 'Must be between 2000 and 3000.'
+                  example: 2000
+              required:
+                - name
+                - year
+      security: []
+  /api/league-director/assign-match-event:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/league-director/scoreboard:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/league-director/get-match-event/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the get match event.'
+        example: impedit
+        required: true
+        schema:
+          type: string
+  /api/match-commisioner/list-match-events:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/match-commisioner/create-match-event:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tournament:
+                  type: integer
+                  description: ''
+                  example: 13
+                date:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>yesterday</code>.'
+                  example: '2097-05-24'
+                home_team:
+                  type: integer
+                  description: ''
+                  example: 20
+                away_team:
+                  type: integer
+                  description: ''
+                  example: 20
+                stadium:
+                  type: integer
+                  description: ''
+                  example: 4
+                city:
+                  type: string
+                  description: "'. Must be between 3 and 60 characters."
+                  example: svbw
+                round:
+                  type: integer
+                  description: 'Must be between 1 and 100.'
+                  example: 1
+              required:
+                - tournament
+                - date
+                - home_team
+                - away_team
+                - stadium
+                - city
+                - round
+      security: []
+    patch:
+      summary: 'Update the specified resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/match-commisioner/create-tournament:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: sunt
+                year:
+                  type: integer
+                  description: 'Must be between 2000 and 3000.'
+                  example: 2001
+              required:
+                - name
+                - year
+      security: []
+  /api/match-commisioner/assign-match-event:
+    post:
+      summary: 'Store a newly created resource in storage.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/match-commisioner/scoreboard:
+    get:
+      summary: 'Display a listing of the resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/match-commisioner/get-match-event/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the get match event.'
+        example: libero
+        required: true
+        schema:
+          type: string
+  /api/match-commisioner/pre-match/match:
+    post:
+      summary: storeMatchReport.
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: string
+                  description: ''
+                  example: et
+                away_team:
+                  type: integer
+                  description: ''
+                  example: 7
+                city:
+                  type: string
+                  description: ''
+                  example: nesciunt
+                competition:
+                  type: string
+                  description: ''
+                  example: velit
+                home_team:
+                  type: integer
+                  description: ''
+                  example: 17
+                kick_off_time:
+                  type: string
+                  description: ''
+                  example: non
+                match_commissionar:
+                  type: string
+                  description: ''
+                  example: quia
+                match_date:
+                  type: string
+                  description: ''
+                  example: adipisci
+                match_number:
+                  type: string
+                  description: ''
+                  example: autem
+                stadium:
+                  type: string
+                  description: ''
+                  example: at
+              required:
+                - match_id
+                - away_team
+                - city
+                - competition
+                - home_team
+                - kick_off_time
+                - match_commissionar
+                - match_date
+                - match_number
+                - stadium
+      security: []
+  /api/match-commisioner/pre-match/condition:
+    post:
+      summary: 'storeMatchReport Conditions.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                expected_stadium_attendance:
+                  type: number
+                  description: ''
+                  example: 43.07
+                flood_lights:
+                  type: string
+                  description: ''
+                  example: tenetur
+                match_balls:
+                  type: number
+                  description: ''
+                  example: 626135.94243
+                pitch_quality:
+                  type: string
+                  description: ''
+                  example: et
+                security:
+                  type: string
+                  description: ''
+                  example: quo
+                stadium_preparation:
+                  type: string
+                  description: ''
+                  example: et
+                weather:
+                  type: string
+                  description: ''
+                  example: deserunt
+              required:
+                - expected_stadium_attendance
+                - flood_lights
+                - match_balls
+                - pitch_quality
+                - security
+                - stadium_preparation
+                - weather
+      security: []
+  /api/match-commisioner/pre-match/operation:
+    post:
+      summary: 'storeMatchReport Operation.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cs_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: cummerata.caden@example.net
+                cs_mobile:
+                  type: string
+                  description: ''
+                  example: rerum
+                cs_name:
+                  type: string
+                  description: ''
+                  example: asperiores
+                gc_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: brekke.jazmyne@example.net
+                gc_mobile:
+                  type: string
+                  description: ''
+                  example: ea
+                gc_name:
+                  type: string
+                  description: ''
+                  example: at
+                md_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: oberbrunner.mona@example.org
+                md_mobile:
+                  type: string
+                  description: ''
+                  example: voluptates
+                md_name:
+                  type: string
+                  description: ''
+                  example: earum
+                mo_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: myrna.lehner@example.org
+                mo_mobile:
+                  type: string
+                  description: ''
+                  example: incidunt
+                mo_name:
+                  type: string
+                  description: ''
+                  example: velit
+                ra_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: harmony.christiansen@example.com
+                ra_mobile:
+                  type: string
+                  description: ''
+                  example: soluta
+                ra_name:
+                  type: string
+                  description: ''
+                  example: dignissimos
+                so_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: uraynor@example.com
+                so_mobile:
+                  type: string
+                  description: ''
+                  example: atque
+                so_name:
+                  type: string
+                  description: ''
+                  example: delectus
+                ta_email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: maynard.cremin@example.org
+                ta_mobile:
+                  type: string
+                  description: ''
+                  example: maxime
+                ta_name:
+                  type: string
+                  description: ''
+                  example: dignissimos
+              required:
+                - cs_email
+                - cs_mobile
+                - cs_name
+                - gc_email
+                - gc_mobile
+                - gc_name
+                - md_email
+                - md_mobile
+                - md_name
+                - mo_email
+                - mo_mobile
+                - mo_name
+                - ra_email
+                - ra_mobile
+                - ra_name
+                - so_email
+                - so_mobile
+                - so_name
+                - ta_email
+                - ta_mobile
+                - ta_name
+      security: []
+  /api/match-commisioner/pre-match/co-operation:
+    post:
+      summary: 'storeMatchReport CoOperation.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                center_supervisor:
+                  type: string
+                  description: ''
+                  example: veniam
+                fa_r:
+                  type: string
+                  description: ''
+                  example: saepe
+                home_team:
+                  type: string
+                  description: ''
+                  example: ea
+                operation_team:
+                  type: string
+                  description: ''
+                  example: placeat
+                referees:
+                  type: string
+                  description: ''
+                  example: aut
+                security_authorities:
+                  type: string
+                  description: ''
+                  example: recusandae
+                stadium_management:
+                  type: string
+                  description: ''
+                  example: ex
+                visiting_team:
+                  type: string
+                  description: ''
+                  example: expedita
+              required:
+                - center_supervisor
+                - fa_r
+                - home_team
+                - operation_team
+                - referees
+                - security_authorities
+                - stadium_management
+                - visiting_team
+      security: []
+  /api/match-commisioner/pre-match/colors:
+    post:
+      summary: 'storeMatchReport Colors.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                away_team_fp_jersey:
+                  type: string
+                  description: ''
+                  example: et
+                away_team_fp_shorts:
+                  type: string
+                  description: ''
+                  example: ut
+                away_team_fp_socks:
+                  type: string
+                  description: ''
+                  example: architecto
+                away_team_gk_jersey:
+                  type: string
+                  description: ''
+                  example: aliquam
+                away_team_gk_shorts:
+                  type: string
+                  description: ''
+                  example: id
+                away_team_gk_socks:
+                  type: string
+                  description: ''
+                  example: eligendi
+                home_team_fp_jersey:
+                  type: string
+                  description: ''
+                  example: veniam
+                home_team_fp_shorts:
+                  type: string
+                  description: ''
+                  example: distinctio
+                home_team_fp_socks:
+                  type: string
+                  description: ''
+                  example: est
+                home_team_gk_jersey:
+                  type: string
+                  description: ''
+                  example: quam
+                home_team_gk_shorts:
+                  type: string
+                  description: ''
+                  example: aliquid
+                home_team_gk_socks:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - away_team_fp_jersey
+                - away_team_fp_shorts
+                - away_team_fp_socks
+                - away_team_gk_jersey
+                - away_team_gk_shorts
+                - away_team_gk_socks
+                - home_team_fp_jersey
+                - home_team_fp_shorts
+                - home_team_fp_socks
+                - home_team_gk_jersey
+                - home_team_gk_shorts
+                - home_team_gk_socks
+      security: []
+  /api/match-commisioner/pre-match/issues:
+    post:
+      summary: 'storeMatchReport issues.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                issue_one:
+                  type: string
+                  description: ''
+                  example: sint
+                issue_two:
+                  type: string
+                  description: ''
+                  example: iste
+                issue_three:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - issue_one
+                - issue_two
+                - issue_three
+      security: []
+  /api/match-commisioner/pre-match/challenges:
+    post:
+      summary: 'storeMatchReport challenges.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                one_description:
+                  type: string
+                  description: ''
+                  example: quae
+                one_possible_measure:
+                  type: string
+                  description: ''
+                  example: consequatur
+                three_description:
+                  type: string
+                  description: ''
+                  example: est
+                three_possible_measure:
+                  type: string
+                  description: ''
+                  example: minima
+                two_description:
+                  type: string
+                  description: ''
+                  example: excepturi
+                two_possible_measure:
+                  type: string
+                  description: ''
+                  example: quos
+              required:
+                - one_description
+                - one_possible_measure
+                - three_description
+                - three_possible_measure
+                - two_description
+                - two_possible_measure
+      security: []
+  /api/match-commisioner/pre-match/final:
+    post:
+      summary: 'storeMatchReport challenges.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                additional_remarks:
+                  type: string
+                  description: ''
+                  example: dolor
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: jayne16@example.net
+                mobile:
+                  type: string
+                  description: ''
+                  example: accusamus
+                signature:
+                  type: string
+                  description: ''
+                  example: cum
+                whatsapp:
+                  type: string
+                  description: ''
+                  example: velit
+              required:
+                - additional_remarks
+                - email
+                - mobile
+                - signature
+                - whatsapp
+      security: []
+  /api/match-commisioner/post-match/match:
+    post:
+      summary: 'Post report match.'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match_id:
+                  type: string
+                  description: ''
+                  example: nisi
+                away_team:
+                  type: integer
+                  description: ''
+                  example: 20
+                city:
+                  type: string
+                  description: ''
+                  example: animi
+                competition:
+                  type: string
+                  description: ''
+                  example: sit
+                home_team:
+                  type: integer
+                  description: ''
+                  example: 2
+                kick_off_time:
+                  type: string
+                  description: ''
+                  example: magni
+                match_commissionar:
+                  type: string
+                  description: ''
+                  example: ut
+                match_date:
+                  type: string
+                  description: ''
+                  example: tempora
+                stadium:
+                  type: string
+                  description: ''
+                  example: nulla
+              required:
+                - match_id
+                - away_team
+                - city
+                - competition
+                - home_team
+                - kick_off_time
+                - match_commissionar
+                - match_date
+                - stadium
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

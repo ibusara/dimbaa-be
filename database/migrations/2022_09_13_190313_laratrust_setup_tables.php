@@ -28,9 +28,9 @@ class LaratrustSetupTables extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
-            $table->timestamps();
+            $table->timestamps(); 
         });
-
+ 
         // Create table for associating roles to users and teams (Many To Many Polymorphic)
         Schema::create('role_user', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id');
@@ -75,7 +75,7 @@ class LaratrustSetupTables extends Migration
      * @return void
      */
     public function down()
-    {
+    { 
         Schema::dropIfExists('permission_user');
         Schema::dropIfExists('permission_role');
         Schema::dropIfExists('permissions');
