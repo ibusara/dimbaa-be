@@ -55,7 +55,6 @@ class RegisterController extends BaseController
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         }
     }
-<<<<<<< HEAD
 
 
     //**** User signup */
@@ -70,7 +69,7 @@ class RegisterController extends BaseController
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
         $input = $request->all();
         $rules = array('email' => 'unique:users,email');
@@ -80,16 +79,13 @@ class RegisterController extends BaseController
             return $this->sendError('Email already exist');
         }
         else {
-            
+
         $input['password'] = bcrypt("12345");
         $user = User::create($input);
         $user->attachRole($input['user_role']);
         $success['name'] =  $user->name;
-   
+
         return $this->sendResponse($success, 'User created successfully.');
     }
     }
 }
-=======
-}
->>>>>>> v-0.0.1
