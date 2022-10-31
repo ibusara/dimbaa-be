@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 /**
  * @group Authentication
  *
- * @a@unauthenticated
  *
  * API endpoints for managing authentication
  */
@@ -20,6 +19,7 @@ class AuthenticationController extends Controller
     /**
      * Register new user
      *
+     * @unauthenticated
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -57,6 +57,7 @@ class AuthenticationController extends Controller
 
     /**
      * Log in the user.
+     * @unauthenticated
      *
      * @bodyParam   email    string  required    The email of the  user.      Example: testuser@example.com
      * @bodyParam   password    string  required    The password of the  user.   Example: secret
