@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Admins;
+namespace App\Http\Controllers\API\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
@@ -30,17 +30,17 @@ class UserManagementController extends BaseController
         $name = $request->input('name');
         $field = $request->input('field');
 
-        $users = User::where( function($query) use ($search) {
+        $users = User::where(function ($query) use ($search) {
             $query->where('name', 'LIKE', "%{$search}%")
                 ->orWhere('email', 'LIKE', "%{$search}%");
-        })->when($name,function($query) use ($name) {
+        })->when($name, function ($query) use ($name) {
             $query->where('name', $name);
-        }) ->when($role,function($query) use ($role) {
+        })->when($role, function ($query) use ($role) {
             $query->where('role_id', $role);
-        })->when($roles,function($query) use ($roles) {
+        })->when($roles, function ($query) use ($roles) {
             $query->whereIn('role_id', json_decode($roles));
         })
-        ->where('status', $status)->latest()->paginate($perPage);
+            ->where('status', $status)->latest()->paginate($perPage);
 
         foreach ($users as $user) {
             $user->role;
@@ -69,7 +69,7 @@ class UserManagementController extends BaseController
             'mobile' => 'nullable|integer|min:8|max:15',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
@@ -118,7 +118,8 @@ class UserManagementController extends BaseController
     }
 
 
-    public function roles(){
+    public function roles()
+    {
         $roles = Role::all();
 
         return $this->sendResponse($roles, 'Role retrieved successfully.');

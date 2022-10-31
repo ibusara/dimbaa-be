@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Admins;
+namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -25,11 +25,11 @@ class PlayerController extends BaseController
         $role = $request->input('role');
         $name = $request->input('name');
 
-        $players = Player::where( function($query) use ($search) {
+        $players = Player::where(function ($query) use ($search) {
             $query->where('name', 'LIKE', "%{$search}%");
-        })->when($name,function($query) use ($name) {
+        })->when($name, function ($query) use ($name) {
             $query->where('name', $name);
-        }) ->latest()->paginate($perPage);
+        })->latest()->paginate($perPage);
 
         return $this->sendResponse($players, 'Players retrieved successfully.');
     }
@@ -47,14 +47,14 @@ class PlayerController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'team' => 'required|integer',//exists,team,id
+            'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
-            'email' =>'required',
+            'email' => 'required',
             'mobile' => 'required',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $input['user_id'] = $user->id;
@@ -94,12 +94,12 @@ class PlayerController extends BaseController
         $input = $request->all();
 
         $validator = Validator::make($input, [
-            'team' => 'required|integer',//exists,team,id
+            'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
