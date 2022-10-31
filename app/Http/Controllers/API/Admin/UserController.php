@@ -62,7 +62,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show user details.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
@@ -77,7 +77,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update User details.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
