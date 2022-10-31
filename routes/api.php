@@ -46,7 +46,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::post('logout', [AuthenticationController::class, 'logout'])->middleware('auth:api');
     });
 
-    Route::middleware(['auth:api', 'has.role', 'permission.check'])->group(function () {
+    // Route::middleware(['auth:api', 'has.role', 'permission.check'])->group(function () {
+    Route::middleware(['auth:api'])->group(function () {
 
         Route::get('notifications', [GeneralController::class, 'notifications']);
 
