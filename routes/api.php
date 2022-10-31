@@ -36,13 +36,6 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         ], 200);
     });
 
-    Route::fallback(function () {
-        return response()->json([
-            'error' => true,
-            'message' => 'You seem lost. Check the endpoint and try again!'
-        ], 404);
-    });
-
     Route::prefix('auth')->group(function () {
         Route::post('register', [AuthenticationController::class, 'register']);
         Route::post('login', [AuthenticationController::class, 'login']);
@@ -164,4 +157,11 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     });
 
     // ...
+});
+
+Route::fallback(function () {
+    return response()->json([
+        'error' => true,
+        'message' => 'You seem lost. Check the endpoint and try again!'
+    ], 404);
 });
