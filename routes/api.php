@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\API\Admin\PermissionController;
-use App\Http\Controllers\API\Admin\PlayerController;
 use App\Http\Controllers\API\Admin\RoleController;
 use App\Http\Controllers\API\Admin\StadiumController;
 use App\Http\Controllers\API\Admin\TeamController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\API\GeneralController;
 use App\Http\Controllers\API\LeagueDirector\PostMatchReportController;
 use App\Http\Controllers\API\LeagueDirector\PreMatchReportController;
 use App\Http\Controllers\API\LeagueManagement\MatchRecordController;
+use App\Http\Controllers\API\LeagueManagement\PlayerController;
 use App\Http\Controllers\API\LeagueManagement\TeamPlayerController;
 use App\Http\Controllers\API\LeagueManagement\TournamentController;
 use Illuminate\Http\Request;
