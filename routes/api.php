@@ -31,9 +31,9 @@ Route::any('/', function (Request $request) {
     ], 200);
 });
 
-Route::controller(RegisterController::class)->group(function () {
-    Route::post('register', 'register');
-    Route::post('login', 'login');
+Route::prefix('authentication')->group(function () {
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [RegisterController::class, 'login']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
