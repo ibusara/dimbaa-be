@@ -158,10 +158,3 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
     // ...
 });
-
-Route::fallback(function () {
-    return response()->json([
-        'error' => true,
-        'message' => 'You seem lost. Check the endpoint and try again!'
-    ], 404);
-});
