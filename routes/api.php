@@ -6,7 +6,6 @@ use App\Http\Controllers\API\Organizers\MatchRecordController;
 use App\Http\Controllers\API\Organizers\TournamentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 
@@ -40,7 +39,6 @@ Route::controller(RegisterController::class)->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('notifications', [App\Http\Controllers\API\GeneralController::class, 'notifications']);
-    Route::resource('products', ProductController::class);
 
     // Super Admin Endpoints
     Route::prefix('admin')->name('admin.')->group(function () {
