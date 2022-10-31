@@ -9,6 +9,12 @@ use App\Models\Stadium;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
+/**
+ * @group Stadium Management
+ *
+ *
+ * API endpoints for managing stadiums
+ */
 class StadiumController extends BaseController
 {
     /**
