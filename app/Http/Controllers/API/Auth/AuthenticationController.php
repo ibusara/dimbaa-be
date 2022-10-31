@@ -7,8 +7,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group Authentication
+ *
+ * API endpoints for managing authentication
+ */
 class AuthenticationController extends Controller
 {
+
     /**
      * Register new user
      *
@@ -48,8 +54,16 @@ class AuthenticationController extends Controller
     }
 
     /**
-     * Login user
+     * Log in the user.
      *
+     * @bodyParam   email    string  required    The email of the  user.      Example: testuser@example.com
+     * @bodyParam   password    string  required    The password of the  user.   Example: secret
+     *
+     * @response {
+     *  "success": true,
+     *  "message": User login successfull
+     *  "access_token": "eyJ0eXA...",
+     * }
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
