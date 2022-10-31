@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Organizers;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,65 +9,59 @@ use App\Models\CordinatorMatchOfficial;
 use App\Models\Notification;
 use Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
+use App\Models\MatchCordinationDetail;
 
 class GeneralCoordinatorController extends BaseController
 {
-    public function matchResult(Request $request){
+    public function matchResult(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'extra_time_score' => 'nullable|array',
             'penalty' => 'nullable|array',
             'final_score' => 'nullable|array',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchResult = CordinatorMatchResult::firstOrCreate(['match_id' => $input['match']]);
-        if($request->has('extra_time_score')){
-            $validator = Validator::make($input, [
-                'extra_time_score.team1' =>'required|integer',
-                'extra_time_score.team2' =>'required|integer',
-                'extra_time_score.favour_of' =>'required|in:team1,team2',
+        if ($request->has('extra_time_score')) {
+            $request->validate([
+                'extra_time_score.team1' => 'required|integer',
+                'extra_time_score.team2' => 'required|integer',
+                'extra_time_score.favour_of' => 'required|in:team1,team2',
             ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
+
 
             $matchResult->extra_time_score = json_encode($input['extra_time_score']);
             $matchResult->update();
         }
 
-        if($request->has('penalty')){
-            $validator = Validator::make($input, [
-                'penalty.team1' =>'required|integer',
-                'penalty.team2' =>'required|integer',
-                'penalty.favour_of' =>'required|in:team1,team2',
+        if ($request->has('penalty')) {
+            $request->validate([
+                'penalty.team1' => 'required|integer',
+                'penalty.team2' => 'required|integer',
+                'penalty.favour_of' => 'required|in:team1,team2',
             ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
+
 
             $matchResult->penalty = json_encode($input['penalty']);
             $matchResult->update();
         }
 
-        if($request->has('final_score')){
-            $validator = Validator::make($input, [
-                'final_score.team1' =>'required|integer',
-                'final_score.team2' =>'required|integer',
-                'final_score.favour_of' =>'required|in:team1,team2',
+        if ($request->has('final_score')) {
+            $request->validate([
+                'final_score.team1' => 'required|integer',
+                'final_score.team2' => 'required|integer',
+                'final_score.favour_of' => 'required|in:team1,team2',
             ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
+
 
             $matchResult->final_score = json_encode($input['final_score']);
             $matchResult->update();
@@ -84,11 +78,12 @@ class GeneralCoordinatorController extends BaseController
         return $this->sendResponse($matchResult, "General Coordinartor Match Result updated");
     }
 
-    public function matchOfficials(Request $request){
+    public function matchOfficials(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'refree' => 'required|array',
             'refree.user' => 'required|integer',
@@ -112,19 +107,17 @@ class GeneralCoordinatorController extends BaseController
             'officer_for_marketing' => 'required|array',
             'officer_for_marketing.user' => 'required|integer',
             'officer_for_marketing.region' => 'string|max:512',
-            'media_officer' =>'required|array',
+            'media_officer' => 'required|array',
             'media_officer.user' => 'required|integer',
             'media_officer.region' => 'string|max:512',
-            'security_officer' =>'required|array',
+            'security_officer' => 'required|array',
             'security_officer.user' => 'required|integer',
             'security_officer' => 'required|array',
             'security_officer.user' => 'required|integer',
             'security_officer.region' => 'string|max:512',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $cordinatorOfficial = CordinatorMatchOfficial::firstOrCreate(['match_id' => $input['match']]);
         $cordinatorOfficial->update($input);
@@ -140,7 +133,8 @@ class GeneralCoordinatorController extends BaseController
         return $this->sendResponse($cordinatorOfficial, 'Match Official Conditions updated successfully');
     }
 
-    public function information(Request $request){
+    public function information(Request $request)
+    {
         $user = $request->user();
         $input = $request->only(
             'match',
@@ -149,13 +143,11 @@ class GeneralCoordinatorController extends BaseController
             'giant_screen',
         );
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
@@ -169,67 +161,67 @@ class GeneralCoordinatorController extends BaseController
         $notification->description = "Giant screen Information set";
         $notification->save();
 
-        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+        return $this->sendResponse($matchCordinator, 'Record is created');
     }
 
-    public function incident(Request $request){
+    public function incident(Request $request)
+    {
         $user = $request->user();
         $input = $request->only(
-            'match', 'incident'
+            'match',
+            'incident'
         );
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+        return $this->sendResponse($matchCordinator, 'Record is created');
     }
 
-    public function remarks(Request $request){
+    public function remarks(Request $request)
+    {
         $user = $request->user();
         $input = $request->only(
-            'match', 'remarks'
+            'match',
+            'remarks'
         );
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+        return $this->sendResponse($matchCordinator, 'Record is created');
     }
 
 
-    public function name(Request $request){
+    public function name(Request $request)
+    {
         $user = $request->user();
         $input = $request->only(
-            'match', 'name'
+            'match',
+            'name'
         );
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+        return $this->sendResponse($matchCordinator, 'Record is created');
     }
 }

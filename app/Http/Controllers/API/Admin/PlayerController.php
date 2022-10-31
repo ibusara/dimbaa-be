@@ -46,7 +46,7 @@ class PlayerController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
             'email' => 'required',
@@ -54,9 +54,7 @@ class PlayerController extends BaseController
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
         $input['user_id'] = $user->id;
         $input['team_id'] = $request->team;
         $player = Player::create($input);
@@ -93,15 +91,13 @@ class PlayerController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $input['team_id'] = $request->team;
         $player = $player->update($input);

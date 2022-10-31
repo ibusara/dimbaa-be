@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Officials;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 
@@ -13,11 +13,12 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class ReferringController extends BaseController
 {
-    public function referringTeam(Request $request){
+    public function referringTeam(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'refree' => 'nullable|array',
             'refree.user' => 'required|integer',
@@ -42,14 +43,12 @@ class ReferringController extends BaseController
             'additional_assistant_referee_1' => 'nullable|array',
             'additional_assistant_referee_1.user' => 'required|integer',
             'additional_assistant_referee_1.region' => 'string|max:512',
-            'additional_assistant_referee_2' =>'nullable|array',
+            'additional_assistant_referee_2' => 'nullable|array',
             'additional_assistant_referee_2.user' => 'required|integer',
             'additional_assistant_referee_2.region' => 'string|max:512'
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $referringTeam = ReferringTeam::firstOrCreate(['match_id' => $input['match']]);
         $referringTeam->update($input);

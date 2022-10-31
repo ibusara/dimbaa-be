@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Organizers;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -37,7 +37,7 @@ class MatchRecordController extends BaseController
         return $this->sendResponse($scoreboard, 'Scoreboard retrieved successfully.');
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,7 +50,7 @@ class MatchRecordController extends BaseController
         $input = $request->all();
 
 
-        // $validator = Validator::make($input, [
+        // $request->validate( [
         //     'tournament' => 'required|integer|exists:tournaments,id',
         //     'date' => 'required|date|after:yesterday',
         //     'home_team' => 'required|integer|exists:teams,id',
@@ -71,7 +71,7 @@ class MatchRecordController extends BaseController
 
 
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -84,7 +84,7 @@ class MatchRecordController extends BaseController
         $input = $request->all();
 
 
-        // $validator = Validator::make($input, [
+        // $request->validate( [
         //     'tournament' => 'required|integer|exists:tournaments,id',
         //     'date' => 'required|date|after:yesterday',
         //     'home_team' => 'required|integer|exists:teams,id',
@@ -120,19 +120,17 @@ class MatchRecordController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'tournament' => 'required|integer|exists:tournaments,id',
             'date' => 'required|date|after:yesterday',
             'home_team' => 'required|integer|exists:teams,id',
             'away_team' => 'required|integer|exists:teams,id',
-            'stadium' => 'required|integer|exists:stadia,id',//'
+            'stadium' => 'required|integer|exists:stadia,id', //'
             'city' => 'required|between:3,60',
             'round' => 'required|integer|between:1,100',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
         $matchRecord = new MatchRecord();
         $matchRecord->user_id = $user->id;
         $matchRecord->tournament_id = $request->tournament;
@@ -174,7 +172,7 @@ class MatchRecordController extends BaseController
     {
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             // 'period' => 'required|date',
             // 'home_team' => 'required|between:3,50',
             // 'away_team' => 'required|between:3,50',
@@ -183,9 +181,7 @@ class MatchRecordController extends BaseController
             // 'round' => 'required|integer',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchRecord->update($input);
 
@@ -198,7 +194,7 @@ class MatchRecordController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( MatchRecord $matchRecord)
+    public function destroy(MatchRecord $matchRecord)
     {
         $matchRecord->delete();
 

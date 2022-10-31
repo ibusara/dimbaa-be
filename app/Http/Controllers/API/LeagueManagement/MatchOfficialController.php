@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Officials;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,43 +12,38 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class MatchOfficialController extends BaseController
 {
-    public function matchResult(Request $request){
+    public function matchResult(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'halftime_score' => 'nullable|array',
             'final_score' => 'nullable|array',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchResult = MatchTeamResult::firstOrCreate(['match_id' => $input['match']]);
-        if($request->has('halftime_score')){
-            $validator = Validator::make($input, [
-                'halftime_score.team1' =>'required|integer',
-                'halftime_score.team2' =>'required|integer',
+        if ($request->has('halftime_score')) {
+            $request->validate([
+                'halftime_score.team1' => 'required|integer',
+                'halftime_score.team2' => 'required|integer',
             ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
+
 
             $matchResult->halftime_score = json_encode($input['halftime_score']);
             $matchResult->update();
         }
-        if($request->has('final_score')){
-            $validator = Validator::make($input, [
-                'final_score.team1' =>'required|integer',
-                'final_score.team2' =>'required|integer',
+        if ($request->has('final_score')) {
+            $request->validate([
+                'final_score.team1' => 'required|integer',
+                'final_score.team2' => 'required|integer',
             ]);
 
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
+
 
             $matchResult->final_score = json_encode($input['final_score']);
             $matchResult->update();
@@ -58,12 +53,13 @@ class MatchOfficialController extends BaseController
     }
 
 
-    public function matchOfficialAssistance(Request $request){
+    public function matchOfficialAssistance(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
         // info($input);
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'center_supervisor' => 'array|min:3',
             'commisioner' => 'array|min:3',
@@ -81,9 +77,7 @@ class MatchOfficialController extends BaseController
             'tel_number' => 'array'
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $equipmentCondition = MatchOfficialAssistant::firstOrCreate(['match_id' => $input['match']]);
         $equipmentCondition->update($input);

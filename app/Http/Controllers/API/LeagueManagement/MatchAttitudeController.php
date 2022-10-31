@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Officials;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 
 use App\Http\Controllers\Controller;
@@ -16,12 +16,13 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class MatchAttitudeController extends BaseController
 {
-    public function matchAttitudeCondition(Request $request){
+    public function matchAttitudeCondition(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'team1_players' => 'required|array|between:2,30',
             'team1_players.*' => 'integer|distinct|exists:players,id',
@@ -33,9 +34,7 @@ class MatchAttitudeController extends BaseController
             'away_team_players.*' => 'integer|distinct|exists:players,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchCondition = MatchPlayerCondition::firstOrCreate(['match_id' => $input['match']]);
         $matchCondition->team1_players = json_encode($input['team1_players']);
@@ -56,17 +55,18 @@ class MatchAttitudeController extends BaseController
     }
 
 
-    public function matchEquipmentCondition(Request $request){
+    public function matchEquipmentCondition(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
         // info($input);
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'ambulance.condition' => 'required|string|max:512',
             'ambulance.rewards' => 'required|string|max:512',
-            'ball_boys.condition' => 'required|string|max:512',//.Rule::exists('ball_boys'),
-            'ball_boys.rewards' => 'required|string|max:512',//.Rule::exists('ball_boys'),
+            'ball_boys.condition' => 'required|string|max:512', //.Rule::exists('ball_boys'),
+            'ball_boys.rewards' => 'required|string|max:512', //.Rule::exists('ball_boys'),
             'corner_flags.condition' => 'required|string|max:512',
             'corner_flags.rewards' => 'required|string|max:512',
 
@@ -80,9 +80,7 @@ class MatchAttitudeController extends BaseController
 
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $equipmentCondition = MatchEquipmentCondition::firstOrCreate(['match_id' => $input['match']]);
         $equipmentCondition->update($input);

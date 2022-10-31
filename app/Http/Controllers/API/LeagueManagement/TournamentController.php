@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Organizers;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,16 +34,14 @@ class TournamentController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'name' => 'required',
             'year' => 'required|integer|between:2000,3000'
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
         $input['user_id'] = $user->id;
-        $input['start_at'] =  date('Y-m-d',strtotime($request->start_at ?? '01-'.date('m').'-'.$request->year));
+        $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament = Tournament::create($input);
 
         return $this->sendResponse($tournament, 'Tournament created successfully.');
@@ -77,16 +75,14 @@ class TournamentController extends BaseController
     {
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'name' => 'required',
             'year' => 'required|integer|between:2000,3000'
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
 
-        $input['start_at'] =  date('Y-m-d',strtotime($request->start_at ?? '01-'.date('m').'-'.$request->year));
+
+        $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament->update($input);
 
         return $this->sendResponse($tournament, 'Tournament updated successfully.');

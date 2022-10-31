@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Officials;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,11 +13,12 @@ use App\Http\Controllers\API\BaseController as BaseController;
 class MatchPlayerController extends BaseController
 {
 
-    public function matchStartingPlayers(Request $request){
+    public function matchStartingPlayers(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'team1_starting' => 'required||array|between:2,30',
             'team1_starting.*' => 'integer|distinct|exists:players,id',
@@ -25,9 +26,7 @@ class MatchPlayerController extends BaseController
             'team2_starting.*' => 'integer|distinct|exists:players,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchPlayer = MatchTeamPlayer::firstOrCreate(['match_id' => $input['match']]);
         $matchPlayer->team1_starting = json_encode($input['team1_starting']);
@@ -46,11 +45,12 @@ class MatchPlayerController extends BaseController
     }
 
 
-    public function matchReservePlayers(Request $request){
+    public function matchReservePlayers(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'team1_reserve' => 'required||array|between:2,30',
             'team1_reserve.*' => 'integer|distinct|exists:players,id',
@@ -58,9 +58,7 @@ class MatchPlayerController extends BaseController
             'team2_reserve.*' => 'integer|distinct|exists:players,id',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchPlayer = MatchTeamPlayer::firstOrCreate(['match_id' => $input['match']]);
         $matchPlayer->team1_reserve = json_encode($input['team1_reserve']);
@@ -79,11 +77,12 @@ class MatchPlayerController extends BaseController
     }
 
 
-    public function matchSubstitutePlayer(Request $request){
+    public function matchSubstitutePlayer(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'team' => 'required||integer|between:1,2',
             'minute' => 'required|integer|between:1,130',
@@ -92,12 +91,10 @@ class MatchPlayerController extends BaseController
             'condition' => 'nullable',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $matchPlayer = MatchTeamPlayer::firstOrCreate(['match_id' => $input['match']]);
-        if($request->team == 1){
+        if ($request->team == 1) {
             $substitutions = $input;
             // $substitutions = array_merge( $substitutions, $input);
             $matchPlayer->team1_substitutions = json_encode((array)$substitutions);
@@ -107,11 +104,12 @@ class MatchPlayerController extends BaseController
         return $this->sendResponse($matchPlayer, 'Match Reserve Players successfully set');
     }
 
-    public function matchPlayerCaution(Request $request){
+    public function matchPlayerCaution(Request $request)
+    {
         $user = $request->user();
         $input = $request->all('match', 'team', 'minute', 'player', 'reasons', 'warning_card');
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'team' => 'required||integer',
             'minute' => 'required|integer|between:1,130',
@@ -120,9 +118,7 @@ class MatchPlayerController extends BaseController
             'reasons' => 'nullable',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
         $input['match_id'] = $input['match'];
         $input['player_id'] = $input['player'];
         $input['team_id'] = $input['team'];

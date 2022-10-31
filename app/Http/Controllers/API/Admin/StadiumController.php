@@ -24,11 +24,11 @@ class StadiumController extends BaseController
         $team = $request->input('team');
         $name = $request->input('name');
 
-        $stadia = Stadium::where( function($query) use ($search) {
+        $stadia = Stadium::where(function ($query) use ($search) {
             $query->where('name', 'LIKE', "%{$search}%");
-        })->when($name,function($query) use ($name) {
+        })->when($name, function ($query) use ($name) {
             $query->where('name', $name);
-        })->when($team,function($query) use ($team) {
+        })->when($team, function ($query) use ($team) {
             $query->where('team_id', $team);
         })->latest()->paginate($perPage);
 
@@ -46,15 +46,13 @@ class StadiumController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'team' => 'required|integer',//exists,team,id
+        $request->validate([
+            'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
             'region' => 'required|between:3,50',
         ]);
         info($input);
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
         $input['user_id'] = $user->id;
         $input['team_id'] = $request->team;
         $stadium = Stadium::create($input);
@@ -91,15 +89,13 @@ class StadiumController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'team' => 'required|integer',//exists,team,id
+        $request->validate([
+            'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
             'region' => 'required|between:3,50',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $input['team_id'] = $request->team;
         $stadium = $stadium->update($input);
@@ -113,7 +109,7 @@ class StadiumController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Stadium $stadium)
+    public function destroy(Stadium $stadium)
     {
         $stadium->delete();
 

@@ -22,11 +22,11 @@ class TeamController extends BaseController
         $search = $request->input('search');
         $name = $request->input('name');
 
-        $teams = Team::where( function($query) use ($search) {
+        $teams = Team::where(function ($query) use ($search) {
             $query->where('team_name', 'LIKE', "%{$search}%");
-        })->when($name,function($query) use ($name) {
+        })->when($name, function ($query) use ($name) {
             $query->where('team_name', $name);
-        }) ->latest()->paginate($perPage);
+        })->latest()->paginate($perPage);
 
         foreach ($teams as $team) {
             $team->players;
@@ -47,15 +47,13 @@ class TeamController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'stadium' => 'required|integer',//exists,stadium,id
+        $request->validate([
+            'stadium' => 'required|integer', //exists,stadium,id
             'team_name' => 'required|unique:teams|between:3,50',
             'region' => 'required|between:3,50',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
         $input['user_id'] = $user->id;
         $input['stadium_id'] = $request->stadium;
         $team = Team::create($input);
@@ -92,15 +90,13 @@ class TeamController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'stadium' => 'required|integer',//exists,stadium,id
+        $request->validate([
+            'stadium' => 'required|integer', //exists,stadium,id
             'team_name' => 'required|unique:teams|between:3,50',
             'region' => 'required|between:3,50',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $input['stadium_id'] = $request->stadium;
         $team = $team->update($input);

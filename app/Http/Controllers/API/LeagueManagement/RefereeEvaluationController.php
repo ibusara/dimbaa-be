@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Officials;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 
 use Illuminate\Http\Request;
@@ -13,12 +13,13 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class RefereeEvaluationController extends BaseController
 {
-    public function refereeEvaluation(Request $request){
+    public function refereeEvaluation(Request $request)
+    {
         $user = $request->user();
         $input = $request->all();
         // info($input);
 
-        $validator = Validator::make($input, [
+        $request->validate([
             'match' => 'required|exists:match_records,id',
             'area_of_improvements' => 'nullable|array',
             'area_of_improvements.*.area_of_improvements' => 'required|string',
@@ -28,9 +29,7 @@ class RefereeEvaluationController extends BaseController
             'positive_points.*.minutes' => 'integer',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $refereeEvaluation = RefereeEvaluation::firstOrCreate(['match_id' => $input['match']]);
         $refereeEvaluation->update($input);

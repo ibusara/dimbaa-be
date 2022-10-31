@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\TeamAdmin;
+namespace App\Http\Controllers\API\LeagueManagement;
 
 
 use Illuminate\Http\Request;
@@ -24,11 +24,11 @@ class TeamPlayerController extends BaseController
         $role = $request->input('role');
         $name = $request->input('name');
 
-        $players = Player::where( function($query) use ($search) {
+        $players = Player::where(function ($query) use ($search) {
             $query->where('name', 'LIKE', "%{$search}%");
-        })->when($name,function($query) use ($name) {
+        })->when($name, function ($query) use ($name) {
             $query->where('name', $name);
-        }) ->latest()->paginate($perPage);
+        })->latest()->paginate($perPage);
 
         return $this->sendResponse($players, 'Players retrieved successfully.');
     }
@@ -45,18 +45,16 @@ class TeamPlayerController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'team' => 'required|integer|exists:teams,id',//
+        $request->validate([
+            'team' => 'required|integer|exists:teams,id', //
             'name' => 'required|between:3,50',
-            'email' =>'required',
+            'email' => 'required',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
 
-        array_merge($input,[
+
+        array_merge($input, [
             'team_id' =>  $request->team, 'user_id' => $user->id,
             'rank' => 3,
         ]);
@@ -72,18 +70,14 @@ class TeamPlayerController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'team' => 'required|integer|exists:teams,id',//
+        $request->validate([
+            'team' => 'required|integer|exists:teams,id', //
             'name' => 'required|between:3,50',
-            'email' =>'required',
+            'email' => 'required',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        array_merge($input,[
+        array_merge($input, [
             'team_id' =>  $request->team, 'user_id' => $user->id,
             'rank' => 4
         ]);
@@ -97,18 +91,16 @@ class TeamPlayerController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'team' => 'required|integer|exists:teams,id',//
+        $request->validate([
+            'team' => 'required|integer|exists:teams,id', //
             'name' => 'required|between:3,50',
-            'email' =>'required',
+            'email' => 'required',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
 
-        array_merge($input,[
+
+        array_merge($input, [
             'team_id' =>  $request->team, 'user_id' => $user->id,
             'rank' => 2
         ]);
@@ -145,15 +137,13 @@ class TeamPlayerController extends BaseController
         $user = $request->user();
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'team' => 'required|integer',//exists,team,id
+        $request->validate([
+            'team' => 'required|integer', //exists,team,id
             'name' => 'required|between:3,50',
             'number' => 'required|integer|between:1,999',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+
 
         $input['team_id'] = $request->team;
         $player = $player->update($input);
