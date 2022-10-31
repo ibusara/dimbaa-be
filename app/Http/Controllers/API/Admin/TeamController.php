@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\Team;
 use Validator;
 
@@ -13,7 +13,7 @@ use Validator;
  *
  * API endpoints for managing teams
  */
-class TeamController extends BaseController
+class TeamController  extends Controller
 {
     /**
      * List Teams.
@@ -39,7 +39,7 @@ class TeamController extends BaseController
             $team->stadium;
         }
 
-        return $this->sendResponse($teams, 'Teams retrieved successfully.');
+        return response()->json($teams, 'Teams retrieved successfully.');
     }
 
     /**
@@ -64,7 +64,7 @@ class TeamController extends BaseController
         $input['stadium_id'] = $request->stadium;
         $team = Team::create($input);
 
-        return $this->sendResponse($team, 'Team created successfully.');
+        return response()->json($team, 'Team created successfully.');
     }
 
     /**
@@ -81,7 +81,7 @@ class TeamController extends BaseController
             return $this->sendError('Team not found.');
         }
 
-        return $this->sendResponse($team, 'Team retrieved successfully.');
+        return response()->json($team, 'Team retrieved successfully.');
     }
 
     /**
@@ -107,7 +107,7 @@ class TeamController extends BaseController
         $input['stadium_id'] = $request->stadium;
         $team = $team->update($input);
 
-        return $this->sendResponse($team, 'Team updated successfully.');
+        return response()->json($team, 'Team updated successfully.');
     }
 
     /**
@@ -120,6 +120,6 @@ class TeamController extends BaseController
     {
         $team->delete();
 
-        return $this->sendResponse([], 'Team deleted successfully.');
+        return response()->json([], 'Team deleted successfully.');
     }
 }

@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\ReferringTeam;
 use App\Models\MatchCordinationDetail;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
-class ReferringController extends BaseController
+
+class ReferringController  extends Controller
 {
     public function referringTeam(Request $request)
     {
@@ -61,6 +60,6 @@ class ReferringController extends BaseController
         $notification->description = "Referee Assessor";
         $notification->save();
 
-        return $this->sendResponse($referringTeam, 'Record is created');
+        return response()->json($referringTeam, 'Record is created');
     }
 }

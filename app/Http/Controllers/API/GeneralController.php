@@ -4,11 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
 
 use App\Models\Notification;
 
-class GeneralController extends BaseController
+class GeneralController  extends Controller
 {
     /**
      * Display all notifications per role.
@@ -24,6 +23,6 @@ class GeneralController extends BaseController
         $notifications = Notification::where('role_id', $user->role_id)
             ->latest()->paginate($perPage);
 
-        return $this->sendResponse($notifications, 'Notification retrieved successfully.');
+        return response()->json($notifications, 'Notification retrieved successfully.');
     }
 }

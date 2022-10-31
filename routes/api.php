@@ -9,9 +9,9 @@ use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\GeneralController;
 use App\Http\Controllers\API\LeagueDirector\PostMatchReportController;
 use App\Http\Controllers\API\LeagueDirector\PreMatchReportController;
+use App\Http\Controllers\API\LeagueManagement\LineupFormController;
 use App\Http\Controllers\API\LeagueManagement\MatchRecordController;
 use App\Http\Controllers\API\LeagueManagement\PlayerController;
-use App\Http\Controllers\API\LeagueManagement\TeamPlayerController;
 use App\Http\Controllers\API\LeagueManagement\TournamentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -61,12 +61,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         Route::prefix('teammanager')->name('teammanager.')->group(function () {
             Route::apiResource('players', PlayerController::class);
-            Route::post('team-players/beginner', [TeamPlayerController::class, 'beginner']);
-            Route::post('team-players/reserve', [TeamPlayerController::class, 'reserve']);
-            Route::post('team-players/leaders', [TeamPlayerController::class, 'leaders']);
-
-            Route::post('team-players/detail', [App\Http\Controllers\API\LeagueManagement\LineupFormController::class, 'detail']);
-            Route::post('team-players/submit', [App\Http\Controllers\API\LeagueManagement\LineupFormController::class, 'submission']);
+            Route::post('team-players/detail', [LineupFormController::class, 'detail']);
+            Route::post('team-players/submit', [LineupFormController::class, 'submission']);
         });
 
         Route::prefix('organizers')->name('organizers.')->group(function () {

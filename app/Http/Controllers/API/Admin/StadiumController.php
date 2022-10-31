@@ -4,10 +4,9 @@ namespace App\Http\Controllers\API\Admin;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\Stadium;
 use Illuminate\Support\Facades\Storage;
-use Validator;
 
 /**
  * @group Stadium Management
@@ -15,7 +14,7 @@ use Validator;
  *
  * API endpoints for managing stadiums
  */
-class StadiumController extends BaseController
+class StadiumController extends Controller
 {
     /**
      * List stadiums.
@@ -137,6 +136,6 @@ class StadiumController extends BaseController
     {
         $stadium->delete();
 
-        return $this->sendResponse([], 'Stadium deleted successfully.');
+        return response()->json([], 'Stadium deleted successfully.');
     }
 }

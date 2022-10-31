@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\MatchCordination;
 use App\Models\MatchCordinationDetail;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
 
-class CoordinatorDetailsController extends BaseController
+class CoordinatorDetailsController  extends Controller
 {
     public function coordinationMeeting(Request $request)
     {
@@ -42,7 +40,7 @@ class CoordinatorDetailsController extends BaseController
         $notification->description = "Match Cordination updated succesfully";
         $notification->save();
 
-        return $this->sendResponse($cordinatorOfficial, 'Record is created');
+        return response()->json($cordinatorOfficial, 'Record is created');
     }
 
     public function playFair(Request $request)
@@ -74,7 +72,7 @@ class CoordinatorDetailsController extends BaseController
         $notification->description = "Match Cordination updated succesfully";
         $notification->save();
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
 
@@ -108,7 +106,7 @@ class CoordinatorDetailsController extends BaseController
         $notification->description = "Match Cordination updated succesfully";
         $notification->save();
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
 
@@ -138,7 +136,7 @@ class CoordinatorDetailsController extends BaseController
         $notification->description = "Cordination Incident Recorded";
         $notification->save();
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
 
@@ -160,7 +158,7 @@ class CoordinatorDetailsController extends BaseController
         $matchCordinator->update($input);
 
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
     public function dressingRoom(Request $request)
@@ -181,7 +179,7 @@ class CoordinatorDetailsController extends BaseController
         $matchCordinator->update($input);
 
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
 
@@ -215,6 +213,6 @@ class CoordinatorDetailsController extends BaseController
         $notification->description = "Strecher and Ambulance Information set";
         $notification->save();
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 }

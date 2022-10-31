@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\CordinatorMatchResult;
 use App\Models\CordinatorMatchOfficial;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
+
 use App\Models\MatchCordinationDetail;
 
-class GeneralCoordinatorController extends BaseController
+class GeneralCoordinatorController  extends Controller
 {
     public function matchResult(Request $request)
     {
@@ -75,7 +74,7 @@ class GeneralCoordinatorController extends BaseController
         $notification->description = "General Coordinartor Match Result updated";
         $notification->save();
 
-        return $this->sendResponse($matchResult, "General Coordinartor Match Result updated");
+        return response()->json($matchResult, "General Coordinartor Match Result updated");
     }
 
     public function matchOfficials(Request $request)
@@ -130,7 +129,7 @@ class GeneralCoordinatorController extends BaseController
         $notification->description = "Match Official Condition set";
         $notification->save();
 
-        return $this->sendResponse($cordinatorOfficial, 'Match Official Conditions updated successfully');
+        return response()->json($cordinatorOfficial, 'Match Official Conditions updated successfully');
     }
 
     public function information(Request $request)
@@ -161,7 +160,7 @@ class GeneralCoordinatorController extends BaseController
         $notification->description = "Giant screen Information set";
         $notification->save();
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
     public function incident(Request $request)
@@ -181,7 +180,7 @@ class GeneralCoordinatorController extends BaseController
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
     public function remarks(Request $request)
@@ -201,7 +200,7 @@ class GeneralCoordinatorController extends BaseController
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 
 
@@ -222,6 +221,6 @@ class GeneralCoordinatorController extends BaseController
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return $this->sendResponse($matchCordinator, 'Record is created');
+        return response()->json($matchCordinator, 'Record is created');
     }
 }

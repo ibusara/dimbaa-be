@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Evaluation\RefereeEvaluation;
 use App\Models\MatchCordinationDetail;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
 
-class RefereeEvaluationController extends BaseController
+
+class RefereeEvaluationController  extends Controller
 {
     public function refereeEvaluation(Request $request)
     {
@@ -42,6 +41,6 @@ class RefereeEvaluationController extends BaseController
         $notification->description = "Referee Assessor";
         $notification->save();
 
-        return $this->sendResponse($refereeEvaluation, 'Record is created');
+        return response()->json($refereeEvaluation, 'Record is created');
     }
 }

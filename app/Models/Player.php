@@ -10,11 +10,19 @@ class Player extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'number',
-        'email',
-        'mobile',
         'team_id',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'local_id',
+        'fifa_id',
+        'playing_position',
+        'weight',
+        'height',
+        'nationality',
+        'dob',
+        'professional_date',
+        'jersey_number',
         'signature',
         'license_no',
         'rank'

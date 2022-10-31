@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\MatchTeamPlayer;
 use App\Models\MatchPlayerCaution;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
-class MatchPlayerController extends BaseController
+
+class MatchPlayerController  extends Controller
 {
 
     public function matchStartingPlayers(Request $request)
@@ -41,7 +40,7 @@ class MatchPlayerController extends BaseController
         $notification->description = "Match Starting Players set";
         $notification->save();
 
-        return $this->sendResponse($matchPlayer, 'Match Starting Players successfully set');
+        return response()->json($matchPlayer, 'Match Starting Players successfully set');
     }
 
 
@@ -73,7 +72,7 @@ class MatchPlayerController extends BaseController
         $notification->description = "Match Reserve Players set";
         $notification->save();
 
-        return $this->sendResponse($matchPlayer, 'Match Reserve Players successfully set');
+        return response()->json($matchPlayer, 'Match Reserve Players successfully set');
     }
 
 
@@ -101,7 +100,7 @@ class MatchPlayerController extends BaseController
             $matchPlayer->update();
         }
 
-        return $this->sendResponse($matchPlayer, 'Match Reserve Players successfully set');
+        return response()->json($matchPlayer, 'Match Reserve Players successfully set');
     }
 
     public function matchPlayerCaution(Request $request)
@@ -124,6 +123,6 @@ class MatchPlayerController extends BaseController
         $input['team_id'] = $input['team'];
         $playerCaution = MatchPlayerCaution::create($input);
 
-        return $this->sendResponse($playerCaution, 'Player Warning Disciplinary action has been set  ');
+        return response()->json($playerCaution, 'Player Warning Disciplinary action has been set  ');
     }
 }

@@ -5,11 +5,10 @@ namespace App\Http\Controllers\API\LeagueManagement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tournament;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
 
-class TournamentController extends BaseController
+
+class TournamentController  extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +19,7 @@ class TournamentController extends BaseController
     {
         $tournaments = Tournament::all();
 
-        return $this->sendResponse($tournaments, 'Tournament retrieved successfully.');
+        return response()->json($tournaments, 'Tournament retrieved successfully.');
     }
 
     /**
@@ -44,7 +43,7 @@ class TournamentController extends BaseController
         $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament = Tournament::create($input);
 
-        return $this->sendResponse($tournament, 'Tournament created successfully.');
+        return response()->json($tournament, 'Tournament created successfully.');
     }
 
     /**
@@ -61,7 +60,7 @@ class TournamentController extends BaseController
             return $this->sendError('Tournament not found.');
         }
 
-        return $this->sendResponse($tournament, 'Tournament retrieved successfully.');
+        return response()->json($tournament, 'Tournament retrieved successfully.');
     }
 
     /**
@@ -85,7 +84,7 @@ class TournamentController extends BaseController
         $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament->update($input);
 
-        return $this->sendResponse($tournament, 'Tournament updated successfully.');
+        return response()->json($tournament, 'Tournament updated successfully.');
     }
 
     /**
@@ -99,6 +98,6 @@ class TournamentController extends BaseController
         return null;
         // $tournament->delete();
 
-        // return $this->sendResponse([], 'Tournament deleted successfully.');
+        // return response()->json([], 'Tournament deleted successfully.');
     }
 }

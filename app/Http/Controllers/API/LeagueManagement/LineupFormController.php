@@ -2,35 +2,32 @@
 
 namespace App\Http\Controllers\API\LeagueManagement;
 
-use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\LineupForm;
-use Validator;
 
-class LineupFormController extends BaseController
+class LineupFormController  extends Controller
 {
 
 
     public function detail(Request $request)
     {
-        $user = $request->user();
         $input = $request->only(['team', 'competition', 'date', 'game_no']);
 
         $request->validate([
-            'team' => 'required|integer|exists:teams,id',
+            'team_id' => 'required|integer|exists:teams,id',
             'competition' => 'required|integer'
         ]);
 
         $lineup = LineupForm::firstOrCreate(
-            ['competition_id' => $request->competition, 'team_id' => $request->team]
+            ['competition_id' => $request->competition, 'team_id' => $request->team_id]
         );
 
-        array_merge($input, ['competion_id' => $request->competition, 'team_id' => $request->team, 'detail_date' => $request->date]);
+        array_merge($input, ['competion_id' => $request->competition, 'team_id' => $request->team_id, 'detail_date' => $request->date]);
 
         $lineup = $lineup->update($input);
 
-        return $this->sendResponse($lineup, 'Lineup Details updated successfully.');
+        return response()->json($lineup, 'Lineup Details updated successfully.');
     }
 
     public function submission(Request $request)
@@ -49,6 +46,6 @@ class LineupFormController extends BaseController
         $input['team_id'] = $request->team;
         $lineup = $lineup->update($input);
 
-        return $this->sendResponse($lineup, 'Lineup Submission updated successfully.');
+        return response()->json($lineup, 'Lineup Submission updated successfully.');
     }
 }

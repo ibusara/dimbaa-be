@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\MatchTeamResult;
 use App\Models\MatchOfficialAssistant;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
-class MatchOfficialController extends BaseController
+
+class MatchOfficialController  extends Controller
 {
     public function matchResult(Request $request)
     {
@@ -49,7 +48,7 @@ class MatchOfficialController extends BaseController
             $matchResult->update();
         }
 
-        return $this->sendResponse($matchResult, 'Match Result updated successfully.');
+        return response()->json($matchResult, 'Match Result updated successfully.');
     }
 
 
@@ -90,6 +89,6 @@ class MatchOfficialController extends BaseController
         $notification->description = "Match Players Condition set";
         $notification->save();
 
-        return $this->sendResponse($equipmentCondition, 'Match Equipment Conditions updated successfully');
+        return response()->json($equipmentCondition, 'Match Equipment Conditions updated successfully');
     }
 }

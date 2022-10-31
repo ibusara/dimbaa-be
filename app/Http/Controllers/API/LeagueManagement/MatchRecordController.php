@@ -8,10 +8,9 @@ use App\Models\MatchRecord;
 use App\Models\MatchOfficial;
 use App\Models\MatchScoreBoard;
 use App\Models\Notification;
-use Validator;
-use App\Http\Controllers\API\BaseController as BaseController;
 
-class MatchRecordController extends BaseController
+
+class MatchRecordController  extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +21,7 @@ class MatchRecordController extends BaseController
     {
         $matchRecord = MatchRecord::all();
 
-        return $this->sendResponse($matchRecord, 'Match Record retrieved successfully.');
+        return response()->json($matchRecord, 'Match Record retrieved successfully.');
     }
 
     /**
@@ -34,7 +33,7 @@ class MatchRecordController extends BaseController
     {
         $scoreboard = MatchScoreBoard::get();
 
-        return $this->sendResponse($scoreboard, 'Scoreboard retrieved successfully.');
+        return response()->json($scoreboard, 'Scoreboard retrieved successfully.');
     }
 
     /**
@@ -66,7 +65,7 @@ class MatchRecordController extends BaseController
 
         $matchOfficial->update($input);
 
-        return $this->sendResponse($matchOfficial, 'Match Officials updated successfully.');
+        return response()->json($matchOfficial, 'Match Officials updated successfully.');
     }
 
 
@@ -107,7 +106,7 @@ class MatchRecordController extends BaseController
         $notification->category = "match";
         $notification->description = "Scoreboard has been updated";
         $notification->save();
-        return $this->sendResponse($matchOfficial, 'Match Scoreboard updated successfully.');
+        return response()->json($matchOfficial, 'Match Scoreboard updated successfully.');
     }
     /**
      * Store a newly created resource in storage.
@@ -141,7 +140,7 @@ class MatchRecordController extends BaseController
         $matchRecord->date = $request->date;
         $matchRecord->round = $request->round;
         $matchRecord->save();
-        return $this->sendResponse($matchRecord, 'Match Record created successfully.');
+        return response()->json($matchRecord, 'Match Record created successfully.');
     }
 
     /**
@@ -158,7 +157,7 @@ class MatchRecordController extends BaseController
             return $this->sendError('Match Record not found.');
         }
 
-        return $this->sendResponse($matchRecord, 'Match Record retrieved successfully.');
+        return response()->json($matchRecord, 'Match Record retrieved successfully.');
     }
 
     /**
@@ -185,7 +184,7 @@ class MatchRecordController extends BaseController
 
         $matchRecord->update($input);
 
-        return $this->sendResponse($matchRecord, 'Match Record updated successfully.');
+        return response()->json($matchRecord, 'Match Record updated successfully.');
     }
 
     /**
@@ -198,6 +197,6 @@ class MatchRecordController extends BaseController
     {
         $matchRecord->delete();
 
-        return $this->sendResponse([], 'Match Record deleted successfully.');
+        return response()->json([], 'Match Record deleted successfully.');
     }
 }

@@ -8,13 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\MatchPlayerCondition;
 use App\Models\MatchEquipmentCondition;
 use App\Models\Notification;
-use Validator;
-use Illuminate\Validation\Rule;
-use App\Http\Controllers\API\BaseController as BaseController;
 
 
-
-class MatchAttitudeController extends BaseController
+class MatchAttitudeController  extends Controller
 {
     public function matchAttitudeCondition(Request $request)
     {
@@ -51,7 +47,7 @@ class MatchAttitudeController extends BaseController
         $notification->description = "Match Players Condition set";
         $notification->save();
 
-        return $this->sendResponse($matchCondition, 'Match Players Conditions successfully set');
+        return response()->json($matchCondition, 'Match Players Conditions successfully set');
     }
 
 
@@ -93,6 +89,6 @@ class MatchAttitudeController extends BaseController
         $notification->description = "Match Players Condition set";
         $notification->save();
 
-        return $this->sendResponse($equipmentCondition, 'Match Equipment Conditions updated successfully');
+        return response()->json($equipmentCondition, 'Match Equipment Conditions updated successfully');
     }
 }

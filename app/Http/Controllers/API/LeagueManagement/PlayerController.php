@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Player;
 use Validator;
 
@@ -14,7 +13,7 @@ use Validator;
  *
  * API endpoints for managing players
  */
-class PlayerController extends BaseController
+class PlayerController  extends Controller
 {
     /**
      * List players.
@@ -41,25 +40,45 @@ class PlayerController extends BaseController
      */
     public function store(Request $request)
     {
-        $user = $request->user();
-        $input = $request->all();
-
         $request->validate([
             'team_id' => 'required|integer|exists,teams,id',
-            'name' => 'required|string',
-            'email' => 'required',
-            'mobile' => 'required',
-            'number' => 'required|integer',
+            'first_name' => 'required|string',
+            'middle_name' => 'required|string',
+            'last_name' => 'required|string',
+            'local_id' => 'required|integer',
+            'fifa_id' => 'required|integer',
+            'playing_position' => 'required|integer',
+            'weight' => 'required',
+            'height' => 'required',
+            'nationality' => 'required',
+            'dob' => 'required|date_format:YYYY-MM-DD',
+            'professional_date' => 'required|date_format:YYYY-MM-DD',
+            'jersey_number' => 'required|integer',
+            'license_no' => 'nullable',
+            'rank' => 'nullable',
         ]);
 
-
-        $input['user_id'] = $user->id;
-        $input['team_id'] = $request->team;
+        $signature = strtoupper(substr($request->first_name, 0, 1) . '.' . substr($request->middle_name, 0, 1)) . '.' . ucwords($request->last_name);
         $player = Player::create([
-            
+            'team_id' => $request->team_id,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'local_id' => $request->local_id,
+            'fifa_id'  => $request->fifa_id,
+            'playing_position' => $request->playing_position,
+            'weight' => $request->weight,
+            'height' => $request->height,
+            'nationality' => $request->nationality,
+            'dob' => $request->dob,
+            'professional_date' => $request->professional_date,
+            'jersey_number' => $request->jersey_number,
+            'signature' => $signature,
+            'license_no' => $request->license_no,
+            'rank' => $request->rank
         ]);
 
-        return $this->sendResponse($player, 'Player created successfully.');
+        return response()->json($player, 'Player created successfully.');
     }
 
     /**
@@ -68,15 +87,9 @@ class PlayerController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Player $player)
     {
-        $player = Player::find($id);
-
-        if (is_null($player)) {
-            return $this->sendError('Player not found.');
-        }
-
-        return $this->sendResponse($player, 'Player retrieved successfully.');
+        return response()->json($player, 'Player retrieved successfully.');
     }
 
     /**
@@ -102,7 +115,7 @@ class PlayerController extends BaseController
         $input['team_id'] = $request->team;
         $player = $player->update($input);
 
-        return $this->sendResponse($player, 'Player updated successfully.');
+        return response()->json($player, 'Player updated successfully.');
     }
 
     /**
@@ -115,6 +128,6 @@ class PlayerController extends BaseController
     {
         $player->delete();
 
-        return $this->sendResponse([], 'Player deleted successfully.');
+        return response()->json([], 'Player deleted successfully.');
     }
 }

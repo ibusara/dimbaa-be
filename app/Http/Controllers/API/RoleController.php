@@ -1,14 +1,14 @@
 <?php
-   
+
 namespace App\Http\Controllers\API;
-   
+
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Validator;
 use App\Http\Resources\RoleResource;
-   
-class RoleController extends BaseController
+
+class RoleController  extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,7 @@ class RoleController extends BaseController
     public function index()
     {
         $roles = Role::all();
-    
-        return $this->sendResponse(RoleResource::collection($roles), 'Roles retrieved successfully.');
+
+        return response()->json(RoleResource::collection($roles), 'Roles retrieved successfully.');
     }
-   
-   
-   
 }
