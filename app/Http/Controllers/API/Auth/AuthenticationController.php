@@ -20,6 +20,7 @@ class AuthenticationController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'phone'=> 'required|unique:users,phone',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
@@ -27,6 +28,7 @@ class AuthenticationController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password)
         ]);
 
