@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\LeagueDirector\PostMatchReportController;
 use App\Http\Controllers\API\LeagueDirector\PreMatchReportController;
 use App\Http\Controllers\API\Organizers\MatchRecordController;
 use App\Http\Controllers\API\Organizers\TournamentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\RegisterController;
-use App\Http\Controllers\API\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +30,12 @@ Route::any('/', function (Request $request) {
     ], 200);
 });
 
-Route::prefix('authentication')->group(function () {
-    Route::post('register', [RegisterController::class, 'register']);
-    Route::post('login', [RegisterController::class, 'login']);
+Route::prefix('auth')->group(function () {
+    Route::post('register', [AuthenticationController::class, 'register']);
+    Route::post('login', [AuthenticationController::class, 'login']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:api')->group(function () {
 
     Route::get('notifications', [App\Http\Controllers\API\GeneralController::class, 'notifications']);
 
