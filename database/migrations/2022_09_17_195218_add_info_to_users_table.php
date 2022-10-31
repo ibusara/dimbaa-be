@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->integer('mobile')->nullable();
             $table->integer('status')->default(1);
         });
     }
