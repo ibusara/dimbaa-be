@@ -20,7 +20,7 @@ class AuthenticationController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'phone'=> 'required|unique:users,phone',
+            'phone'=> 'required|integer|unique:users,phone',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
