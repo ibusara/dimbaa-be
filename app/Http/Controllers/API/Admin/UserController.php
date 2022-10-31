@@ -111,7 +111,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete user.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
