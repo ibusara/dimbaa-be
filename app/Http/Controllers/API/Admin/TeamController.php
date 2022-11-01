@@ -43,6 +43,8 @@ class TeamController  extends Controller
             'stadium_id' => 'required|integer|exists:stadia,id',
             'name' => 'required|unique:teams,name',
             'region' => 'required',
+        ], [
+            'stadium_id.exists' => 'Selected stadium does not exist!'
         ]);
 
         $team = Team::create([
@@ -53,7 +55,7 @@ class TeamController  extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Teams created successfully!',
+            'message' => 'Team created successfully!',
             'team' => $team
         ], 200);
     }
@@ -86,6 +88,8 @@ class TeamController  extends Controller
             'stadium_id' => 'required|integer|exists:stadia,id',
             'name' => 'required|unique:teams,name,except,' . $team->id,
             'region' => 'required',
+        ], [
+            'stadium_id.exists' => 'Selected stadium does not exist!'
         ]);
 
         $team->update([
