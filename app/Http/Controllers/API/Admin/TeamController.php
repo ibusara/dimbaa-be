@@ -86,7 +86,7 @@ class TeamController  extends Controller
     {
         $request->validate([
             'stadium_id' => 'required|integer|exists:stadia,id',
-            'name' => 'required|unique:teams,name,except,' . $team->id,
+            'name' => 'required|unique:teams,name,' . $team->id,
             'region' => 'required',
         ], [
             'stadium_id.exists' => 'Selected stadium does not exist!'

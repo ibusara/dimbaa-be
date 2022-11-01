@@ -96,7 +96,7 @@ class StadiumController extends Controller
     public function update(Request $request, Stadium $stadium)
     {
         $request->validate([
-            'name' => 'required|unique:stadia,name,except,' . $stadium->id,
+            'name' => 'required|unique:stadia,name,' . $stadium->id,
             'region' => 'required',
             'location' => 'required',
             'capacity' => 'required|integer',
