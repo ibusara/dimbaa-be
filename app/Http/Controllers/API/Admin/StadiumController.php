@@ -44,10 +44,10 @@ class StadiumController extends Controller
             'name' => 'required|unique:stadia,name',
             'region' => 'required',
             'location' => 'required',
-            'capacity' => 'required|numeric',
+            'capacity' => 'required|integer',
             'stadium_owner' => 'required|string',
             'stadium_picture' => 'required|image|mimes:jpeg,png,jpg',
-            'inauguration_date' => 'required'
+            'inauguration_date' => 'required|date_format:YYYY-MM-DD'
         ]);
 
         $filename = time() . '.' . $request->stadium_picture->getClientOriginalExtension();
@@ -96,13 +96,13 @@ class StadiumController extends Controller
     public function update(Request $request, Stadium $stadium)
     {
         $request->validate([
-            'name' => 'required|unique:stadia,name',
+            'name' => 'required|unique:stadia,name,except,' . $stadium->id,
             'region' => 'required',
             'location' => 'required',
-            'capacity' => 'required|numeric',
+            'capacity' => 'required|integer',
             'stadium_owner' => 'required|string',
-            'stadium_picture' => 'required|mimes:jpeg,png,jpg',
-            'inauguration_date' => 'required'
+            'stadium_picture' => 'required|image|mimes:jpeg,png,jpg',
+            'inauguration_date' => 'required|date_format:YYYY-MM-DD'
         ]);
 
         $filename = time() . '.' . $request->stadium_picture->getClientOriginalExtension();
