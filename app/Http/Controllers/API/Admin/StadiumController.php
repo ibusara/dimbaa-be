@@ -47,7 +47,7 @@ class StadiumController extends Controller
             'capacity' => 'required|integer',
             'stadium_owner' => 'required|string',
             'stadium_picture' => 'required|image|mimes:jpeg,png,jpg',
-            'inauguration_date' => 'required|date_format:YYYY-MM-DD'
+            'inauguration_date' => 'required|date'
         ]);
 
         $filename = time() . '.' . $request->stadium_picture->getClientOriginalExtension();
@@ -102,7 +102,7 @@ class StadiumController extends Controller
             'capacity' => 'required|integer',
             'stadium_owner' => 'required|string',
             'stadium_picture' => 'required|image|mimes:jpeg,png,jpg',
-            'inauguration_date' => 'required|date_format:YYYY-MM-DD'
+            'inauguration_date' => 'required|date'
         ]);
 
         $filename = time() . '.' . $request->stadium_picture->getClientOriginalExtension();
