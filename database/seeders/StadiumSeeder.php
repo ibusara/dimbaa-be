@@ -15,6 +15,8 @@ class StadiumSeeder extends Seeder
      */
     public function run()
     {
-        $stadiums = Stadium::factory()->count(20)->make();
+        Stadium::factory()
+            ->count(50)
+            ->create();
     }
 }
