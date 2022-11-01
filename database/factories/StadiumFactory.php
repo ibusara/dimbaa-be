@@ -25,7 +25,7 @@ class StadiumFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'region' => $this->faker->text,
+            'region' => $this->faker->name,
             'location' => $this->faker->name,
             'capacity' => $this->faker->randomFloat(4),
             'stadium_owner' => $this->faker->name,
