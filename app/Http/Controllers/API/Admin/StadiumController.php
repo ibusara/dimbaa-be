@@ -66,7 +66,7 @@ class StadiumController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Stadiup saved successfully!',
+            'message' => 'Stadium saved successfully!',
             'stadium' => $stadium
         ], 200);
     }
@@ -121,7 +121,7 @@ class StadiumController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Stadiup updated successfully!',
+            'message' => 'Stadium updated successfully!',
             'stadium' => $stadium
         ], 200);
     }
