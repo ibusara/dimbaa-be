@@ -53,7 +53,6 @@ class PlayerController  extends Controller
             'dob' => 'required|date',
             'professional_date' => 'required|date',
             'jersey_number' => 'required|integer',
-            'license_no' => 'nullable',
             'rank' => 'nullable',
         ]);
 
@@ -73,7 +72,6 @@ class PlayerController  extends Controller
             'professional_date' => $request->professional_date,
             'jersey_number' => $request->jersey_number,
             'signature' => $signature,
-            'license_no' => $request->license_no,
             'rank' => $request->rank
         ]);
 
@@ -118,7 +116,6 @@ class PlayerController  extends Controller
             'dob' => 'required|date',
             'professional_date' => 'required|date',
             'jersey_number' => 'required|integer',
-            'license_no' => 'nullable',
             'rank' => 'nullable',
         ]);
 
@@ -138,7 +135,6 @@ class PlayerController  extends Controller
             'professional_date' => $request->professional_date,
             'jersey_number' => $request->jersey_number,
             'signature' => $signature,
-            'license_no' => $request->license_no,
             'rank' => $request->rank
         ]);
 

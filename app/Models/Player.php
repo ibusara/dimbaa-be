@@ -24,7 +24,6 @@ class Player extends Model
         'professional_date',
         'jersey_number',
         'signature',
-        'license_no',
         'rank'
     ];
 }

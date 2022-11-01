@@ -29,7 +29,6 @@ return new class extends Migration
             $table->date('dob')->nullable();
             $table->date('professional_date');
             $table->string('signature', 100);
-            $table->string('license_no', 100)->nullable();
             $table->string('rank', 100)->nullable();
             $table->timestamps();
         });
