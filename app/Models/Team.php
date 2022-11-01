@@ -10,17 +10,18 @@ class Team extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'team_name',
         'stadium_id',
+        'name',
         'region'
     ];
 
-    public function stadium(){
+    public function stadium()
+    {
         return  $this->hasOne('App\Models\Stadium');
     }
 
-    public function players(){
+    public function players()
+    {
         return  $this->hasMany('App\Models\Player');
     }
 }

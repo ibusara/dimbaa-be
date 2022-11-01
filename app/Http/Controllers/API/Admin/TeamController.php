@@ -22,24 +22,13 @@ class TeamController  extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 100);
-        $sortBy = $request->input('sort_by', 'asc');
+        $teams = Team::get();
 
-        $search = $request->input('search');
-        $name = $request->input('name');
-
-        $teams = Team::where(function ($query) use ($search) {
-            $query->where('team_name', 'LIKE', "%{$search}%");
-        })->when($name, function ($query) use ($name) {
-            $query->where('team_name', $name);
-        })->latest()->paginate($perPage);
-
-        foreach ($teams as $team) {
-            $team->players;
-            $team->stadium;
-        }
-
-        return response()->json($teams, 'Teams retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Teams retrieved successfully!',
+            'teams' => $teams
+        ], 200);
     }
 
     /**
@@ -50,21 +39,23 @@ class TeamController  extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user();
-        $input = $request->all();
-
         $request->validate([
-            'stadium' => 'required|integer', //exists,stadium,id
-            'team_name' => 'required|unique:teams|between:3,50',
-            'region' => 'required|between:3,50',
+            'stadium_id' => 'required|integer|exists,stadium,id',
+            'name' => 'required|unique:teams,name',
+            'region' => 'required',
         ]);
 
+        $team = Team::create([
+            'stadium_id' => $request->stadium_id,
+            'name' => $request->name,
+            'region' => $request->region
+        ]);
 
-        $input['user_id'] = $user->id;
-        $input['stadium_id'] = $request->stadium;
-        $team = Team::create($input);
-
-        return response()->json($team, 'Team created successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Teams created successfully!',
+            'team' => $team
+        ], 200);
     }
 
     /**
@@ -73,15 +64,13 @@ class TeamController  extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Team $team)
     {
-        $team = Team::find($id);
-
-        if (is_null($team)) {
-            return $this->sendError('Team not found.');
-        }
-
-        return response()->json($team, 'Team retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Teams retrieved successfully!',
+            'team' => $team
+        ], 200);
     }
 
     /**
@@ -93,21 +82,23 @@ class TeamController  extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        $user = $request->user();
-        $input = $request->all();
-
         $request->validate([
-            'stadium' => 'required|integer', //exists,stadium,id
-            'team_name' => 'required|unique:teams|between:3,50',
-            'region' => 'required|between:3,50',
+            'stadium_id' => 'required|integer|exists,stadium,id',
+            'name' => 'required|unique:teams,name,except,' . $team->id,
+            'region' => 'required',
         ]);
 
+        $team->update([
+            'stadium_id' => $request->stadium_id,
+            'name' => $request->name,
+            'region' => $request->region
+        ]);
 
-
-        $input['stadium_id'] = $request->stadium;
-        $team = $team->update($input);
-
-        return response()->json($team, 'Team updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Teams updated successfully!',
+            'team' => $team
+        ], 200);
     }
 
     /**
