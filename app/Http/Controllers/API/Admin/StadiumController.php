@@ -46,7 +46,7 @@ class StadiumController extends Controller
             'location' => 'required',
             'capacity' => 'required|numeric',
             'stadium_owner' => 'required|string',
-            'stadium_picture' => 'required|mimes:jpeg,png,jpg',
+            'stadium_picture' => 'required|image|mimes:jpeg,png,jpg',
             'inauguration_date' => 'required'
         ]);
 
