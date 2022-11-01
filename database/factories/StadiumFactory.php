@@ -29,7 +29,7 @@ class StadiumFactory extends Factory
             'location' => $this->faker->name,
             'capacity' => $this->faker->randomFloat(4),
             'stadium_owner' => $this->faker->name,
-            'stadium_picture' => $this->faker->image('public/images', 640, 480, null, false),
+            'stadium_picture' => $this->faker->imageUrl(640, 480, 'animals', true),
             'inauguration_date' => $this->faker->date('Y-m-d', $max = now())
         ];
     }
