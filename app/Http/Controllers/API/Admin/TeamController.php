@@ -70,7 +70,7 @@ class TeamController  extends Controller
     {
         return response()->json([
             'success' => true,
-            'message' => 'Teams retrieved successfully!',
+            'message' => 'Team retrieved successfully!',
             'team' => $team
         ], 200);
     }
@@ -100,7 +100,7 @@ class TeamController  extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Teams updated successfully!',
+            'message' => 'Team updated successfully!',
             'team' => $team
         ], 200);
     }
