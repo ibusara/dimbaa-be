@@ -40,7 +40,7 @@ class TeamController  extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'stadium_id' => 'required|integer|exists,stadium,id',
+            'stadium_id' => 'required|integer|exists,stadia,id',
             'name' => 'required|unique:teams,name',
             'region' => 'required',
         ]);
@@ -83,7 +83,7 @@ class TeamController  extends Controller
     public function update(Request $request, Team $team)
     {
         $request->validate([
-            'stadium_id' => 'required|integer|exists,stadium,id',
+            'stadium_id' => 'required|integer|exists,stadia,id',
             'name' => 'required|unique:teams,name,except,' . $team->id,
             'region' => 'required',
         ]);
