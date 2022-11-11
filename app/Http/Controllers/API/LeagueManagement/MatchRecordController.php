@@ -21,7 +21,11 @@ class MatchRecordController  extends Controller
     {
         $matchRecord = MatchRecord::all();
 
-        return response()->json($matchRecord, 'Match Record retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Record retrieved successfully.',
+            'match' => $matchRecord
+        ], 200);
     }
 
     /**
@@ -33,7 +37,11 @@ class MatchRecordController  extends Controller
     {
         $scoreboard = MatchScoreBoard::get();
 
-        return response()->json($scoreboard, 'Scoreboard retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Scoreboard retrieved successfully.',
+            'scoreboard' => $scoreboard
+        ], 200);
     }
 
     /**
@@ -65,7 +73,11 @@ class MatchRecordController  extends Controller
 
         $matchOfficial->update($input);
 
-        return response()->json($matchOfficial, 'Match Officials updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Officials updated successfully.',
+            'match_official' => $matchOfficial
+        ], 200);
     }
 
 
@@ -106,7 +118,11 @@ class MatchRecordController  extends Controller
         $notification->category = "match";
         $notification->description = "Scoreboard has been updated";
         $notification->save();
-        return response()->json($matchOfficial, 'Match Scoreboard updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Scoreboard updated successfully.',
+            'match_official' => $matchOfficial
+        ], 200);
     }
     /**
      * Store a newly created resource in storage.
@@ -140,7 +156,12 @@ class MatchRecordController  extends Controller
         $matchRecord->date = $request->date;
         $matchRecord->round = $request->round;
         $matchRecord->save();
-        return response()->json($matchRecord, 'Match Record created successfully.');
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Match Record created successfully.',
+                'match' => $matchRecord
+            ], 200);
     }
 
     /**
@@ -157,7 +178,11 @@ class MatchRecordController  extends Controller
             return $this->sendError('Match Record not found.');
         }
 
-        return response()->json($matchRecord, 'Match Record retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Record retrieved successfully.',
+            'match' => $matchRecord
+        ], 200);
     }
 
     /**
@@ -184,7 +209,11 @@ class MatchRecordController  extends Controller
 
         $matchRecord->update($input);
 
-        return response()->json($matchRecord, 'Match Record updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Record updated successfully.',
+            'match' =>  $matchRecord
+        ], 200 );
     }
 
     /**
@@ -197,6 +226,9 @@ class MatchRecordController  extends Controller
     {
         $matchRecord->delete();
 
-        return response()->json([], 'Match Record deleted successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Record deleted successfully!'
+        ], 200);
     }
 }

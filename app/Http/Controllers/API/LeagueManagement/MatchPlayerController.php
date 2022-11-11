@@ -40,7 +40,11 @@ class MatchPlayerController  extends Controller
         $notification->description = "Match Starting Players set";
         $notification->save();
 
-        return response()->json($matchPlayer, 'Match Starting Players successfully set');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Starting Players successfully set',
+            'player' => $matchPlayer
+        ], 200);
     }
 
 
@@ -72,7 +76,11 @@ class MatchPlayerController  extends Controller
         $notification->description = "Match Reserve Players set";
         $notification->save();
 
-        return response()->json($matchPlayer, 'Match Reserve Players successfully set');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Reserve Players successfully set',
+            'player' => $matchPlayer
+        ], 200);
     }
 
 
@@ -100,7 +108,11 @@ class MatchPlayerController  extends Controller
             $matchPlayer->update();
         }
 
-        return response()->json($matchPlayer, 'Match Reserve Players successfully set');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Reserve Players successfully set',
+            'player' => $matchPlayer
+        ], 200);
     }
 
     public function matchPlayerCaution(Request $request)
@@ -123,6 +135,10 @@ class MatchPlayerController  extends Controller
         $input['team_id'] = $input['team'];
         $playerCaution = MatchPlayerCaution::create($input);
 
-        return response()->json($playerCaution, 'Player Warning Disciplinary action has been set  ');
+        return response()->json([
+            'success' => true,
+            'message' => 'Player Warning Disciplinary action has been set',
+            'caution' => $playerCaution
+        ], 200);
     }
 }

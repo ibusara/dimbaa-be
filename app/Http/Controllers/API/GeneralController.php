@@ -23,6 +23,10 @@ class GeneralController  extends Controller
         $notifications = Notification::where('role_id', $user->role_id)
             ->latest()->paginate($perPage);
 
-        return response()->json($notifications, 'Notification retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Notification retrieved successfully.',
+            'player' => $notifications
+        ], 200);
     }
 }

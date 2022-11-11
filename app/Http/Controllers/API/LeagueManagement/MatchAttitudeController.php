@@ -47,7 +47,11 @@ class MatchAttitudeController  extends Controller
         $notification->description = "Match Players Condition set";
         $notification->save();
 
-        return response()->json($matchCondition, 'Match Players Conditions successfully set');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Players Conditions successfully set',
+            'condition' => $matchCondition
+        ], 200);
     }
 
 
@@ -89,6 +93,10 @@ class MatchAttitudeController  extends Controller
         $notification->description = "Match Players Condition set";
         $notification->save();
 
-        return response()->json($equipmentCondition, 'Match Equipment Conditions updated successfully');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Equipment Conditions successfully set',
+            'condition' => $equipmentCondition
+        ], 200);
     }
 }

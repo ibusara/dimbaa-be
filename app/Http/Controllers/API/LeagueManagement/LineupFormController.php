@@ -27,7 +27,11 @@ class LineupFormController  extends Controller
 
         $lineup = $lineup->update($input);
 
-        return response()->json($lineup, 'Lineup Details updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Lineup Details updated successfully.',
+            'lineup' => $lineup
+        ], 200);
     }
 
     public function submission(Request $request)
@@ -46,6 +50,10 @@ class LineupFormController  extends Controller
         $input['team_id'] = $request->team;
         $lineup = $lineup->update($input);
 
-        return response()->json($lineup, 'Lineup Submission updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Lineup Submission updated successfully.',
+            'lineup' => $lineup
+        ], 200);
     }
 }

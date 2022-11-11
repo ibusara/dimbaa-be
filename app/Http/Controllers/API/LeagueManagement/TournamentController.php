@@ -19,7 +19,11 @@ class TournamentController  extends Controller
     {
         $tournaments = Tournament::all();
 
-        return response()->json($tournaments, 'Tournament retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Tournament retrieved successfully.',
+            'tournament' => $tournaments
+        ], 200 );
     }
 
     /**
@@ -43,7 +47,11 @@ class TournamentController  extends Controller
         $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament = Tournament::create($input);
 
-        return response()->json($tournament, 'Tournament created successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Tournament created successfully.',
+            'tournament' => $tournament
+        ], 200);
     }
 
     /**
@@ -60,7 +68,11 @@ class TournamentController  extends Controller
             return $this->sendError('Tournament not found.');
         }
 
-        return response()->json($tournament, 'Tournament retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Tournament retrieved successfully.',
+            'tournament' => $tournament
+        ], 200);
     }
 
     /**
@@ -83,8 +95,14 @@ class TournamentController  extends Controller
 
         $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament->update($input);
+        
 
-        return response()->json($tournament, 'Tournament updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Tournament updated successfully.',
+            'tournament' => $tournament
+        ], 200
+           );
     }
 
     /**
