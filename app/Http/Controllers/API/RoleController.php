@@ -20,5 +20,6 @@ class RoleController  extends Controller
         $roles = Role::all();
 
         return response()->json(RoleResource::collection($roles), 'Roles retrieved successfully.');
+        
     }
 }

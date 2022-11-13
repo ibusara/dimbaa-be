@@ -48,7 +48,11 @@ class MatchOfficialController  extends Controller
             $matchResult->update();
         }
 
-        return response()->json($matchResult, 'Match Result updated successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Result updated successfully.',
+            'result' => $matchResult
+        ], 200);
     }
 
 
@@ -89,6 +93,10 @@ class MatchOfficialController  extends Controller
         $notification->description = "Match Players Condition set";
         $notification->save();
 
-        return response()->json($equipmentCondition, 'Match Equipment Conditions updated successfully');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Equipment Conditions updated successfully',
+            'equipment' => $equipmentCondition
+        ], 200);
     }
 }

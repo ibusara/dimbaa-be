@@ -90,7 +90,11 @@ class PlayerController  extends Controller
      */
     public function show(Player $player)
     {
-        return response()->json($player, 'Player retrieved successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Player retrieved successfully!',
+            'player' => $player
+        ], 200);
     }
 
     /**
@@ -118,6 +122,7 @@ class PlayerController  extends Controller
             'jersey_number' => 'required|integer',
             'rank' => 'nullable',
         ]);
+        
 
         $signature = strtoupper(substr($request->first_name, 0, 1) . '.' . substr($request->middle_name, 0, 1)) . '.' . ucwords($request->last_name);
         $player->update([
@@ -143,6 +148,11 @@ class PlayerController  extends Controller
             'message' => 'Player updated successfully!',
             'player' => $player
         ], 200);
+
+        if (is_null($player)) {
+            return $this->sendError('Player not found.');
+        }
+
     }
 
     /**
