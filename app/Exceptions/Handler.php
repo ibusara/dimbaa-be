@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Throwable;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -50,6 +51,14 @@ class Handler extends ExceptionHandler
                     'error' => true,
                     'message' => 'You seem lost. Check the endpoint and try again!'
                 ], 404);
+            }
+        });
+        $this->renderable(function (MethodNotAllowedException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Error: Invalid HTTP method used to access the resource'
+                ], 500);
             }
         });
     }
