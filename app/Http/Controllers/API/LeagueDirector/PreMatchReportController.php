@@ -271,7 +271,7 @@ class PreMatchReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeChalenges(Request $request)
+    public function storeChallenges(Request $request)
     {
         $request->validate([
             'one_description' => 'required',

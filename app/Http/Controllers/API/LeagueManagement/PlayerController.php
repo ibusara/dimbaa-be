@@ -18,6 +18,7 @@ class PlayerController  extends Controller
     /**
      * List players.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)

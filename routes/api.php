@@ -97,12 +97,12 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
-            Route::post('referee-evaluation/game-control', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('referee-evaluation/team-work-one', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('referee-evaluation/game-control', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('referee-evaluation/team-work-one', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-two', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('assistant-referee-evaluation/one', [RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('assistant-referee-evaluation/two', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('4th-official/evaluation', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('assistant-referee-evaluation/two', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('4th-official/evaluation', [RefereeEvaluationController::class, 'refereeEvaluation']);
         });
 
         //Data Manager role
@@ -144,7 +144,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
                 Route::post('co-operation', [PreMatchReportController::class, 'storeCoOperation']);
                 Route::post('colors', [PreMatchReportController::class, 'storeColors']);
                 Route::post('issues', [PreMatchReportController::class, 'storeIssues']);
-                Route::post('challenges', [PreMatchReportController::class, 'storeChalenges']);
+                Route::post('challenges', [PreMatchReportController::class, 'storeChallenges']);
                 Route::post('final', [PreMatchReportController::class, 'storeFinal']);
             });
 

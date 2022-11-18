@@ -50,11 +50,15 @@ class MatchRecordController  extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function officials(Request $request, $id)
+    public function officials(Request $request)
     {
+        $request->validate([
+            'match_id'=>'required|integer|exists:match_records,id'
+        ]);
+        $id = $request->id;
         $user = $request->user();
         $matchOfficial = MatchOfficial::firstOrCreate(['match_id' => $id]);
-        $input = $request->all();
+        $input = $request->except(['id']);
 
 
         // $request->validate( [
@@ -188,8 +192,8 @@ class MatchRecordController  extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param MatchRecord $matchRecord
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MatchRecord $matchRecord)

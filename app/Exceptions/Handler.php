@@ -2,9 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Throwable;
+use Psy\Exception\TypeErrorException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -53,7 +54,7 @@ class Handler extends ExceptionHandler
                 ], 404);
             }
         });
-        $this->renderable(function (MethodNotAllowedException $e, $request) {
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             if ($request->is('api/*')) {
                 return response()->json([
                     'error' => true,
@@ -61,5 +62,22 @@ class Handler extends ExceptionHandler
                 ], 500);
             }
         });
+        $this->renderable(function (QueryException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Querying the resource throws an error :'.explode('(',$e->getMessage())[0].'.'
+                ], 405);
+            }
+        });
+        $this->renderable(function (TypeErrorException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessage()
+                ], 500);
+            }
+        });
+
     }
 }
