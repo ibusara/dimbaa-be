@@ -60,6 +60,10 @@ class ReferringController  extends Controller
         $notification->description = "Referee Assessor";
         $notification->save();
 
-        return response()->json($referringTeam, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'referring_team' => $referringTeam
+        ], 200);
     }
 }

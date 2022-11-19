@@ -40,7 +40,11 @@ class CoordinatorDetailsController  extends Controller
         $notification->description = "Match Cordination updated succesfully";
         $notification->save();
 
-        return response()->json($cordinatorOfficial, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $cordinatorOfficial
+        ], 200);
     }
 
     public function playFair(Request $request)
@@ -72,7 +76,11 @@ class CoordinatorDetailsController  extends Controller
         $notification->description = "Match Cordination updated succesfully";
         $notification->save();
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
 
@@ -106,7 +114,11 @@ class CoordinatorDetailsController  extends Controller
         $notification->description = "Match Cordination updated succesfully";
         $notification->save();
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
 
@@ -136,7 +148,11 @@ class CoordinatorDetailsController  extends Controller
         $notification->description = "Cordination Incident Recorded";
         $notification->save();
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
 
@@ -158,7 +174,11 @@ class CoordinatorDetailsController  extends Controller
         $matchCordinator->update($input);
 
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
     public function dressingRoom(Request $request)
@@ -179,7 +199,11 @@ class CoordinatorDetailsController  extends Controller
         $matchCordinator->update($input);
 
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
 
@@ -213,6 +237,10 @@ class CoordinatorDetailsController  extends Controller
         $notification->description = "Strecher and Ambulance Information set";
         $notification->save();
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 }

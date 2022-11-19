@@ -74,7 +74,11 @@ class GeneralCoordinatorController  extends Controller
         $notification->description = "General Coordinartor Match Result updated";
         $notification->save();
 
-        return response()->json($matchResult, "General Coordinartor Match Result updated");
+        return response()->json([
+            'success' => true,
+            'message' => 'General Coordinator Match Result updated',
+            'coordinator' => $matchResult
+        ], 200);
     }
 
     public function matchOfficials(Request $request)
@@ -84,9 +88,9 @@ class GeneralCoordinatorController  extends Controller
 
         $request->validate([
             'match' => 'required|exists:match_records,id',
-            'refree' => 'required|array',
-            'refree.user' => 'required|integer',
-            'refree.region' => 'string|max:512',
+            'referee' => 'required|array',
+            'referee.user' => 'required|integer',
+            'referee.region' => 'string|max:512',
             'assistant_referee_one' => 'required|array',
             'assistant_referee_one.user' => 'required|integer',
             'assistant_referee_one.region' => 'string|max:512',
@@ -129,7 +133,11 @@ class GeneralCoordinatorController  extends Controller
         $notification->description = "Match Official Condition set";
         $notification->save();
 
-        return response()->json($cordinatorOfficial, 'Match Official Conditions updated successfully');
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Official Conditions updated successfully',
+            'coordinator' => $cordinatorOfficial
+        ], 200);
     }
 
     public function information(Request $request)
@@ -160,7 +168,11 @@ class GeneralCoordinatorController  extends Controller
         $notification->description = "Giant screen Information set";
         $notification->save();
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
     public function incident(Request $request)
@@ -180,7 +192,11 @@ class GeneralCoordinatorController  extends Controller
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
     public function remarks(Request $request)
@@ -200,7 +216,11 @@ class GeneralCoordinatorController  extends Controller
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 
 
@@ -221,6 +241,10 @@ class GeneralCoordinatorController  extends Controller
         $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
         $matchCordinator->update($input);
 
-        return response()->json($matchCordinator, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
     }
 }

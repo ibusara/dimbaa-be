@@ -42,6 +42,10 @@ class RefereeEvaluationController  extends Controller
         $notification->description = "Referee Assessor";
         $notification->save();
 
-        return response()->json($refereeEvaluation, 'Record is created');
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'referee' => $refereeEvaluation
+        ], 200);
     }
 }
