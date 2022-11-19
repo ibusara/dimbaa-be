@@ -17,7 +17,7 @@ class MatchOfficialController  extends Controller
         $input = $request->all();
 
         $request->validate([
-            'match' => 'required|exists:match_records,id',
+            'match' => 'required|numeric|exists:match_records,id',
             'halftime_score' => 'nullable|array',
             'final_score' => 'nullable|array',
         ]);
@@ -63,7 +63,7 @@ class MatchOfficialController  extends Controller
 
         // info($input);
         $request->validate([
-            'match' => 'required|exists:match_records,id',
+            'match' => 'required|numeric|exists:match_records,id',
             'center_supervisor' => 'array|min:3',
             'commisioner' => 'array|min:3',
             'district' => 'array|min:3',

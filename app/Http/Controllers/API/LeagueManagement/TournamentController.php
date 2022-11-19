@@ -57,15 +57,18 @@ class TournamentController  extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Tournament $tournaments
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tournament $tournaments)
     {
-        $tournament = Tournament::find($id);
+        $tournament = $tournaments;
 
-        if (is_null($tournament)) {
-            return $this->sendError('Tournament not found.');
+        if (!$tournament->id) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'Tournament not found'
+            ],404);
         }
 
         return response()->json([
@@ -78,12 +81,19 @@ class TournamentController  extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Tournament $tournaments
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tournament $tournament)
+    public function update(Request $request, Tournament $tournaments)
     {
+        $tournament = $tournaments;
+        if (!$tournament->id) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'Tournament not found'
+            ],404);
+        }
         $input = $request->all();
 
         $request->validate([
@@ -95,7 +105,7 @@ class TournamentController  extends Controller
 
         $input['start_at'] =  date('Y-m-d', strtotime($request->start_at ?? '01-' . date('m') . '-' . $request->year));
         $tournament->update($input);
-        
+
 
         return response()->json([
             'success' => true,
@@ -108,14 +118,23 @@ class TournamentController  extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     *
+     * @param Tournament $tournaments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tournament $tournament)
+    public function destroy(Tournament $tournaments)
     {
-        return null;
-        // $tournament->delete();
-
-        // return response()->json([], 'Tournament deleted successfully.');
+        $tournament = $tournaments;
+        if (!$tournament->id) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'Tournament not found'
+            ],404);
+        }
+        $tournament->delete();
+        return response()->json([
+            'success'=>true,
+            'message'=>'Tournament Deleted Successfully'
+        ],200);
     }
 }

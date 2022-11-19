@@ -113,10 +113,8 @@ class GeneralCoordinatorController  extends Controller
             'media_officer' => 'required|array',
             'media_officer.user' => 'required|integer',
             'media_officer.region' => 'string|max:512',
-            'security_officer' => 'required|array',
             'security_officer.user' => 'required|integer',
             'security_officer' => 'required|array',
-            'security_officer.user' => 'required|integer',
             'security_officer.region' => 'string|max:512',
         ]);
 

@@ -73,12 +73,12 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $users)
     {
         return response()->json([
             'success' => true,
             'message' => 'User retrieved successfully!',
-            'user' => $user
+            'user' => $users
         ], 200);
     }
 
@@ -86,11 +86,12 @@ class UserController extends Controller
      * Update User details.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $users)
     {
+        $user = $users;
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -119,12 +120,12 @@ class UserController extends Controller
     /**
      * Delete user.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $users)
     {
-        $user->delete();
+        $users->delete();
 
         return response()->json([
             'success' => true,
