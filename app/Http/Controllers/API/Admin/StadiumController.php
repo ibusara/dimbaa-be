@@ -23,7 +23,7 @@ class StadiumController extends Controller
      */
     public function index()
     {
-        $stadia = Stadium::all();
+        $stadia = Stadium::orderBy('name','ASC')->all();
 
         return response()->json([
             'success' => true,
@@ -74,29 +74,41 @@ class StadiumController extends Controller
     /**
      * Show stadium details.
      *
-     * @param  int  $id
+     * @param Stadium $stadia
      * @return \Illuminate\Http\Response
      */
-    public function show(Stadium $stadium)
+    public function show(Stadium $stadia)
     {
+        if (!$stadia->id){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Stadium associated with the identifier provided not found',
+            ],404);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Stadium retrieved successfully!',
-            'stadium' => $stadium
+            'stadium' => $stadia
         ], 200);
     }
 
     /**
      * Update stadium details.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Stadium $stadia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stadium $stadium)
+    public function update(Request $request, Stadium $stadia)
     {
+        if (!$stadia->id){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Stadium associated with the identifier provided not found',
+            ],404);
+        }
         $request->validate([
-            'name' => 'required|unique:stadia,name,' . $stadium->id,
+            'name' => 'required|unique:stadia,name,' . $stadia->id,
             'region' => 'required',
             'location' => 'required',
             'capacity' => 'required|integer',
@@ -109,7 +121,7 @@ class StadiumController extends Controller
 
         $file = Storage::putFileAs('uploads', $request->stadium_picture, $filename, 'public');
 
-        $stadium->update([
+        $stadia->update([
             'name' => $request->name,
             'region' => $request->region,
             'location' => $request->location,
@@ -122,7 +134,7 @@ class StadiumController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Stadium updated successfully!',
-            'stadium' => $stadium
+            'stadium' => $stadia
         ], 200);
     }
 
@@ -132,9 +144,15 @@ class StadiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Stadium $stadium)
+    public function destroy(Stadium $stadia)
     {
-        $stadium->delete();
+        if (!$stadia->id){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Stadium associated with the identifier provided not found',
+            ],404);
+        }
+        $stadia->delete();
 
         return response()->json([], 'Stadium deleted successfully.');
     }

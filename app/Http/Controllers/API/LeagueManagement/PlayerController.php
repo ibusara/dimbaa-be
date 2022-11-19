@@ -18,6 +18,7 @@ class PlayerController  extends Controller
     /**
      * List players.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -85,26 +86,26 @@ class PlayerController  extends Controller
     /**
      * Display player details.
      *
-     * @param  int  $id
+     * @param Player $players
      * @return \Illuminate\Http\Response
      */
-    public function show(Player $player)
+    public function show(Player $players)
     {
         return response()->json([
             'success' => true,
             'message' => 'Player retrieved successfully!',
-            'player' => $player
+            'player' => $players
         ], 200);
     }
 
     /**
      * Update player details
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Player $players
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Player $player)
+    public function update(Request $request, Player $players)
     {
         $request->validate([
             'team_id' => 'required|integer|exists:teams,id',
@@ -122,10 +123,10 @@ class PlayerController  extends Controller
             'jersey_number' => 'required|integer',
             'rank' => 'nullable',
         ]);
-        
+
 
         $signature = strtoupper(substr($request->first_name, 0, 1) . '.' . substr($request->middle_name, 0, 1)) . '.' . ucwords($request->last_name);
-        $player->update([
+        $players->update([
             'team_id' => $request->team_id,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
@@ -146,7 +147,7 @@ class PlayerController  extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Player updated successfully!',
-            'player' => $player
+            'player' => $players
         ], 200);
 
         if (is_null($player)) {
@@ -158,12 +159,12 @@ class PlayerController  extends Controller
     /**
      * Delete player.
      *
-     * @param  int  $id
+     * @param Player $players
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Player $player)
+    public function destroy(Player $players)
     {
-        $player->delete();
+        $players->delete();
 
         return response()->json([
             'success' => true,

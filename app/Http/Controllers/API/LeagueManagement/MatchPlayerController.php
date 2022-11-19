@@ -18,7 +18,7 @@ class MatchPlayerController  extends Controller
         $input = $request->all();
 
         $request->validate([
-            'match' => 'required|exists:match_records,id',
+            'match' => 'required|numeric|exists:match_records,id',
             'team1_starting' => 'required||array|between:2,30',
             'team1_starting.*' => 'integer|distinct|exists:players,id',
             'team2_starting' => 'required||array|between:2,30',
@@ -54,7 +54,7 @@ class MatchPlayerController  extends Controller
         $input = $request->all();
 
         $request->validate([
-            'match' => 'required|exists:match_records,id',
+            'match' => 'required|numeric|exists:match_records,id',
             'team1_reserve' => 'required||array|between:2,30',
             'team1_reserve.*' => 'integer|distinct|exists:players,id',
             'team2_reserve' => 'required||array|between:2,30',
@@ -90,7 +90,7 @@ class MatchPlayerController  extends Controller
         $input = $request->all();
 
         $request->validate([
-            'match' => 'required|exists:match_records,id',
+            'match' => 'required|numeric|exists:match_records,id',
             'team' => 'required||integer|between:1,2',
             'minute' => 'required|integer|between:1,130',
             'in' => 'required|between:1,2',
@@ -121,7 +121,7 @@ class MatchPlayerController  extends Controller
         $input = $request->all('match', 'team', 'minute', 'player', 'reasons', 'warning_card');
 
         $request->validate([
-            'match' => 'required|exists:match_records,id',
+            'match' => 'required|numeric|exists:match_records,id',
             'team' => 'required||integer',
             'minute' => 'required|integer|between:1,130',
             'warning_card' => 'required|between:1,2',

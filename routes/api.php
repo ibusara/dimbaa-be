@@ -9,9 +9,15 @@ use App\Http\Controllers\API\Auth\AuthenticationController;
 use App\Http\Controllers\API\GeneralController;
 use App\Http\Controllers\API\LeagueDirector\PostMatchReportController;
 use App\Http\Controllers\API\LeagueDirector\PreMatchReportController;
+use App\Http\Controllers\API\LeagueManagement\CoordinatorDetailsController;
+use App\Http\Controllers\API\LeagueManagement\GeneralCoordinatorController;
 use App\Http\Controllers\API\LeagueManagement\LineupFormController;
+use App\Http\Controllers\API\LeagueManagement\MatchAttitudeController;
+use App\Http\Controllers\API\LeagueManagement\MatchOfficialController;
+use App\Http\Controllers\API\LeagueManagement\MatchPlayerController;
 use App\Http\Controllers\API\LeagueManagement\MatchRecordController;
 use App\Http\Controllers\API\LeagueManagement\PlayerController;
+use App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController;
 use App\Http\Controllers\API\LeagueManagement\TournamentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -66,37 +72,37 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('organizers')->name('organizers.')->group(function () {
-            Route::apiResource('tournaments', App\Http\Controllers\API\LeagueManagement\TournamentController::class);
-            Route::post('matchrecords/scoreboard/{id}', [App\Http\Controllers\API\LeagueManagement\MatchRecordController::class, 'scoreboard']);
-            Route::post('matchrecords/officials/{id}', [App\Http\Controllers\API\LeagueManagement\MatchRecordController::class, 'officials']);
-            Route::apiResource('matchrecords', App\Http\Controllers\API\LeagueManagement\MatchRecordController::class);
+            Route::apiResource('tournaments', TournamentController::class);
+            Route::post('matchrecords/scoreboard/{id}', [MatchRecordController::class, 'scoreboard']);
+            Route::post('matchrecords/officials/{id}', [MatchRecordController::class, 'officials']);
+            Route::apiResource('matchrecords', MatchRecordController::class);
         });
 
         Route::prefix('referee')->name('referee.')->group(function () {
-            Route::post('team-results', [App\Http\Controllers\API\LeagueManagement\MatchOfficialController::class, 'matchResult']);
-            Route::post('starting-players', [App\Http\Controllers\API\LeagueManagement\MatchPlayerController::class, 'matchStartingPlayers']);
-            Route::post('reserve-players', [App\Http\Controllers\API\LeagueManagement\MatchPlayerController::class, 'matchReservePlayers']);
-            Route::post('subtitutions', [App\Http\Controllers\API\LeagueManagement\MatchPlayerController::class, 'matchSubstitutePlayer']);
+            Route::post('team-results', [MatchOfficialController::class, 'matchResult']);
+            Route::post('starting-players', [MatchPlayerController::class, 'matchStartingPlayers']);
+            Route::post('reserve-players', [MatchPlayerController::class, 'matchReservePlayers']);
+            Route::post('subtitutions', [MatchPlayerController::class, 'matchSubstitutePlayer']);
 
-            Route::post('cautions', [App\Http\Controllers\API\LeagueManagement\MatchPlayerController::class, 'matchPlayerCaution']);
-            Route::post('attitude-condition', [App\Http\Controllers\API\LeagueManagement\MatchAttitudeController::class, 'matchAttitudeCondition']);
-            Route::post('attitude-condition/ground-equipment', [App\Http\Controllers\API\LeagueManagement\MatchAttitudeController::class, 'matchEquipmentCondition']);
-            Route::post('official-assistant', [App\Http\Controllers\API\LeagueManagement\MatchOfficialController::class, 'matchOfficialAssistance']);
+            Route::post('cautions', [MatchPlayerController::class, 'matchPlayerCaution']);
+            Route::post('attitude-condition', [MatchAttitudeController::class, 'matchAttitudeCondition']);
+            Route::post('attitude-condition/ground-equipment', [MatchAttitudeController::class, 'matchEquipmentCondition']);
+            Route::post('official-assistant', [MatchOfficialController::class, 'matchOfficialAssistance']);
         });
 
         Route::prefix('general-coordinator')->name('general-coordinator.')->group(function () {
-            Route::post('team-results', [App\Http\Controllers\API\LeagueManagement\GeneralCoordinatorController::class, 'matchResult']);
-            Route::post('match_official', [App\Http\Controllers\API\LeagueManagement\GeneralCoordinatorController::class, 'matchOfficials']);
-            Route::post('coordination-meeting', [App\Http\Controllers\API\LeagueManagement\CoordinatorDetailsController::class, 'coordinationMeeting']);
+            Route::post('team-results', [GeneralCoordinatorController::class, 'matchResult']);
+            Route::post('match_official', [GeneralCoordinatorController::class, 'matchOfficials']);
+            Route::post('coordination-meeting', [CoordinatorDetailsController::class, 'coordinationMeeting']);
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
-            Route::post('referee-evaluation/game-control', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('referee-evaluation/team-work-one', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('referee-evaluation/team-work-two', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('assistant-referee-evaluation/one', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('assistant-referee-evaluation/two', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
-            Route::post('4th-official/evaluation', [App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('referee-evaluation/game-control', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('referee-evaluation/team-work-one', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('referee-evaluation/team-work-two', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('assistant-referee-evaluation/one', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('assistant-referee-evaluation/two', [RefereeEvaluationController::class, 'refereeEvaluation']);
+            Route::post('4th-official/evaluation', [RefereeEvaluationController::class, 'refereeEvaluation']);
         });
 
         //Data Manager role
@@ -138,7 +144,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
                 Route::post('co-operation', [PreMatchReportController::class, 'storeCoOperation']);
                 Route::post('colors', [PreMatchReportController::class, 'storeColors']);
                 Route::post('issues', [PreMatchReportController::class, 'storeIssues']);
-                Route::post('challenges', [PreMatchReportController::class, 'storeChalenges']);
+                Route::post('challenges', [PreMatchReportController::class, 'storeChallenges']);
                 Route::post('final', [PreMatchReportController::class, 'storeFinal']);
             });
 

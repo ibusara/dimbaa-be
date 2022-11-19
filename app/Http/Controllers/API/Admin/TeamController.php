@@ -66,12 +66,12 @@ class TeamController  extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Team $team)
+    public function show(Team $teams)
     {
         return response()->json([
             'success' => true,
             'message' => 'Team retrieved successfully!',
-            'team' => $team
+            'team' => $teams
         ], 200);
     }
 
@@ -82,8 +82,9 @@ class TeamController  extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, Team $teams)
     {
+        $team = $teams;
         $request->validate([
             'stadium_id' => 'required|integer|exists:stadia,id',
             'name' => 'required|unique:teams,name,' . $team->id,
@@ -111,9 +112,9 @@ class TeamController  extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Team $team)
+    public function destroy(Team $teams)
     {
-        $team->delete();
+        $teams->delete();
 
         return response()->json([], 'Team deleted successfully.');
     }

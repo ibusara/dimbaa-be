@@ -65,8 +65,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request, Permission $permissions)
     {
+        $permission = $permissions;
         $request->validate([
             'name' => 'required|unique:permissions,name,' . $permission->id
         ]);
@@ -85,9 +86,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy(Permission $permissions)
     {
-        $permission->delete();
+        $permissions->delete();
 
         return response()->json([
             'success' => true,

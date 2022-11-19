@@ -67,9 +67,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Role $roles)
     {
-        $role = $role;
+        if (!$roles->id){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Resource associated with the identifier provided not found',
+            ],404);
+        }
+        $role = $roles;
         $rolePermissions = $role->permissions;
 
         return response()->json([
@@ -87,8 +93,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Role $roles)
     {
+        if (!$roles->id){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Resource associated with the identifier provided not found',
+            ],404);
+        }
+        $role = $roles;
         $request->validate([
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
@@ -110,9 +123,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Role $roles)
     {
-        $role->delete();
+        if (!$roles->id){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Resource associated with the identifier provided not found',
+            ],404);
+        }
+        $roles->delete();
 
         return response()->json([
             'success' => true,
