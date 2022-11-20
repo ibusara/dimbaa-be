@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use BadMethodCallException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Psy\Exception\TypeErrorException;
@@ -71,6 +72,14 @@ class Handler extends ExceptionHandler
             }
         });
         $this->renderable(function (TypeErrorException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessage()
+                ], 500);
+            }
+        });
+        $this->renderable(function (BadMethodCallException $e, $request) {
             if ($request->is('api/*')) {
                 return response()->json([
                     'error' => true,

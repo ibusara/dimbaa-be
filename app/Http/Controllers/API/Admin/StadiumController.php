@@ -23,7 +23,7 @@ class StadiumController extends Controller
      */
     public function index()
     {
-        $stadia = Stadium::orderBy('name','ASC')->all();
+        $stadia = Stadium::orderBy('name','ASC')->get();
 
         return response()->json([
             'success' => true,
