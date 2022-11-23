@@ -3,23 +3,27 @@
 namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\MatchRecord;
 use App\Models\MatchOfficial;
 use App\Models\MatchScoreBoard;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Schema;
+use function Termwind\ValueObjects\format;
 
 
 class MatchRecordController  extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $matchRecord = MatchRecord::all();
+        $field = $request->filled('field')?$request->field:"id";
+        $columns = Schema::getColumnListing('match_records');
+        if (!in_array($field,$columns)){
+            return response()->json(['success'=>false,'message'=>'Field provided is not in the table field list'],500);
+        }
+        $order  = $request->filled('sort_by')?$request->sort_by:'desc';
+        $matchRecord = MatchRecord::orderBy($field,$order)->get();
 
         return response()->json([
             'success' => true,
@@ -141,14 +145,14 @@ class MatchRecordController  extends Controller
 
         $request->validate([
             'tournament' => 'required|integer|exists:tournaments,id',
-            'date' => 'required|date|after:yesterday',
+            'date' => 'required|before:yesterday',
             'home_team' => 'required|integer|exists:teams,id',
             'away_team' => 'required|integer|exists:teams,id',
             'stadium' => 'required|integer|exists:stadia,id', //'
             'city' => 'required|between:3,60',
             'round' => 'required|integer|between:1,100',
         ]);
-
+        $request->date = (new Carbon(date('d-m-Y H:i:s',strtotime(str_replace('/','-',$request->date)))))->format('Y-m-d H:i:s');
 
         $matchRecord = new MatchRecord();
         $matchRecord->user_id = $user->id;
@@ -196,22 +200,34 @@ class MatchRecordController  extends Controller
      * @param MatchRecord $matchRecord
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MatchRecord $matchRecord)
+    public function update(Request $request)
     {
-        $input = $request->all();
-
         $request->validate([
-            // 'period' => 'required|date',
-            // 'home_team' => 'required|between:3,50',
-            // 'away_team' => 'required|between:3,50',
-            // 'city' => 'required|between:3,50',
-            // 'stadium' => 'required|between:3,50',
-            // 'round' => 'required|integer',
+            'id'=>'required|exists:match_records,id',
+            'tournament' => 'required|integer|exists:tournaments,id',
+            'date' => 'required|before:yesterday',
+            'home_team' => 'required|integer|exists:teams,id',
+            'away_team' => 'required|integer|exists:teams,id',
+            'stadium' => 'required|integer|exists:stadia,id', //'
+            'city' => 'required|between:3,60',
+            'round' => 'required|integer|between:1,100',
         ]);
-
-
-
-        $matchRecord->update($input);
+        $matchRecord = MatchRecord::find($request->id);
+        if (!$matchRecord){
+            return response()->json(['success'=>false,'message'=>'Match record not found'],404);
+        }
+        $input = $request->only('id','tournament','date','home_team','away_team','stadium','city','round');
+        $input_array = array(
+           'tournament_id'=>$input['tournament'],
+           'date'=>$input['date'],
+           'home_team_id'=>$input['home_team'],
+           'away_team_id'=>$input['away_team'],
+           'stadium_id'=>$input['stadium'],
+           'city'=>$input['city'],
+           'round'=>$input['round'],
+        );
+        $input_array['date'] = (new Carbon(date('d-m-Y H:i:s',strtotime(str_replace('/','-',$input['date'])))))->format('Y-m-d H:i:s');
+        $matchRecord->update($input_array);
 
         return response()->json([
             'success' => true,

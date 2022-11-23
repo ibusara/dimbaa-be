@@ -97,6 +97,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('referee-evaluation/game-control', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-one', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-two', [RefereeEvaluationController::class, 'refereeEvaluation']);

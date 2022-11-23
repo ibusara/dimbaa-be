@@ -17,6 +17,7 @@ class MatchRecord extends Model
         'away_team',
         'city',
         'stadium',
-        'round'
+        'round',
+        'date'
     ];
 }
