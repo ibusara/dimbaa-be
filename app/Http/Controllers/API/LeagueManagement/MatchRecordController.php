@@ -64,21 +64,6 @@ class MatchRecordController  extends Controller
         $matchOfficial = MatchOfficial::firstOrCreate(['match_id' => $id]);
         $input = $request->except(['id']);
 
-
-        // $request->validate( [
-        //     'tournament' => 'required|integer|exists:tournaments,id',
-        //     'date' => 'required|date|after:yesterday',
-        //     'home_team' => 'required|integer|exists:teams,id',
-        //     'away_team' => 'required|integer|exists:teams,id',
-        //     'stadium' => 'required|integer|exists:stadia,id',//'
-        //     'city' => 'required|between:3,60',
-        //     'round' => 'required|integer|between:1,100',
-        // ]);
-
-        // if($validator->fails()){
-        //     return $this->sendError('Validation Error.', $validator->errors());
-        // }
-
         $matchOfficial->update($input);
 
         return response()->json([
@@ -175,15 +160,15 @@ class MatchRecordController  extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $matchRecord = MatchRecord::find($id);
 
-        if (is_null($matchRecord)) {
-            return $this->sendError('Match Record not found.');
+        if (!$matchRecord) {
+            return response()->json(['success'=>false,'message'=>'Record not found']);
         }
 
         return response()->json([
