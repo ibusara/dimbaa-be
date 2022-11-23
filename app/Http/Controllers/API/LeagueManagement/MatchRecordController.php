@@ -126,7 +126,7 @@ class MatchRecordController  extends Controller
     public function store(Request $request)
     {
         $user = $request->user();
-        $input = $request->all();
+       // $input = $request->all();
 
         $request->validate([
             'tournament' => 'required|integer|exists:tournaments,id',
