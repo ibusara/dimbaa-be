@@ -59,7 +59,7 @@ class MatchRecordController  extends Controller
         $request->validate([
             'match_id'=>'required|integer|exists:match_records,id'
         ]);
-        $id = $request->id;
+        $id = $request->match_id;
         $user = $request->user();
         $matchOfficial = MatchOfficial::firstOrCreate(['match_id' => $id]);
         $input = $request->except(['id']);
