@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Notification;
+use Illuminate\Http\Response;
 
 class GeneralController  extends Controller
 {
     /**
      * Display all notifications per role.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function notifications(Request $request)
     {
@@ -20,8 +22,9 @@ class GeneralController  extends Controller
 
         $perPage = $request->input('per_page', 100);
         $sortBy = $request->input('sort_by', 'asc');
+        $sortByField = $request->input('field','id');
         $notifications = Notification::where('role_id', $user->role_id)
-            ->latest()->paginate($perPage);
+            ->orderBy($sortByField,$sortBy)->paginate($perPage);
 
         return response()->json([
             'success' => true,

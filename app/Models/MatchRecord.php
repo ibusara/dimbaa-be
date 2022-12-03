@@ -17,7 +17,8 @@ class MatchRecord extends Model
         'away_team',
         'city',
         'stadium',
-        'round'
+        'round',
+        'date'
     ];
     public function user(){
         return $this->belongsTo(User::class,'user_id')->withDefault([]);
