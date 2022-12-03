@@ -9,29 +9,34 @@ use App\Models\MatchRecord;
 use App\Models\MatchOfficial;
 use App\Models\MatchScoreBoard;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use function Termwind\ValueObjects\format;
 
 
 class MatchRecordController  extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
-        $field = $request->filled('field')?$request->field:"id";
+        $sortBy = $request->input('sort_by', 'asc');
+        $sortByField = $request->input('field', 'id');
         $columns = Schema::getColumnListing('match_records');
-        if (!in_array($field,$columns)){
-            return response()->json(['success'=>false,'message'=>'Field provided is not in the table field list'],500);
+        if (!in_array($sortByField, $columns)) {
+            return response()->json(['success' => false, 'message' => 'Field provided is not in the table field list'], 500);
         }
-        $order  = $request->filled('sort_by')?$request->sort_by:'desc';
-        $matchRecord = MatchRecord::orderBy($field,$order)->get();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Match Record retrieved successfully.',
-            'match' => $matchRecord
-        ], 200);
+        $matchRecord = MatchRecord::orderBy($sortByField, $sortBy)->when(filled($request->roles), function ($query) use ($request) {
+            $roles_ = is_array($request->roles) ? $request->roles : (array)$request->roles;
+            $query->whereHas('user', function ($query_) use ($roles_) {
+                $query_->whereIn('role_id', $roles_);
+            });
+        })->get();
     }
-
     /**
      * Display a listing of the resource.
      *

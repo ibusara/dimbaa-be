@@ -79,6 +79,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('referee')->name('referee.')->group(function () {
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('team-results', [MatchOfficialController::class, 'matchResult']);
             Route::post('starting-players', [MatchPlayerController::class, 'matchStartingPlayers']);
             Route::post('reserve-players', [MatchPlayerController::class, 'matchReservePlayers']);
