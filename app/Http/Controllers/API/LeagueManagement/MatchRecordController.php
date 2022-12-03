@@ -36,6 +36,11 @@ class MatchRecordController  extends Controller
                 $query_->whereIn('role_id', $roles_);
             });
         })->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Match retrieved successfully.',
+            'match' => $matchRecord
+        ], 200);
     }
     /**
      * Display a listing of the resource.
