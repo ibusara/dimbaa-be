@@ -79,6 +79,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('referee')->name('referee.')->group(function () {
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('team-results', [MatchOfficialController::class, 'matchResult']);
             Route::post('starting-players', [MatchPlayerController::class, 'matchStartingPlayers']);
             Route::post('reserve-players', [MatchPlayerController::class, 'matchReservePlayers']);
@@ -91,12 +92,14 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('general-coordinator')->name('general-coordinator.')->group(function () {
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('team-results', [GeneralCoordinatorController::class, 'matchResult']);
             Route::post('match_official', [GeneralCoordinatorController::class, 'matchOfficials']);
             Route::post('coordination-meeting', [CoordinatorDetailsController::class, 'coordinationMeeting']);
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('referee-evaluation/game-control', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-one', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-two', [RefereeEvaluationController::class, 'refereeEvaluation']);

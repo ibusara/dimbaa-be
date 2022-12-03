@@ -8,6 +8,7 @@ use App\Models\MatchRecord;
 use App\Models\MatchOfficial;
 use App\Models\MatchScoreBoard;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Log;
 
 
 class MatchRecordController  extends Controller
@@ -15,11 +16,19 @@ class MatchRecordController  extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $matchRecord = MatchRecord::all();
+        $sortBy = $request->input('sort_by','asc');
+        $sortByField = $request->input('field','id');
+        $matchRecord = MatchRecord::orderBy($sortByField,$sortBy)->when(filled($request->roles),function ($query)use($request){
+            $roles_ = is_array($request->roles) ?$request->roles:(array)$request->roles;
+            $query->whereHas('user',function ($query_)use ($roles_){
+                $query_->whereIn('role_id',$roles_);
+            });
+        })->get();
 
         return response()->json([
             'success' => true,
