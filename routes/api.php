@@ -56,6 +56,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::middleware(['auth:api'])->group(function () {
 
         Route::get('notifications', [GeneralController::class, 'notifications']);
+        Route::get('unread-notifications', [GeneralController::class, 'unread_notifications']);
 
         Route::prefix('admin')->group(function () {
             Route::apiResource('roles', RoleController::class);
