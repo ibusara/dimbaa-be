@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\ImageProcessor;
 use Illuminate\Http\Request;
 use App\Models\Player;
-use Validator;
 
 /**
  * @group Player Management
@@ -55,7 +55,15 @@ class PlayerController  extends Controller
             'professional_date' => 'required|date',
             'jersey_number' => 'required|integer',
             'rank' => 'nullable',
+            'player_image' => 'nullable|image',
         ]);
+        $player_image = null;
+        if ($request->hasFile('player_image')){
+            $response = json_decode((new ImageProcessor())->resize_image($request,'player_image',750,750)->getContent());
+            if ($response->success){
+                $player_image = $response->path;
+            }
+        }
 
         $signature = strtoupper(substr($request->first_name, 0, 1) . '.' . substr($request->middle_name, 0, 1)) . '.' . ucwords($request->last_name);
         $player = Player::create([
@@ -73,7 +81,8 @@ class PlayerController  extends Controller
             'professional_date' => $request->professional_date,
             'jersey_number' => $request->jersey_number,
             'signature' => $signature,
-            'rank' => $request->rank
+            'rank' => $request->rank,
+            'player_image' => $player_image
         ]);
 
         return response()->json([

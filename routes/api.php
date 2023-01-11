@@ -32,7 +32,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::post('test-compress',function (Request $request){
+   return (new \App\Libraries\ImageProcessor())->resize_image($request,'player_image',500,400);
+});
 Route::group(['middleware' => ['cors', 'json.response']], function () {
 
     Route::any('/', function (Request $request) {
