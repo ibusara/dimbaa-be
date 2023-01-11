@@ -21,7 +21,7 @@ class GeneralController  extends Controller
         $user = $request->user();
 
         $perPage = $request->input('per_page', 100);
-        $sortBy = $request->input('sort_by', 'asc');
+        $sortBy = $request->input('sort_by', 'DESC');
         $sortByField = $request->input('field','id');
         $notifications = Notification::where('role_id', $user->role_id)
             ->orderBy($sortByField,$sortBy)->paginate($perPage);
@@ -29,7 +29,16 @@ class GeneralController  extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Notification retrieved successfully.',
-            'player' => $notifications
+            'data' => $notifications
+        ], 200);
+    }
+    public function unread_notifications(){
+        //when role_id is null, it will pick the general notifications
+        $notifications = Notification::where('seen',0)->where('role_id',auth()->user()->role_id)->orderBy('id','DESC')->paginate(50);
+        return response()->json([
+            'success' => true,
+            'message' => 'Notification retrieved successfully.',
+            'data' => $notifications
         ], 200);
     }
 }

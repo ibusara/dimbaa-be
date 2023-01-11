@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use BadMethodCallException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Intervention\Image\Exception\NotWritableException;
 use Psy\Exception\TypeErrorException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -84,6 +85,14 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'error' => true,
                     'message' => $e->getMessage()
+                ], 500);
+            }
+        });
+        $this->renderable(function (NotWritableException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'error' => true,
+                    'message' => "Permission Denied.".$e->getMessage()
                 ], 500);
             }
         });
