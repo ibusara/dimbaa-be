@@ -121,8 +121,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::get('scoreboard', [MatchRecordController::class, 'listScoreboard']);
             Route::get('get-match-event/{id}', [MatchRecordController::class, 'show']);
         });
-        /*//All Roles List Match Events
-        Route::get('/{any}/list-match-events',[MatchRecordController::class,'index']);*/
+        //All Roles List Match Events
+        Route::get('/{any}/list-match-events',[MatchRecordController::class,'index']);
         //league director role
         Route::prefix('league-director')->group(function () {
             Route::get('list-match-events', [MatchRecordController::class, 'index']);
