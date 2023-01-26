@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
             if ($request->is('api/*')) {
                 return response()->json([
                     'error' => true,
-                    'message' => 'You seem lost. Check the endpoint and try again!'
+                    'message' => 'You seem lost. Check the endpoint and try again!'.$e->getTraceAsString()
                 ], 404);
             }
         });
