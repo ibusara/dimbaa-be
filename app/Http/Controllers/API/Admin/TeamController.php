@@ -107,15 +107,25 @@ class TeamController  extends Controller
             'stadium_id' => 'required|integer|exists:stadia,id',
             'name' => 'required|unique:teams,name,' . $team->id,
             'region' => 'required',
+            'team_logo' => 'nullable|image|mimes:jpg,png,jpeg,bmp',
+            'team_photo' => 'nullable|image|mimes:jpg,png,jpeg,bmp',
         ], [
             'stadium_id.exists' => 'Selected stadium does not exist!'
         ]);
-
-        $team->update([
+        $updateData = [
             'stadium_id' => $request->stadium_id,
             'name' => $request->name,
             'region' => $request->region
-        ]);
+        ];
+        $team_logo = $this->upload_team_images($request,'team_logo');
+        $team_photo = $this->upload_team_images($request,'team_photo');
+        if ($team_logo){
+            $updateData['team_logo'] = $team_logo;
+        }
+        if ($team_photo){
+            $updateData['team_photo'] = $team_photo;
+        }
+        $team->update($updateData);
 
         return response()->json([
             'success' => true,
