@@ -95,7 +95,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('general-coordinator')->name('general-coordinator.')->group(function () {
-            // Route::get('list-match-events', [MatchRecordController::class, 'index']);
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('team-results', [GeneralCoordinatorController::class, 'matchResult']);
             Route::post('match_official', [GeneralCoordinatorController::class, 'matchOfficials']);
             Route::post('coordination-meeting', [CoordinatorDetailsController::class, 'coordinationMeeting']);
@@ -121,8 +121,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::get('scoreboard', [MatchRecordController::class, 'listScoreboard']);
             Route::get('get-match-event/{id}', [MatchRecordController::class, 'show']);
         });
-        //All Roles List Match Events
-        Route::get('/{any}/list-match-events',[MatchRecordController::class,'index']);
+        /*//All Roles List Match Events
+        Route::get('/{any}/list-match-events',[MatchRecordController::class,'index']);*/
         //league director role
         Route::prefix('league-director')->group(function () {
             Route::get('list-match-events', [MatchRecordController::class, 'index']);
