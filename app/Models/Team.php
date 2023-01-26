@@ -12,7 +12,9 @@ class Team extends Model
     protected $fillable = [
         'stadium_id',
         'name',
-        'region'
+        'region',
+        'team_photo',
+        'team_logo'
     ];
 
     public function stadium()
@@ -23,5 +25,17 @@ class Team extends Model
     public function players()
     {
         return  $this->hasMany('App\Models\Player');
+    }
+    public function getTeamPhotoAttribute($value){
+        if (!$value){
+            return url('/images/default-player-icon.png');
+        }
+        return url($value);
+    }
+    public function getTeamLogoAttribute($value){
+        if (!$value){
+            return url('/images/default-player-icon.png');
+        }
+        return url($value);
     }
 }

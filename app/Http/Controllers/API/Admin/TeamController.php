@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 /**
@@ -22,7 +23,7 @@ class TeamController  extends Controller
      */
     public function index()
     {
-        $teams = Team::get();
+        $teams = Team::orderBy('name')->get();
 
         return response()->json([
             'success' => true,
@@ -43,14 +44,20 @@ class TeamController  extends Controller
             'stadium_id' => 'required|integer|exists:stadia,id',
             'name' => 'required|unique:teams,name',
             'region' => 'required',
+            'team_logo' => 'nullable|image|mimes:jpg,png,jpeg,bmp',
+            'team_photo' => 'nullable|image|mimes:jpg,png,jpeg,bmp',
         ], [
             'stadium_id.exists' => 'Selected stadium does not exist!'
         ]);
+        $team_logo = $this->upload_team_images($request,'team_logo');
+        $team_photo = $this->upload_team_images($request,'team_photo');
 
         $team = Team::create([
             'stadium_id' => $request->stadium_id,
             'name' => $request->name,
-            'region' => $request->region
+            'region' => $request->region,
+            'team_photo' => $team_photo,
+            'team_logo' => $team_logo
         ]);
 
         return response()->json([
@@ -73,6 +80,17 @@ class TeamController  extends Controller
             'message' => 'Team retrieved successfully!',
             'team' => $teams
         ], 200);
+    }
+    public function upload_team_images($request,$field_name){
+        $path = null;
+        if ($request->hasFile($field_name)){
+            $file = $request->file($field_name);
+            $extension = $file->getClientOriginalExtension();
+            $file_name = $field_name.time().'.'.$extension;
+            Storage::putFileAs('uploads', $request->$field_name, $file_name, 'public');
+            $path ="/uploads/$file_name";
+        }
+        return $path;
     }
 
     /**
