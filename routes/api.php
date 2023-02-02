@@ -19,6 +19,7 @@ use App\Http\Controllers\API\LeagueManagement\MatchRecordController;
 use App\Http\Controllers\API\LeagueManagement\PlayerController;
 use App\Http\Controllers\API\LeagueManagement\RefereeEvaluationController;
 use App\Http\Controllers\API\LeagueManagement\TournamentController;
+use App\Http\Controllers\ApparelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +73,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::apiResource('players', PlayerController::class);
             Route::post('team-players/detail', [LineupFormController::class, 'detail']);
             Route::post('team-players/submit', [LineupFormController::class, 'submission']);
+            Route::apiResource('apparels',ApparelController::class);
         });
 
         Route::prefix('organizers')->name('organizers.')->group(function () {
