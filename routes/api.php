@@ -70,7 +70,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('teammanager')->name('teammanager.')->group(function () {
-            Route::apiResource('players', PlayerController::class);
+            Route::apiResource('apparels', PlayerController::class);
             Route::post('team-players/detail', [LineupFormController::class, 'detail']);
             Route::post('team-players/submit', [LineupFormController::class, 'submission']);
             Route::apiResource('apparels',ApparelController::class);
