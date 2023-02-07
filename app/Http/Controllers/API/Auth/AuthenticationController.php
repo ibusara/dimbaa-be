@@ -84,9 +84,11 @@ class AuthenticationController extends Controller
 
         if (auth()->attempt($data)) {
             $token = auth()->user()->createToken('Dimbaa')->accessToken;
+            $user = User::query()->with('role:id,name,guard_name')->find(auth()->id());
             return response()->json([
                 'success' => true,
-                'message' => 'User login successfull',
+                'message' => 'User login successfully',
+                'user'=>$user,
                 'access_token' => $token
             ], 200);
         } else {
