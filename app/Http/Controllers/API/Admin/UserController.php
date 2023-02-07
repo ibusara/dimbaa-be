@@ -59,7 +59,8 @@ class UserController extends Controller
         if ($user) {
             return response()->json([
                 'success' => true,
-                'message' => 'User registration successfull'
+                'user'=>$user,
+                'message' => 'User registration successful'
             ], 200);
         }
 
@@ -72,7 +73,7 @@ class UserController extends Controller
     /**
      * Show user details.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
     public function show(User $users)
@@ -111,7 +112,8 @@ class UserController extends Controller
         if ($user) {
             return response()->json([
                 'success' => true,
-                'message' => 'User registration successfull'
+                'user'=>$user,
+                'message' => 'User registration successful'
             ], 200);
         }
 
