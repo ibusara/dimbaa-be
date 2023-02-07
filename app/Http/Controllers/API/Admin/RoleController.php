@@ -37,6 +37,14 @@ class RoleController extends Controller
             'roles' => $roles
         ], 200);
     }
+    public function rolesData(){
+        $roleData = Role::query()->orderBy('name')->select('id','name','guard_name')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Role data retrieved successfully!',
+            'roles'=>$roleData
+        ], 200);
+    }
 
     /**
      * Create a new role.

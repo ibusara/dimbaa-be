@@ -45,12 +45,14 @@ class UserController extends Controller
             'mobile' => 'required|integer|unique:users,mobile',
             'password' => 'required',
             'c_password' => 'required|same:password',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
+            'role_id' => $request->role_id,
             'password' => Hash::make($request->password)
         ]);
 
@@ -96,12 +98,14 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'mobile' => 'required|integer|unique:users,mobile,' . $user->id,
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'mobile' => $request->mobile
+            'mobile' => $request->mobile,
+            'role_id' => $request->role_id
         ]);
 
         if ($user) {

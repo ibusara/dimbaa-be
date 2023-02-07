@@ -63,6 +63,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         Route::prefix('admin')->group(function () {
             Route::apiResource('roles', RoleController::class);
+            Route::get('roles-data', [RoleController::class,'rolesData']);
             Route::apiResource('permissions', PermissionController::class);
             Route::apiResource('users', UserController::class);
             Route::apiResource('teams', TeamController::class);
