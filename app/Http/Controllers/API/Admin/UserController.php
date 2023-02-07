@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->get();
+        $users = User::with('role:id,name,guard_name')->get();
 
         return response()->json([
             'success' => true,
