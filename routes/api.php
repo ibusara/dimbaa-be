@@ -36,6 +36,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('test-compress',function (Request $request){
    return (new \App\Libraries\ImageProcessor())->resize_image($request,'player_image',500,400);
 });
+Route::get('test-api-routes',function (){
+    return "It works";
+});
 Route::group(['middleware' => ['cors', 'json.response']], function () {
 
     Route::any('/', function (Request $request) {
