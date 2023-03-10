@@ -19,11 +19,17 @@ class StadiumController extends Controller
     /**
      * List stadiums.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $stadia = Stadium::orderBy('name','ASC')->get();
+        $orderBy = $request->filled('orderBy')?$request->orderBy:'id';
+        $orderByDirection = $request->filled('orderByDirection')?$request->orderByDirection:'DESC';
+        $stadia = Stadium::orderBy('name','ASC')->when($request->filled('searchText'), function ($query) use ($request){
+            $searchText = "%$request->searchText%";
+            $query->where('name','like',$searchText);
+        })->orderBy($orderBy,$orderByDirection)->get();
 
         return response()->json([
             'success' => true,

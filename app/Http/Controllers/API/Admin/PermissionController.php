@@ -25,11 +25,14 @@ class PermissionController extends Controller
     /**
      * List all the permissions.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = Permission::all();
+        $orderBy = $request->filled('orderBy')?$request->orderBy:'name';
+        $orderByDirection = $request->filled('orderByDirection')?$request->orderByDirection:'DESC';
+        $permissions = Permission::orderBy($orderBy,$orderByDirection)->get();
 
         return response()->json([
             'success' => true,

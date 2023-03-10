@@ -25,11 +25,18 @@ class RoleController extends Controller
     /**
      * List all the roles.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::all()->pluck('name');
+        $orderBy = $request->filled('orderBy')?$request->orderBy:'id';
+        $orderByDirection = $request->filled('orderByDirection')?$request->orderByDirection:'DESC';
+
+        $roles = Role::all()->when($request->filled('searchText'), function ($query) use ($request){
+            $searchText = "%$request->searchText%";
+            $query->where('name','like',$searchText);
+        })->orderBy($orderBy,$orderByDirection)->pluck('name');
 
         return response()->json([
             'success' => true,

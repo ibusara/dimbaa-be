@@ -21,9 +21,14 @@ class TeamController  extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teams = Team::orderBy('name')->get();
+        $orderBy = $request->filled('orderBy')?$request->orderBy:'name';
+        $orderByDirection = $request->filled('orderByDirection')?$request->orderByDirection:'ASC';
+        $teams = Team::orderBy($orderBy,$orderByDirection)->when($request->filled('searchText'), function ($query) use ($request){
+            $searchText = "%$request->searchText%";
+            $query->where('name','like',$searchText);
+        })->get();
 
         return response()->json([
             'success' => true,
