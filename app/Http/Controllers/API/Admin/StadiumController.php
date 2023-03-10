@@ -28,7 +28,7 @@ class StadiumController extends Controller
         $orderByDirection = $request->filled('orderByDirection')?$request->orderByDirection:'DESC';
         $stadia = Stadium::orderBy('name','ASC')->when($request->filled('searchText'), function ($query) use ($request){
             $searchText = "%$request->searchText%";
-            $query->where('name','like',$searchText);
+            $query->where('name','like',$searchText)->orwhere('region','like',$searchText)->orwhere('location','like',$searchText)->orwhere('stadium_owner','like',$searchText);
         })->orderBy($orderBy,$orderByDirection)->get();
 
         return response()->json([
