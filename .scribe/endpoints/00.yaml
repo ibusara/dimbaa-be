@@ -1,0 +1,176 @@
+name: Authentication
+description: |-
+
+
+  API endpoints for managing authentication
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/auth/register
+    metadata:
+      groupName: Authentication
+      groupDescription: |-
+
+
+        API endpoints for managing authentication
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Register new user'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: et
+        type: string
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: trenton69@example.org
+        type: string
+        custom: []
+      mobile:
+        name: mobile
+        description: ''
+        required: true
+        example: 10
+        type: integer
+        custom: []
+      password:
+        name: password
+        description: ''
+        required: true
+        example: ut
+        type: string
+        custom: []
+      c_password:
+        name: c_password
+        description: 'The value and <code>password</code> must match.'
+        required: true
+        example: debitis
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: et
+      email: trenton69@example.org
+      mobile: 10
+      password: ut
+      c_password: debitis
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/auth/login
+    metadata:
+      groupName: Authentication
+      groupDescription: |-
+
+
+        API endpoints for managing authentication
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Log in the user.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The email of the  user.'
+        required: true
+        example: testuser@example.com
+        type: string
+        custom: []
+      password:
+        name: password
+        description: 'The password of the  user.'
+        required: true
+        example: secret
+        type: string
+        custom: []
+    cleanBodyParameters:
+      email: testuser@example.com
+      password: secret
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "success": true,
+           "message": User login successfull
+           "access_token": "eyJ0eXA...",
+          }
+        headers: []
+        description: '200'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/auth/logout
+    metadata:
+      groupName: Authentication
+      groupDescription: |-
+
+
+        API endpoints for managing authentication
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Logout user'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer cP6d3Da1V85eagf4vkZbEh6'
+    controller: null
+    method: null
+    route: null
+    custom: []

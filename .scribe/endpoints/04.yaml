@@ -1,0 +1,300 @@
+name: 'User Management'
+description: |-
+
+
+  API endpoints for managing users
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/admin/users
+    metadata:
+      groupName: 'User Management'
+      groupDescription: |-
+
+
+        API endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all users.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+          access-control-allow-methods: 'GET, POST, PUT, DELETE, OPTIONS'
+          access-control-allow-headers: 'X-Requested-With, Content-Type, X-Token-Auth, Authorization'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 3cZ6h8kP51aDevVg6E4dbfa'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/admin/users
+    metadata:
+      groupName: 'User Management'
+      groupDescription: |-
+
+
+        API endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create new user.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: ut
+        type: string
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: paolo.stamm@example.org
+        type: string
+        custom: []
+      mobile:
+        name: mobile
+        description: ''
+        required: true
+        example: 13
+        type: integer
+        custom: []
+      password:
+        name: password
+        description: ''
+        required: true
+        example: ea
+        type: string
+        custom: []
+      c_password:
+        name: c_password
+        description: 'The value and <code>password</code> must match.'
+        required: true
+        example: ea
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: ut
+      email: paolo.stamm@example.org
+      mobile: 13
+      password: ea
+      c_password: ea
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 58E61aV4fkgbcvdPZe3Dha6'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/admin/users/{id}'
+    metadata:
+      groupName: 'User Management'
+      groupDescription: |-
+
+
+        API endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show user details.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+          access-control-allow-methods: 'GET, POST, PUT, DELETE, OPTIONS'
+          access-control-allow-headers: 'X-Requested-With, Content-Type, X-Token-Auth, Authorization'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6d463hZD58aPVaE1kfbgcve'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/admin/users/{id}'
+    metadata:
+      groupName: 'User Management'
+      groupDescription: |-
+
+
+        API endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update User details.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: molestias
+        type: string
+        custom: []
+      email:
+        name: email
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
+      mobile:
+        name: mobile
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: molestias
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer hP6vkabdE5fga81ZV364ceD'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/admin/users/{id}'
+    metadata:
+      groupName: 'User Management'
+      groupDescription: |-
+
+
+        API endpoints for managing users
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete user.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 4Pvc3dk1bfDa6VeZgE5ah86'
+    controller: null
+    method: null
+    route: null
+    custom: []
