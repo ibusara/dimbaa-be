@@ -4,8 +4,14 @@ namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PasswordReset;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+use Validator;
 
 /**
  * @group Authentication
@@ -108,5 +114,91 @@ class AuthenticationController extends Controller
         $token->revoke();
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
+    }
+
+    public function forgetpassword(Request $request){
+
+        try{
+
+            $user = User::where('email',$request->email)->get();
+
+            if(count($user) > 0){
+                $token = rand(4,10000000);
+                // $domain = URL::to('/');
+                // $url = $domain.'/reset/password?token='.$token;
+
+                $data['token'] = $token;
+                $data['email'] = $request->email;
+                $data['title'] = 'Password Reset';
+                $data['body'] = 'Your Otp Code';
+
+                Mail::send('forgetPasswordMail',['data'=>$data],function($message) use ($data){
+                    $message->from($data['email']);
+                    $message->to($data['email'])->subject($data['title']);
+                });
+
+                $datetime = Carbon::now()->format('Y-m-d H:i:s');
+
+                PasswordReset::updateOrCreate(
+                    ['email'=>$request->email],
+                    [
+                        'email'=>$request->email,
+                        'token'=>$token,
+                        'created_at'=>$datetime,
+                    ],
+                );
+
+                return response()->json(['success'=>true,'message'=>'please check you mail to reset your password.']);
+
+            }else{
+                return response()->json(['success'=>false,'message'=>'User not found!']);
+            }
+
+        }catch(\Exception $e){
+            return response()->json(['success'=>false,'message'=>$e->getMessage()]);
+        }
+
+    }
+
+    public function resetpasswordload(Request $request){
+        
+        $request->validate([
+            'otp' => 'required',
+            'email' => 'required'
+        ]);
+
+        $restData = PasswordReset::where('token',$request->otp)->where('email','=',$request->email)->get();
+
+        if(isset($request->otp) && count($restData) > 0){
+
+            return response()->json(['success'=>true,'message'=>'Otp has been Verified']);
+
+        }else{
+            return response()->json(['success'=>false,'message'=>'Otp has not Verified']);
+        }
+
+    }
+
+    public function resetpassword(Request $request){
+        
+        $request->validate([
+            'password' => 'required|string|min:7|confirmed',
+            'email' => 'required'
+        ]);
+
+            $user = User::where('email','=',$request->email)->first();
+
+            if(!empty($user)){
+                $user->password = Hash::make($request->password);
+
+                $user->save();
+
+                PasswordReset::where('email',$user->email)->delete();
+
+                return response()->json(['success'=>true,'message'=>'Your password has been reset successfully']);
+           
+            }else{
+                return response()->json(['success'=>false,'message'=>'User Not Found']);
+            }
     }
 }

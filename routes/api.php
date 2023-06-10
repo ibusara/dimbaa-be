@@ -52,6 +52,10 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         ], 200);
     });
 
+    Route::post('forget-password', [AuthenticationController::class, 'forgetpassword']);
+    Route::post('/verify-reset-password', [AuthenticationController::class, 'resetpasswordload']);
+    Route::post('/reset-password', [AuthenticationController::class, 'resetpassword']);
+    
     Route::prefix('auth')->group(function () {
         Route::post('register', [AuthenticationController::class, 'register']);
         Route::post('login', [AuthenticationController::class, 'login']);
