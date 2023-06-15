@@ -55,7 +55,6 @@ class CoordinatorDetailsController  extends Controller
             'tff_flag_raised',
             'tff_on_the_pole',
             'play_fair_flag_raised',
-            'security_officer',
             'pff_on_the_pole'
         );
 
