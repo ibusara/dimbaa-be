@@ -110,6 +110,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::post('team-results', [GeneralCoordinatorController::class, 'matchResult']);
             Route::post('match_official', [GeneralCoordinatorController::class, 'matchOfficials']);
             Route::post('coordination-meeting', [CoordinatorDetailsController::class, 'coordinationMeeting']);
+            Route::post('play-fair', [CoordinatorDetailsController::class, 'playFair']);
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
