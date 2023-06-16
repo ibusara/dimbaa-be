@@ -106,6 +106,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('general-coordinator')->name('general-coordinator.')->group(function () {
+            Route::get('get-match-officials/{match_id}', [GeneralCoordinatorController::class, 'GetMatchOfficials']);
+            Route::get('get_region/{match_id}', [GeneralCoordinatorController::class, 'getRegion']);
             Route::get('list-match-events', [MatchRecordController::class, 'index']);
             Route::post('team-results', [GeneralCoordinatorController::class, 'matchResult']);
             Route::post('match_official', [GeneralCoordinatorController::class, 'matchOfficials']);
