@@ -116,6 +116,11 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::post('pitch-condition', [CoordinatorDetailsController::class, 'pitchCondition']);
             Route::post('dressing-room', [CoordinatorDetailsController::class, 'dressingRoom']);
             Route::post('stretcher-ambulance', [CoordinatorDetailsController::class, 'stretcherAmbulance']);
+            Route::post('information', [GeneralCoordinatorController::class, 'information']);
+            Route::post('incident_step5', [GeneralCoordinatorController::class, 'incident']);
+            Route::post('remarks', [GeneralCoordinatorController::class, 'remarks']);
+            Route::post('name', [GeneralCoordinatorController::class, 'name']);
+            Route::post('date', [GeneralCoordinatorController::class, 'date']);
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
