@@ -9,6 +9,8 @@ use App\Models\CordinatorMatchOfficial;
 use App\Models\Notification;
 
 use App\Models\MatchCordinationDetail;
+use App\Models\MatchOfficial;
+use App\Models\MatchOfficialAssistant;
 
 class GeneralCoordinatorController  extends Controller
 {
@@ -144,7 +146,7 @@ class GeneralCoordinatorController  extends Controller
         $input = $request->only(
             'match',
             'information',
-            'annoucer',
+            'announcer',
             'giant_screen',
         );
 
@@ -243,6 +245,59 @@ class GeneralCoordinatorController  extends Controller
             'success' => true,
             'message' => 'Record is created',
             'coordinator' => $matchCordinator
+        ], 200);
+    }
+
+
+    public function date(Request $request)
+    {
+        $user = $request->user();
+        $input = $request->only(
+            'match',
+            'date'
+        );
+
+        $request->validate([
+            'date' => 'required|date',
+        ]);
+
+
+
+        $matchCordinator = MatchCordinationDetail::firstOrCreate(['match_id' => $input['match']]);
+        $matchCordinator->update($input);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Record is created',
+            'coordinator' => $matchCordinator
+        ], 200);
+    }
+
+    public function GetMatchOfficials(Request $request,$match_id)
+    {
+        $match = MatchOfficial::where('match_id',$match_id)->get();
+        if($match == ''){
+            abort(404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Officials Result updated',
+            'Content' => $match
+        ], 200);
+    }
+
+    public function getRegion(Request $request,$match_id)
+    {
+        $match = MatchOfficialAssistant::where('match_id',$match_id)->get(['region']);
+        if($match == ''){
+            abort(404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Match Officials Result updated',
+            'Content' => $match
         ], 200);
     }
 }
