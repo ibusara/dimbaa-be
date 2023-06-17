@@ -12,6 +12,7 @@ use App\Models\MatchCordinationDetail;
 use App\Models\MatchOfficial;
 use App\Models\MatchOfficialAssistant;
 use App\Models\PreMatchReport;
+use App\Models\Regions;
 
 class GeneralCoordinatorController  extends Controller
 {
@@ -288,16 +289,12 @@ class GeneralCoordinatorController  extends Controller
         ], 200);
     }
 
-    public function getRegion(Request $request,$match_id)
+    public function getRegion(Request $request)
     {
-        $match = MatchOfficialAssistant::where('match_id',$match_id)->get(['region']);
-        if($match == ''){
-            abort(404);
-        }
-
+        $match = Regions::get();
         return response()->json([
             'success' => true,
-            'message' => 'Match Officials Result updated',
+            'message' => 'Regions updated',
             'Content' => $match
         ], 200);
     }
