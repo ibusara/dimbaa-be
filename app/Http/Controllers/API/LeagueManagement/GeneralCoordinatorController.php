@@ -11,6 +11,7 @@ use App\Models\Notification;
 use App\Models\MatchCordinationDetail;
 use App\Models\MatchOfficial;
 use App\Models\MatchOfficialAssistant;
+use App\Models\PreMatchReport;
 
 class GeneralCoordinatorController  extends Controller
 {
@@ -297,6 +298,23 @@ class GeneralCoordinatorController  extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Match Officials Result updated',
+            'Content' => $match
+        ], 200);
+    }
+
+    public function details(Request $request,$match_id)
+    {
+        $match = PreMatchReport::where('match_id',$match_id)->first();
+        if($match == ''){
+            return response()->json([
+                'success' => false,
+                'message' => 'data not found',
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Match details updated',
             'Content' => $match
         ], 200);
     }
