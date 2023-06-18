@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\LeagueManagement;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PreMatchResource;
 use Illuminate\Http\Request;
 use App\Models\CordinatorMatchResult;
 use App\Models\CordinatorMatchOfficial;
@@ -11,6 +12,7 @@ use App\Models\Notification;
 use App\Models\MatchCordinationDetail;
 use App\Models\MatchOfficial;
 use App\Models\MatchOfficialAssistant;
+use App\Models\MatchRecord;
 use App\Models\PreMatchReport;
 use App\Models\Regions;
 
@@ -299,20 +301,9 @@ class GeneralCoordinatorController  extends Controller
         ], 200);
     }
 
-    public function details(Request $request,$match_id)
+    public function details(Request $request,$MatchID)
     {
-        $match = PreMatchReport::where('match_id',$match_id)->first();
-        if($match == ''){
-            return response()->json([
-                'success' => false,
-                'message' => 'data not found',
-            ], 200);
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Match details updated',
-            'Content' => $match
-        ], 200);
+        $match = MatchRecord::where('match_records.id',$MatchID)->first();
+        return new PreMatchResource($match);
     }
 }
