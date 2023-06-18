@@ -45,7 +45,7 @@ class MatchRecord extends Model
     {
         return Team::where('id',$this->away_team_id)->value('name');
     }
-    public function getPrematchAttribute()
+    public function getKickOffTimeAttribute()
     {
         return PreMatchReport::where('match_id',$this->id)->value('kick_off_time');
     }
