@@ -12,7 +12,7 @@ class LineupFormController  extends Controller
 
     public function detail(Request $request)
     {
-        $input = $request->only(['team', 'competition', 'date', 'game_no']);
+        $input = $request->only(['team_id', 'competition', 'date', 'game_no']);
 
         $request->validate([
             'team_id' => 'required|integer|exists:teams,id',
@@ -37,18 +37,26 @@ class LineupFormController  extends Controller
     public function submission(Request $request)
     {
         $user = $request->user();
-        $input = $request->only(['team', 'today_date', 'today_date', 'game_no']);
+        $input = $request->only(['team_id', 'today_date', 'game_no']);
 
         $request->validate([
-            'team' => 'required|integer|exists:teams,id'
+            'team_id' => 'required|integer|exists:teams,id'
         ]);
+        $lineup = LineupForm::where('team_id',$request->team_id)->first();
 
+        if($lineup == ''){
+            LineupForm::create([
+                'today_date' => $request->post('today_date'),
+                'game_no' => $request->post('today_date'),
+            ]);
+        }else{
+            LineupForm::where('team_id',$request->team_id)->update([
+                'today_date' => $request->post('today_date'),
+                'game_no' => $request->post('game_no'),
+            ]);
+        }
+        $lineup = LineupForm::where('team_id',$request->team_id)->first();
 
-
-        $lineup = LineupForm::firstorfail($request->team);
-
-        $input['team_id'] = $request->team;
-        $lineup = $lineup->update($input);
 
         return response()->json([
             'success' => true,
