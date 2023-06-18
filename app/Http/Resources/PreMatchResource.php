@@ -19,11 +19,11 @@ class PreMatchResource extends JsonResource
             'city' => $this->city,
             'competition' => $this->tournament->name,
             'home_team' => $this->hometeam->name,
-            'kick_off_time' => $this->prematch->kick_off_time,
-            'match_commissionar' => $this->assigned->commissioner,
+            'kick_off_time' => $this->kick_off_time,
+            'match_commissionar' => $this->official_assistant,
             'match_date' => $this->date,
             'match_number' => $this->id,
-            'stadium' => $this->stadium
+            'stadium' => $this->stadium->name
         ];
     }
 }
