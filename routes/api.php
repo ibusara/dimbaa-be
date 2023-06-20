@@ -22,6 +22,7 @@ use App\Http\Controllers\API\LeagueManagement\TournamentController;
 use App\Http\Controllers\ApparelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\LeagueManagement\StaffManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,8 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('teammanager')->name('teammanager.')->group(function () {
+            Route::get('staffs', [StaffManagerController::class, 'get']);
+            Route::get('details/{MatchRecord}', [GeneralCoordinatorController::class, 'details']);
             Route::apiResource('apparels', PlayerController::class);
             Route::post('team-players/detail', [LineupFormController::class, 'detail']);
             Route::post('team-players/submit', [LineupFormController::class, 'submission']);
