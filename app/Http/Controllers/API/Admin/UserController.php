@@ -98,10 +98,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'mobile' => 'required|integer|unique:users,mobile,' . $user->id,
+            'mobile' => 'required|integer',
             'role_id' => 'required|exists:roles,id',
         ]);
 
+        if($user['mobile'] != $request->post('mobile')){
+            $request->validate([
+                'mobile' => 'unique:users,mobile,' . $user->id,
+            ]);
+        }
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
