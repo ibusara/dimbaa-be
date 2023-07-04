@@ -1,0 +1,349 @@
+name: 'Stadium Management'
+description: |-
+
+
+  API endpoints for managing stadiums
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/admin/stadia
+    metadata:
+      groupName: 'Stadium Management'
+      groupDescription: |-
+
+
+        API endpoints for managing stadiums
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List stadiums.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+          access-control-allow-methods: 'GET, POST, PUT, DELETE, OPTIONS'
+          access-control-allow-headers: 'X-Requested-With, Content-Type, X-Token-Auth, Authorization'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer PcEDake8bhdg6v4aVfZ5361'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/admin/stadia
+    metadata:
+      groupName: 'Stadium Management'
+      groupDescription: |-
+
+
+        API endpoints for managing stadiums
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a stadium.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: libero
+        type: string
+        custom: []
+      region:
+        name: region
+        description: ''
+        required: true
+        example: ipsam
+        type: string
+        custom: []
+      location:
+        name: location
+        description: ''
+        required: true
+        example: voluptas
+        type: string
+        custom: []
+      capacity:
+        name: capacity
+        description: ''
+        required: true
+        example: 6
+        type: integer
+        custom: []
+      stadium_owner:
+        name: stadium_owner
+        description: ''
+        required: true
+        example: deserunt
+        type: string
+        custom: []
+      stadium_picture:
+        name: stadium_picture
+        description: 'Must be an image.'
+        required: true
+        example: null
+        type: file
+        custom: []
+      inauguration_date:
+        name: inauguration_date
+        description: 'Must be a valid date.'
+        required: true
+        example: '2022-11-01T15:32:16'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      name: libero
+      region: ipsam
+      location: voluptas
+      capacity: 6
+      stadium_owner: deserunt
+      inauguration_date: '2022-11-01T15:32:16'
+    fileParameters:
+      stadium_picture: null
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 51vaa36EP48e6kZfDdVcbgh'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/admin/stadia/{id}'
+    metadata:
+      groupName: 'Stadium Management'
+      groupDescription: |-
+
+
+        API endpoints for managing stadiums
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show stadium details.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+          access-control-allow-methods: 'GET, POST, PUT, DELETE, OPTIONS'
+          access-control-allow-headers: 'X-Requested-With, Content-Type, X-Token-Auth, Authorization'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer hb561k6PcagZEv4VedaD83f'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/admin/stadia/{id}'
+    metadata:
+      groupName: 'Stadium Management'
+      groupDescription: |-
+
+
+        API endpoints for managing stadiums
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update stadium details.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: false
+        example: null
+        type: string
+        custom: []
+      region:
+        name: region
+        description: ''
+        required: true
+        example: est
+        type: string
+        custom: []
+      location:
+        name: location
+        description: ''
+        required: true
+        example: ipsa
+        type: string
+        custom: []
+      capacity:
+        name: capacity
+        description: ''
+        required: true
+        example: 4
+        type: integer
+        custom: []
+      stadium_owner:
+        name: stadium_owner
+        description: ''
+        required: true
+        example: et
+        type: string
+        custom: []
+      stadium_picture:
+        name: stadium_picture
+        description: 'Must be an image.'
+        required: true
+        example: null
+        type: file
+        custom: []
+      inauguration_date:
+        name: inauguration_date
+        description: 'Must be a valid date.'
+        required: true
+        example: '2022-11-01T15:32:16'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      region: est
+      location: ipsa
+      capacity: 4
+      stadium_owner: et
+      inauguration_date: '2022-11-01T15:32:16'
+    fileParameters:
+      stadium_picture: null
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6gh6d4D1e35kVaPbaEfvc8Z'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/admin/stadia/{id}'
+    metadata:
+      groupName: 'Stadium Management'
+      groupDescription: |-
+
+
+        API endpoints for managing stadiums
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete stadium.'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_BEARER_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the stadium.'
+        required: true
+        example: 1
+        type: integer
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer vVEPcdbkh84566aa1e3ZDfg'
+    controller: null
+    method: null
+    route: null
+    custom: []
