@@ -23,9 +23,7 @@ class PreMatchResource extends JsonResource
             'match_commissionar' => $this->official_assistant,
             'match_date' => $this->date,
             'match_number' => $this->id,
-            'stadium' => $this->stadium->name,
-            'away_team_photo' => $this->awayteam->team_photo,
-            'home_team_photo' => $this->awayteam->team_photo,
+            'stadium' => $this->stadium->name
         ];
     }
 }
