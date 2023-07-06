@@ -163,6 +163,11 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::post('assign-match-event', [MatchRecordController::class, 'officials']);
             Route::get('scoreboard', [MatchRecordController::class, 'listScoreboard']);
             Route::get('get-match-event/{id}', [MatchRecordController::class, 'show']);
+
+            Route::get('/match-event-list', [LeagueDirecorController::class, 'getMatchEventLists']);
+            Route::get('/tournament-list', [LeagueDirecorController::class, 'getTournamentList']);
+            Route::get('/scoreboard', [LeagueDirecorController::class, 'getScoreBoard']);
+            Route::get('/macth-event/{id}', [LeagueDirecorController::class, 'getMatchEvent']);
         });
 
         //Match Commisioner role
