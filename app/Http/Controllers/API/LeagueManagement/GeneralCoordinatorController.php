@@ -18,6 +18,12 @@ use App\Models\Regions;
 
 class GeneralCoordinatorController  extends Controller
 {
+    
+    function __construct()
+    {
+        $this->middleware('permission:view-match-details', ['only' => ['details']]);
+    }
+    
     public function matchResult(Request $request)
     {
         $user = $request->user();

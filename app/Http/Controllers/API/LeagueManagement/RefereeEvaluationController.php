@@ -13,6 +13,11 @@ use App\Http\Controllers\Controller;
 
 class RefereeEvaluationController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:add-referee-evaluation', ['only' => ['refereeEvaluation']]);
+    }
+
     public function refereeEvaluation(Request $request)
     {
         $user = $request->user();

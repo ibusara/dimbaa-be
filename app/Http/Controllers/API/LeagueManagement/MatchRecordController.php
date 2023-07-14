@@ -16,6 +16,11 @@ use function Termwind\ValueObjects\format;
 
 class MatchRecordController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-match-events', ['only' => ['index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

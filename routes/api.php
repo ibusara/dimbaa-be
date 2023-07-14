@@ -105,7 +105,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
             Route::post('cautions', [MatchPlayerController::class, 'matchPlayerCaution']);
             Route::post('attitude-condition', [MatchAttitudeController::class, 'matchAttitudeCondition']);
             Route::post('attitude-condition/ground-equipment', [MatchAttitudeController::class, 'matchEquipmentCondition']);
-            Route::post('official-assistant', [MatchOfficialController::class, 'matchOfficialAssistance']);
+            Route::post('official-assistant', [MatchOfficialController::class, 'matchOfficialAssistance']);  
         });
 
         Route::prefix('general-coordinator')->name('general-coordinator.')->group(function () {
@@ -130,7 +130,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         });
 
         Route::prefix('referee-assessor')->name('referee-assessor.')->group(function () {
-            Route::get('list-match-events', [MatchRecordController::class, 'index']);
+            Route::get('list-match-events', [MatchRecordController::class, 'index']);//
             Route::post('referee-evaluation/game-control', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-one', [RefereeEvaluationController::class, 'refereeEvaluation']);
             Route::post('referee-evaluation/team-work-two', [RefereeEvaluationController::class, 'refereeEvaluation']);
