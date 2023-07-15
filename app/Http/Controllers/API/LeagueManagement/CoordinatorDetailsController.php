@@ -12,6 +12,18 @@ use App\Models\MatchCordinationDetail;
 
 class GeneralCoordinatorController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:add-coordination-meeting', ['only' => ['coordinationMeeting']]);
+        $this->middleware('permission:add-play-fair', ['only' => ['playFair']]);
+        $this->middleware('permission:add-performance-behaviour', ['only' => ['performanceBehaviour']]);
+        $this->middleware('permission:add-incident', ['only' => ['incident']]);
+        $this->middleware('permission:app-pitch-condition', ['only' => ['pitchCondition']]);
+        $this->middleware('permission:add-dressing-room', ['only' => ['dressingRoom']]);
+        $this->middleware('permission:add-stretcher-ambulance', ['only' => ['stretcherAmbulance']]);
+
+    }
+
     public function matchResult(Request $request)
     {
         $user = $request->user();

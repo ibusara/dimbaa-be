@@ -10,6 +10,10 @@ use App\Models\Tournament;
 
 class TournamentController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:add-tournament', ['only' => ['store']]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -22,6 +22,17 @@ class GeneralCoordinatorController  extends Controller
     function __construct()
     {
         $this->middleware('permission:view-match-details', ['only' => ['details']]);
+
+        $this->middleware('permission:view-region', ['only' => ['getRegion']]);
+        $this->middleware('permission:view-match-officals', ['only' => ['GetMatchOfficials']]);
+        $this->middleware('permission:edit-match-result', ['only' => ['matchResult']]);
+        $this->middleware('permission:add-match-official-conditions', ['only' => ['matchOfficials']]);
+        $this->middleware('permission:information', ['only' => ['information']]);
+        $this->middleware('permission:add-incident-step5', ['only' => ['incident']]);
+        $this->middleware('permission:add-remarks', ['only' => ['remarks']]);
+        $this->middleware('permission:add-name', ['only' => ['name']]);
+        $this->middleware('permission:add-date', ['only' => ['date']]);
+
     }
     
     public function matchResult(Request $request)

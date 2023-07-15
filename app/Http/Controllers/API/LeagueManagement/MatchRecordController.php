@@ -19,6 +19,12 @@ class MatchRecordController  extends Controller
     function __construct()
     {
         $this->middleware('permission:view-match-events', ['only' => ['index']]);
+        $this->middleware('permission:add-match-event', ['only' => ['store']]);
+        $this->middleware('permission:edit-match-event', ['only' => ['update']]);
+        $this->middleware('permission:assign-match-event', ['only' => ['officials']]);
+        $this->middleware('permission:view_scoreboard', ['only' => ['listScoreboard']]);
+        $this->middleware('permission:view-match-event', ['only' => ['show']]);
+     
     }
 
     /**
