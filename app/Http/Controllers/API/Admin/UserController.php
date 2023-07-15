@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserController extends Controller
 {
+    
+    function __construct()
+    {
+        $this->middleware('permission:view-users', ['only' => ['index','show']]);
+        $this->middleware('permission:add-user', ['only' => ['store']]);
+        $this->middleware('permission:edit-user', ['only' => ['update']]);
+        $this->middleware('permission:delete-user', ['only' => ['destory']]);
+    }
     /**
      * List all users.
      *

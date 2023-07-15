@@ -16,6 +16,13 @@ use Validator;
  */
 class TeamController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-team', ['only' => ['index','show']]);
+        $this->middleware('permission:edit-team', ['only' => ['update']]);
+        $this->middleware('permission:add-team', ['only' => ['store']]);
+        $this->middleware('permission:delete-team', ['only' => ['destroy']]);
+    }
     /**
      * List Teams.
      *
