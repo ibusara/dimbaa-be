@@ -17,10 +17,129 @@ class AddRolesAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        ///////Team_Manager_Edit
-        $permissions = [
-            "view-match-details",
+        $this->addPermissions();
 
+        $this->addLeagueDirectorWithPermissions();
+        $this->addTeamManagerRoleWithPermissions();
+
+        /// Match Officials
+        $this->addRefereeWithPermissions();
+        $this->addRefereeAssessorWithPermissions();
+        $this->addGeneralCoordinator();
+        $this->addCommissionerWithPermissions();
+
+    }
+
+    
+    public function addCommissionerWithPermissions(){
+        $permissions = [
+            'view-match-events',
+            'edit-match-event',
+            'assign-match-event',
+            'view_scoreboard', 
+            'add-tournament',
+
+            'add-prematch-reported',
+            'add-prematch-condition',
+            'add-prematch-operation',
+            'add-prematch-co-operation',
+            'add-prematch-colors',
+            'add-prematch-store-issues',
+            'add-prematch-store-challenges',
+            'add-prematch-report-final',
+
+            'add-post-match-report',
+        ];
+        $role=Role::create([
+            'name' => 'Match Commissioner',
+            'guard_name' => 'web'
+        ]);
+        $role->syncPermissions($permissions);
+    }
+
+    public function addLeagueDirectorWithPermissions(){
+        $permissions = [
+            'view-match-events',
+            'view_scoreboard',
+        ];
+        $role=Role::create([
+            'name' => 'League Director',
+            'guard_name' => 'web'
+        ]);
+
+        $role->syncPermissions($permissions);
+
+
+    }
+
+    public function addGeneralCoordinator(){
+        $permissions = [
+            'view-match-events',
+            'view-region',
+            'view-match-officals',
+            'edit-match-result',
+            'add-match-official-conditions',
+            'add-information',
+            'add-incident-step5',
+            'add-remarks',
+            'add-name',
+            'add-date',
+            'add-coordination-meeting',
+            'add-play-fair',
+            'add-performance-behaviour',
+            'add-incident',
+            'app-pitch-condition',
+            'add-dressing-room',
+            'add-stretcher-ambulance',
+        ];
+        $role=Role::create([
+            'name' => 'General Coordinator',
+            'guard_name' => 'web'
+        ]);
+
+        $role->syncPermissions($permissions);
+
+    }
+
+    public function addRefereeAssessorWithPermissions(){
+        $permissions = [
+            "add-referee-evaluation",
+            'view-match-events'
+        ];
+
+        $role=Role::create([
+                    'name' => 'Referee Assessor',
+                    'guard_name' => 'web'
+        ]);
+    
+        $role->syncPermissions($permissions);
+    }
+
+    public function addRefereeWithPermissions(){
+        $permissions = [
+            "edit-match-result",
+            "edit-official-assistant",
+            "view-match-events",
+            "add-starting-players",
+            "add-reserve-players",
+            "add-subtitute-player",
+            "add-match-player-caution",
+            "add-match-equipment-condition",
+            "add-match-attitude-condition",
+        ];
+        $role=Role::create([
+                    'name' => 'Referee',
+                    'guard_name' => 'web'
+        ]);
+    
+        $role->syncPermissions($permissions);
+    }
+
+    public function addTeamManagerRoleWithPermissions(){
+        $permissions = [
+            "View_match_details",
+
+            "View-staff",
             "view-players",
             "add-players",
             "edit-players",
@@ -35,101 +154,85 @@ class AddRolesAndPermissionsSeeder extends Seeder
             "edit-apparel",
             "delete-apparel"
         ];
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
-        }
-
-    
+        
         $role=Role::create([
-                'name' => 'Team_Manager_Edit',
-                'guard_name' => 'web'
+            'name' => 'Team Manager',
+            'guard_name' => 'web'
         ]);
 
         $role->syncPermissions($permissions);
-        
-        // ////Team_Manager_View
-        
-        // $permissions = [
-        //       "view-match-details",
-
-        //        "view-players",
-
-        //         "view-team-players",
-
-        //         "view-apparel"
-        // ];
-        // $role=Role::create([
-        //             'name' => 'Team_Manager_View',
-        //             'guard_name' => 'web'
-        // ]);
-    
-        // $role->syncPermissions($permissions);
-      
-    
-        // ////Referee_Edit
-    
-        // $permissions2 = [
-        //     "edit-match-result",
-        //     "edit-official-assistant",
-
-        //     "view-match-events",
-
-        //     "add-starting-players",
-        //     "add-reserve-players",
-        //     "add-subtitute-player",
-        //     "add-match-player-caution",
-        //     "add-match-equipment-condition",
-        //     "add-match-attitude-condition",
-        // ];
-        // foreach ($permissions2 as $permission) {
-        //     Permission::create(['name' => $permission]);
-        // }
-        // $role2=Role::create([
-        //             'name' => 'Referee_Edit',
-        //             'guard_name' => 'web'
-        // ]);
-    
-        // $role2->syncPermissions($permissions2);
-
-        // ////Referee_View
-        
-        // $role=Role::create([
-        //             'name' => 'Referee_View',
-        //             'guard_name' => 'web'
-        // ]);
-
-        // $role->syncPermissions("view-match-events");
-                
-
-        // ////Referee_Assessor_Edit
-    
-        // $permissions = [
-        //     "add-referee-evaluation",
-        // ];
-        // foreach ($permissions as $permission) {
-        //         Permission::create(['name' => $permission]);
-        // }
-
-        // $role=Role::create([
-        //             'name' => 'Referee_Assessor_Edit',
-        //             'guard_name' => 'web'
-        // ]);
-    
-        // $role->syncPermissions($permissions);
-        // $role->syncPermissions('view-match-events');
-        
-        // ////Referee_Referee_Assessor_View
-    
-        
-        // $role=Role::create([
-        //             'name' => 'Referee_Assessor_View',
-        //             'guard_name' => 'web'
-        // ]);
-    
-        // $role->syncPermissions("view-match-events");
-
- //
-        
-
     }
+
+    public function addPermissions(){
+        $permissions = [
+            "view-match-details",
+
+            "view-staff",
+
+            "view-players",
+            "add-players",
+            "edit-players",
+            "delete-players",
+
+            "view-team-players",
+            "add-team-players",
+
+
+            "view-apparel",
+            "add-apparel",
+            "edit-apparel",
+            "delete-apparel",
+
+            "edit-match-result",
+            "edit-official-assistant",
+
+            "view-match-events",
+
+            "add-starting-players",
+            "add-reserve-players",
+            "add-subtitute-player",
+            "add-match-player-caution",
+            "add-match-equipment-condition",
+            "add-match-attitude-condition",
+
+            "add-referee-evaluation",
+
+            'add-prematch-reported', 
+            'add-prematch-condition', 
+            'add-prematch-operation', 
+            'add-prematch-co-operation', 
+            'add-prematch-colors',
+            'add-prematch-store-issues', 
+            'add-prematch-store-challenges',
+            'add-prematch-report-final', 
+
+            'view_scoreboard',
+            'add-tournament',
+
+            'view-region',
+            'view-match-officals',
+
+            'add-match-official-conditions',
+            'add-information',
+            'add-incident-step5',
+            'add-remarks',
+            'add-name',
+            'add-date',
+
+            'add-coordination-meeting',
+            'add-play-fair',
+            'add-performance-behaviour',
+            'add-incident',
+            'app-pitch-condition',
+            'add-dressing-room',
+            'add-stretcher-ambulance',
+
+            'add-post-match-report',
+            "edit-match-event",
+            'assign-match-event',
+        ];
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+    }       
 }

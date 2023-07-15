@@ -23,7 +23,7 @@ class MatchRecordController  extends Controller
         $this->middleware('permission:edit-match-event', ['only' => ['update']]);
         $this->middleware('permission:assign-match-event', ['only' => ['officials']]);
         $this->middleware('permission:view_scoreboard', ['only' => ['listScoreboard']]);
-        $this->middleware('permission:view-match-event', ['only' => ['show']]);
+        
      
     }
 

@@ -187,6 +187,15 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
                 Route::post('match', [PostMatchReportController::class, 'match']);
             });
         });
+       
+        Route::get('get-user-permissions',function(){
+            $permissions = auth()->user()->role()->with('permissions')->get()
+                ->pluck('permissions')
+                ->flatten()
+                ->pluck('name')
+                ->toArray();
+            return $permissions;
+        });
     });
 
     // ...
