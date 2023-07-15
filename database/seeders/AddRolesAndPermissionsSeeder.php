@@ -22,24 +22,17 @@ class AddRolesAndPermissionsSeeder extends Seeder
         $this->addDataManagerWithPermissions();
         $this->addLeagueDirectorWithPermissions();
         $this->addTeamManagerRoleWithPermissions();
-
-        /// Match Officials
-        $this->addRefereeWithPermissions();
-        $this->addRefereeAssessorWithPermissions();
-        $this->addGeneralCoordinator();
-        $this->addCommissionerWithPermissions();
+        $this->addMatchOfficalsWithPermissions();
 
     }
 
-    
-    public function addCommissionerWithPermissions(){
+    public function addMatchOfficalsWithPermissions(){
         $permissions = [
             'view-match-events',
             'edit-match-event',
             'assign-match-event',
             'view_scoreboard', 
             'add-tournament',
-
             'add-prematch-reported',
             'add-prematch-condition',
             'add-prematch-operation',
@@ -48,15 +41,65 @@ class AddRolesAndPermissionsSeeder extends Seeder
             'add-prematch-store-issues',
             'add-prematch-store-challenges',
             'add-prematch-report-final',
-
             'add-post-match-report',
+            'view-region',
+            'view-match-officals',
+            'edit-match-result',
+            'add-match-official-conditions',
+            'add-information',
+            'add-incident-step5',
+            'add-remarks',
+            'add-name',
+            'add-date',
+            'add-coordination-meeting',
+            'add-play-fair',
+            'add-performance-behaviour',
+            'add-incident',
+            'app-pitch-condition',
+            'add-dressing-room',
+            'add-stretcher-ambulance',
+            "add-referee-evaluation",
+            "edit-official-assistant",
+            "add-starting-players",
+            "add-reserve-players",
+            "add-subtitute-player",
+            "add-match-player-caution",
+            "add-match-equipment-condition",
+            "add-match-attitude-condition",
         ];
         $role=Role::create([
-            'name' => 'Match Commissioner',
+            'name' => 'Match Officials',
             'guard_name' => 'web'
         ]);
         $role->syncPermissions($permissions);
+
     }
+
+    // public function addCommissionerWithPermissions(){
+    //     $permissions = [
+    //         'view-match-events',
+    //         'edit-match-event',
+    //         'assign-match-event',
+    //         'view_scoreboard', 
+    //         'add-tournament',
+
+    //         'add-prematch-reported',
+    //         'add-prematch-condition',
+    //         'add-prematch-operation',
+    //         'add-prematch-co-operation',
+    //         'add-prematch-colors',
+    //         'add-prematch-store-issues',
+    //         'add-prematch-store-challenges',
+    //         'add-prematch-report-final',
+
+    //         'add-post-match-report',
+    //     ];
+    //     $role=Role::create([
+    //         'name' => 'Match Commissioner',
+    //         'guard_name' => 'web'
+    //     ]);
+    //     $role->syncPermissions($permissions);
+    // }
 
     public function addDataManagerWithPermissions(){
         $permissions = [
@@ -88,72 +131,70 @@ class AddRolesAndPermissionsSeeder extends Seeder
         ]);
 
         $role->syncPermissions($permissions);
-
-
     }
 
-    public function addGeneralCoordinator(){
-        $permissions = [
-            'view-match-events',
-            'view-region',
-            'view-match-officals',
-            'edit-match-result',
-            'add-match-official-conditions',
-            'add-information',
-            'add-incident-step5',
-            'add-remarks',
-            'add-name',
-            'add-date',
-            'add-coordination-meeting',
-            'add-play-fair',
-            'add-performance-behaviour',
-            'add-incident',
-            'app-pitch-condition',
-            'add-dressing-room',
-            'add-stretcher-ambulance',
-        ];
-        $role=Role::create([
-            'name' => 'General Coordinator',
-            'guard_name' => 'web'
-        ]);
+    // public function addGeneralCoordinator(){
+    //     $permissions = [
+    //         'view-match-events',
+    //         'view-region',
+    //         'view-match-officals',
+    //         'edit-match-result',
+    //         'add-match-official-conditions',
+    //         'add-information',
+    //         'add-incident-step5',
+    //         'add-remarks',
+    //         'add-name',
+    //         'add-date',
+    //         'add-coordination-meeting',
+    //         'add-play-fair',
+    //         'add-performance-behaviour',
+    //         'add-incident',
+    //         'app-pitch-condition',
+    //         'add-dressing-room',
+    //         'add-stretcher-ambulance',
+    //     ];
+    //     $role=Role::create([
+    //         'name' => 'General Coordinator',
+    //         'guard_name' => 'web'
+    //     ]);
 
-        $role->syncPermissions($permissions);
+    //     $role->syncPermissions($permissions);
 
-    }
+    // }
 
-    public function addRefereeAssessorWithPermissions(){
-        $permissions = [
-            "add-referee-evaluation",
-            'view-match-events'
-        ];
+    // public function addRefereeAssessorWithPermissions(){
+    //     $permissions = [
+    //         "add-referee-evaluation",
+    //         'view-match-events'
+    //     ];
 
-        $role=Role::create([
-                    'name' => 'Referee Assessor',
-                    'guard_name' => 'web'
-        ]);
+    //     $role=Role::create([
+    //                 'name' => 'Referee Assessor',
+    //                 'guard_name' => 'web'
+    //     ]);
     
-        $role->syncPermissions($permissions);
-    }
+    //     $role->syncPermissions($permissions);
+    // }
 
-    public function addRefereeWithPermissions(){
-        $permissions = [
-            "edit-match-result",
-            "edit-official-assistant",
-            "view-match-events",
-            "add-starting-players",
-            "add-reserve-players",
-            "add-subtitute-player",
-            "add-match-player-caution",
-            "add-match-equipment-condition",
-            "add-match-attitude-condition",
-        ];
-        $role=Role::create([
-                    'name' => 'Referee',
-                    'guard_name' => 'web'
-        ]);
+    // public function addRefereeWithPermissions(){
+    //     $permissions = [
+    //         "edit-match-result",
+    //         "edit-official-assistant",
+    //         "view-match-events",
+    //         "add-starting-players",
+    //         "add-reserve-players",
+    //         "add-subtitute-player",
+    //         "add-match-player-caution",
+    //         "add-match-equipment-condition",
+    //         "add-match-attitude-condition",
+    //     ];
+    //     $role=Role::create([
+    //                 'name' => 'Referee',
+    //                 'guard_name' => 'web'
+    //     ]);
     
-        $role->syncPermissions($permissions);
-    }
+    //     $role->syncPermissions($permissions);
+    // }
 
     public function addTeamManagerRoleWithPermissions(){
         $permissions = [
