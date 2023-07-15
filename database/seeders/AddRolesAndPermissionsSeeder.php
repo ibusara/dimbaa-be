@@ -19,6 +19,7 @@ class AddRolesAndPermissionsSeeder extends Seeder
     {
         $this->addPermissions();
 
+        $this->addDataManagerWithPermissions();
         $this->addLeagueDirectorWithPermissions();
         $this->addTeamManagerRoleWithPermissions();
 
@@ -55,6 +56,25 @@ class AddRolesAndPermissionsSeeder extends Seeder
             'guard_name' => 'web'
         ]);
         $role->syncPermissions($permissions);
+    }
+
+    public function addDataManagerWithPermissions(){
+        $permissions = [
+            "add-tournament",
+            "view-match-events",
+            "add-match-event", 
+            "edit-match-event",
+            "assign-match-event",
+            "view_scoreboard", 
+        ];
+        $role=Role::create([
+            'name' => 'Data Manager',
+            'guard_name' => 'web'
+        ]);
+
+        $role->syncPermissions($permissions);
+
+
     }
 
     public function addLeagueDirectorWithPermissions(){
@@ -165,6 +185,7 @@ class AddRolesAndPermissionsSeeder extends Seeder
 
     public function addPermissions(){
         $permissions = [
+            "add-match-event",
             "view-match-details",
 
             "view-staff",
