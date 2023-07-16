@@ -26,7 +26,7 @@ class AddRolesAndPermissionsSeeder extends Seeder
         $this->addSuperAdminWithPermissions();
         $this->addTeamAdminWithPermissions();
     }
-    
+
     public function addSuperAdminWithPermissions(){
         $permissions = [
 
@@ -190,6 +190,14 @@ class AddRolesAndPermissionsSeeder extends Seeder
     }
 
     public function addPermissions(){
+
+        $added_permissions = Permission::get('name');
+        $permission_names=[];
+        foreach($added_permissions as $p){
+            array_push($permission_names,$p->name);
+        }
+        // echo $permission_names[0];
+        // return "ss";
         $permissions = [
             "view-notifications",
             "view-users",
@@ -214,7 +222,7 @@ class AddRolesAndPermissionsSeeder extends Seeder
             "add-match-event",
             "view-match-details",
 
-            "view-staff",
+            "View-staff",
 
             "view-players",
             "add-players",
@@ -278,7 +286,8 @@ class AddRolesAndPermissionsSeeder extends Seeder
             "edit-match-event",
             'assign-match-event',
         ];
-        foreach ($permissions as $permission) {
+        $permissions_result = array_diff($permissions, $permission_names);
+        foreach ($permissions_result as $permission) {
             Permission::create(['name' => $permission]);
         }
     }       

@@ -49,13 +49,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $roles = array(
             array('name'=>'Admin'),
-            array('name'=>'Editor'),
-            array('name' =>'Team_Manager_Edit'),
-            array('name' => 'Team_Manager_View'),
-            array('name' => 'Referee_View'),
-            array('name' => 'Referee_Edit'),
-            array('name' => "Referee_Assessor_View"),
-            array('name' => "Referee_Assessor_Edit")
+            array('name'=>'Editor')
         );
         foreach ($roles as $role){
             if (!DB::table('roles')->where('name',$role['name'])->exists()){
@@ -81,70 +75,7 @@ class RoleAndPermissionSeeder extends Seeder
                             'delete-teams',
                         ]);
                         break;
-                    case 'Team_Manager_Edit':
-                        $createdRole->givePermissionTo([
-                            "view-match-details",
-
-                             "view-players",
-                             "add-players",
-                             "edit-players",
-                             "delete-players",
-
-                             "view-team-players",
-                             "add-team-players",
-
-
-                             "view-apparel",
-                             "add-apparel",
-                             "edit-apparel",
-                             "delete-apparel",
-                        ]);
-                        break;
-                    case 'Team_Manager_View':
-                        $createdRole->givePermissionTo([
                     
-                            "view-match-details",
-    
-                            "view-players",
-    
-                            "view-team-players",
-    
-                            "view-apparel",
-                        ]);
-                        break;
-                    case 'Referee_View':
-                        $createdRole->givePermissionTo([
-                            "view-match-events",
-                        ]);
-                        break;
-                    case 'Referee_Edit':
-                        $createdRole->givePermissionTo([
-                            "edit-match-result",
-                            "edit-official-assistant",
-    
-                            "view-match-events",
-    
-                            "add-starting-players",
-                            "add-reserve-players",
-                            "add-subtitute-player",
-                            "add-match-player-caution",
-                            "add-match-equipment-condition",
-                            "add-match-attitude-condition",
-                        ]);
-                        break;
-                    case 'Referee_Assessor_View':
-                        $createdRole->givePermissionTo([
-                            'view-match-events',
-                        ]);
-                        break;
-                        
-                    case 'Referee_Assessor_Edit':
-                        $createdRole->givePermissionTo([
-                            'view-match-events',
-                            
-                            "add-referee-evaluation",
-                        ]);
-                        break;
                 }
             }
         }
@@ -170,108 +101,6 @@ class RoleAndPermissionSeeder extends Seeder
             'delete-teams',
         ]);*/
 
-        /////////////////////// add/edit/view team manager role
-                        
-        // $roles = array('name'=>'Team_Manager_Edit');
-                        
-        // if (!DB::table('roles')->where('name',$role['name'])->exists()){
-        //     $createdRole = Role::create($role);
-                
-        //             $createdRole->givePermissionTo([
-                    
-        //                 "view-match-details",
-
-        //                 "view-players",
-        //                 "add-players",
-        //                 "edit-players",
-        //                 "delete-players",
-
-        //                 "view-team-players",
-        //                 "add-team-players",
-
-
-        //                 "view-apparel",
-        //                 "add-apparel",
-        //                 "edit-apparel",
-        //                 "delete-apparel",
-        //             ]);
-                
-        //     }
-
-        
-        // /////////////////////// view team manager role
-        
-        // $roles = array('name'=>'Team_Manager_View');
-        
-        // if (!DB::table('roles')->where('name',$role['name'])->exists()){
-        //     $createdRole = Role::create($role);
-                
-        //             $createdRole->givePermissionTo([
-                    
-        //                 "view-match-details",
-
-        //                 "view-players",
-
-        //                 "view-team-players",
-
-        //                 "view-apparel",
-        //             ]);
-                
-        // }
-
-        // ////////////////////// Referee View
-        // $roles = array('name'=>'Referee_View');
-        
-        // if (!DB::table('roles')->where('name',$role['name'])->exists()){
-        //     $createdRole = Role::create($role);
-                
-        //          $createdRole->givePermissionTo([
-        //                 "view-match-events",
-        //         ]);
-                
-        // }
-
-    //     ////////////////////// Referee CRUD
-    //     $roles = array('name'=>'Referee_Edit');
-        
-    //     if (!DB::table('roles')->where('name',$role['name'])->exists()){
-    //         $createdRole = Role::create($role);
-                
-    //                 $createdRole->givePermissionTo([
-    //                     "edit-match-result",
-    //                     "edit-official-assistant",
-
-    //                     "view-match-events",
-
-    //                     "add-starting-players",
-    //                     "add-reserve-players",
-    //                     "add-subtitute-player",
-    //                     "add-match-player-caution",
-    //                     "add-match-equipment-condition",
-    //                     "add-match-attitude-condition",
-    //                 ]);
-    //    }
-
-       
-    //     ////////////////////// Referee assessor View
-    //     $roles = array('name'=>'Referee_Assessor_View');
-        
-    //     if (!DB::table('roles')->where('name',$role['name'])->exists()){
-    //         $createdRole = Role::create($role);
-    //                 $createdRole->givePermissionTo([
-    //                     'view-match-events',
-    //                 ]);
-    //    }
-    //     ////////////////////// Referee assessor CRUD
-    //     $roles = array('name'=>'Referee_Assessor_Edit');
-        
-    //     if (!DB::table('roles')->where('name',$role['name'])->exists()){
-    //         $createdRole = Role::create($role);
-    //                 $createdRole->givePermissionTo([
-    //                     'view-match-events',
-                        
-    //                     "add-referee-evaluation",
-    //                 ]);
-    //    }
+      
 }
 }
