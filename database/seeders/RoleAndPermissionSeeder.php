@@ -49,7 +49,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $roles = array(
             array('name'=>'Admin'),
-            array('name'=>'Editor'),
+            array('name'=>'Editor')
         );
         foreach ($roles as $role){
             if (!DB::table('roles')->where('name',$role['name'])->exists()){
@@ -75,6 +75,7 @@ class RoleAndPermissionSeeder extends Seeder
                             'delete-teams',
                         ]);
                         break;
+                    
                 }
             }
         }
@@ -99,5 +100,7 @@ class RoleAndPermissionSeeder extends Seeder
             'edit-users',
             'delete-teams',
         ]);*/
-    }
+
+      
+}
 }

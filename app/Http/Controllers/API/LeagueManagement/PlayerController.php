@@ -15,6 +15,14 @@ use App\Models\Player;
  */
 class PlayerController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-players', ['only' => ['index','show']]);
+        $this->middleware('permission:add-players', ['only' => ['store']]);
+        $this->middleware('permission:edit-players', ['only' => ['update']]);
+        $this->middleware('permission:delete-players', ['only' => ['destory']]);
+    }
+    
     /**
      * List players.
      *

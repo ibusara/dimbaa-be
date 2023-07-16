@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Storage;
  */
 class StadiumController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-stadium', ['only' => ['index','show']]);
+        $this->middleware('permission:edit-stadium', ['only' => ['update']]);
+        $this->middleware('permission:add-stadium', ['only' => ['store']]);
+        $this->middleware('permission:delete-stadium', ['only' => ['destroy']]);
+    }
+
     /**
      * List stadiums.
      *

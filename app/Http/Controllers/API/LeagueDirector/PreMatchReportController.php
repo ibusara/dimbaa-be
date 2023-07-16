@@ -17,6 +17,20 @@ use Illuminate\Http\Request;
 
 class PreMatchReportController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:add-prematch-reported', ['only' => ['match']]);
+        $this->middleware('permission:add-prematch-condition', ['only' => ['storeCondition']]);
+        $this->middleware('permission:add-prematch-operation', ['only' => ['storeOperation']]);
+        
+        $this->middleware('permission:add-prematch-co-operation', ['only' => ['storeCoOperation']]);
+        $this->middleware('permission:add-prematch-colors', ['only' => ['storeColors']]);
+        $this->middleware('permission:add-prematch-store-issues', ['only' => ['storeIssues']]);
+        $this->middleware('permission:add-prematch-store-challenges', ['only' => ['storeChallenges']]);
+        $this->middleware('permission:add-prematch-report-final', ['only' => ['storeFinal']]);
+
+
+    }
     /**
      * storeMatchReport.
      *

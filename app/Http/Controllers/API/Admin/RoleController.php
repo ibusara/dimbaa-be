@@ -14,13 +14,13 @@ use Spatie\Permission\Models\Role;
  */
 class RoleController extends Controller
 {
-    // function __construct()
-    // {
-    //     $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
-    //     $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
-    //     $this->middleware('permission:role-edit', ['only' => ['update']]);
-    //     $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+        $this->middleware('permission:view-role', ['only' => ['index','show', 'rolesData']]);
+        $this->middleware('permission:add-role', ['only' => ['store']]);
+        $this->middleware('permission:edit-role', ['only' => ['update']]);
+        $this->middleware('permission:delete-role', ['only' => ['destroy']]);
+    }
 
     /**
      * List all the roles.

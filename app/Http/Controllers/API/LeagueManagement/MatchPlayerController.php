@@ -11,6 +11,14 @@ use App\Models\Notification;
 
 class MatchPlayerController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:add-starting-players', ['only' => ['matchStartingPlayers']]);
+        $this->middleware('permission:add-reserve-players', ['only' => ['matchReservePlayers']]);
+        $this->middleware('permission:add-subtitute-player', ['only' => ['matchSubstitutePlayer']]);
+        
+        $this->middleware('permission:add-match-player-caution', ['only' => ['matchPlayerCaution']]);
+    }
 
     public function matchStartingPlayers(Request $request)
     {

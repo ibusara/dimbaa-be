@@ -11,6 +11,12 @@ use App\Models\Notification;
 
 class MatchOfficialController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:edit-match-result', ['only' => ['matchResult']]);
+        $this->middleware('permission:edit-official-assistant', ['only' => ['matchOfficialAssistance']]);
+    }
+    
     public function matchResult(Request $request)
     {
         $user = $request->user();

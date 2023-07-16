@@ -10,6 +10,10 @@ use Illuminate\Http\Response;
 
 class GeneralController  extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-notifications', ['only' => ['index','notifications']]);
+    }
     /**
      * Display all notifications per role.
      *

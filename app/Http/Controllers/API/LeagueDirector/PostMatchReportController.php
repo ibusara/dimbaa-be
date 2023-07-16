@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PostMatchReportController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:add-post-match-report', ['only' => ['match']]);
+    }
     /**
      * Post report match.
      *
